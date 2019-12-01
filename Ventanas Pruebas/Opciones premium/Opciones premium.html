@@ -1,32 +1,68 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Opciones premium</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<style type="text/css">
 
-		table{
+		body {
+			background-color: rgb(81, 146, 184);
+			overflow : hidden /*Sin scroll*/
+		}
+
+		table {
 			background-color: lightblue;
 			margin-top: 20px;
 			margin-left: 20px;
 		}
 
-		.oferta2{
-			background-color: blue;
-			width: 50px;
-			height: 25px
-			
-		}
-
-		footer{
+		footer {
 			background-color: gray;
 			margin-top: 45px;
 		}
-		
 
+		.foto {
+			padding-bottom: 2px;
+			border: 2px solid rgb(248, 248, 248);
+			padding-top: -20px;
+		}
+
+		/*Poner la foto mas cuadrada*/
+		.recuadro-foto {
+			margin-top: -10px;
+		}
+
+		.of1{
+			background-color: rgb(94, 187, 76);
+			margin-left: 50px;
+			margin-top: 20px;
+			height: 800px;
+		}
+
+		.of2{
+			background-color: rgb(156, 180, 70);
+			margin-top: 25px;
+			height: 300px;
+			margin-left: 50px;
+		}
+
+		.of3{	
+			height: 200px;
+			margin-right: 200px;
+			margin-top: 300px;
+			margin-left: -18px;
+		}
+
+		.estrella{
+			width: 815px;
+			height: 450px;
+		}
 
 	</style>
 </head>
+
 <body>
 	<!-- Barra de navegacion del header -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
@@ -34,7 +70,8 @@
 			<a class="navbar-brand" href="#">
 				<img src="http://placehold.it/150x50?text=Logo" alt="">
 			</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
@@ -54,35 +91,39 @@
 						<a class="nav-link" href="#">Contact</a>
 					</li>
 					<li class="nav-item avatar dropdown">
-						<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false">
-						<img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="rounded-circle z-depth-0"
-						alt="avatar image" width="50px">
-					</a>
-					<div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
-					aria-labelledby="navbarDropdownMenuLink-55">
-					<a class="dropdown-item" href="#">Ver mi perfil</a>
-					<a class="dropdown-item" href="#">Editar mi perfil</a>
-					<a class="dropdown-item" href="#">Publicación nueva</a>
-					<a class="dropdown-item" href="#">Proyecto nuevo</a>
-				</div>
-			</li>
-		</ul>
-	</div>
-</div></nav>
-	<tbody>
-		<table>
-			<tr>
-				<td width="700px" height="750px"></td>
-				<td class="oferta2"></td>
-			</tr>
-		</table>
-	</tbody>
+						<a class="nav-link dropdown-toggle recuadro-foto" id="navbarDropdownMenuLink-55"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg"
+								class="rounded-circle z-depth-0 foto" alt="avatar image" width="50px">
+						</a>
+						<div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+							aria-labelledby="navbarDropdownMenuLink-55">
+							<a class="dropdown-item" href="#">Ver mi perfil</a>
+							<a class="dropdown-item" href="#">Editar mi perfil</a>
+							<a class="dropdown-item" href="#">Publicación nueva</a>
+							<a class="dropdown-item" href="#">Proyecto nuevo</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<div class="row">
 
-	<footer>
-		<br>
-		<br>
-		<br>
-	</footer>
+		<div class="col-4 of1">primera</div>
+
+		<div class="col-2"></div><!--Espaciado-->
+
+		<div class="col-5 of2">
+			Segunda	
+			<div class="row">
+				<div class="col-6"></div>
+				<div class="col-5 of3"><img src="img/star.jpg" class="estrella"></div>
+			</div>
+		</div>
+
+	</div>
+
 </body>
 </html>
