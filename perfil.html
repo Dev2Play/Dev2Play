@@ -14,13 +14,34 @@
 	<style type="text/css">
 
 		.perf{
-			box-shadow: 2px, 2px, 3px, 5px orange;
+			/*border: 2px solid rgb(25, 53, 179);*/
+			box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 1);
+			width: 210px;
+			height: 200px;
+			margin-top: 20px;
 		}
+
+		#nav{
+			position: fixed;
+			z-index: 100;
+			width: 100%;
+		}
+
+		img:hover{
+			opacity: 80%;
+		}
+
+	/*	.fijar{
+			position: fixed;
+			z-index: 100;
+			border: 2px solid cyan;
+		}*/
+
 	</style>
 </head>
 <body>
 	<!-- Navigation -->
-	<nav class="navbar navbar-expand-lg navbar-white bg-light static-top">
+	<nav class="navbar navbar-expand-lg navbar-white bg-light " id="nav">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img src="http://placehold.it/150x50?text=Logo" alt="">
@@ -61,19 +82,22 @@
     </nav>
 
 <!-- Page Content -->
+<br>
+<br><br><br>
 <div class="container-fluid">
 	<div class="row">
-		<img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="rounded-circle z-depth-0 mx-auto py-4 perf"
-		alt="avatar image" width="200px" height="200px"> <!--Puse el heigth porque la imagen estaba ovalada-->
+		<img src="images/gif.gif" class="rounded-circle z-depth-0 mx-auto  perf"
+		alt="avatar image"> <!--Puse el heigth porque la imagen estaba ovalada-->
 	</div>
 	<div class="row mb-2">
 		<div class="mx-auto text-center">
+			<br>
 			<h3> Nombre y apellidos <br></h3>
 			<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati debitis, assumenda voluptate, velit quas impedit fugit nisi odio dolor dolore, incidunt dolorem nobis dolorum error laudantium perspiciatis necessitatibus dignissimos in!</p>
 
 		</div>	
 	</div>
-	<hr>
+	
 	<div class="row justify-content-md-center">
 		<div class="col col-lg-2 text-center">
 			<p class="mb-0"><strong>567</strong></p>
@@ -86,46 +110,53 @@
 		<div class="col col-lg-2 text-center">
 			<p class="mb-0"><strong>1236</strong></p>
 			<p class="text-muted">publicaciones</p>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col col-3">
+			</div>
+			</div>
+			<hr>
 			<br>
-			<h3>Programador C#</h3>
-			<br>
-			<h3>Diseñador Grafico</h3>
+			<div class="row">
+				<div class="col-3">
+					<br>
+					<div class="fijar">
+						<h3>Programador C#</h3>
+						<br>
+						<h3>Diseñador Grafico</h3>
+					</div>
 		</div>
 		<div class="col">
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="card">
-						<img class="card-img-top" src="..." alt="Card image cap">
+						<img class="card-img-top" src="images/gif.gif"  alt="Card image cap">
 						<div class="card-body">
 							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						</div>
 					</div>
+					<br>
 				</div>
 				<div class="col-sm-6">
 					<div class="card" >
-						<img class="card-img-top" src="..." alt="Card image cap">
+						<img class="card-img-top" src="images/gif.gif"  alt="Card image cap">
 						<div class="card-body">
 							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						</div>
 					</div>
+					<br>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="card">
-						<img class="card-img-top" src="..." alt="Card image cap">
+						<img class="card-img-top" src="images/gif.gif" alt="Card image cap">
 						<div class="card-body">
 							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						</div>
 					</div>
+					<br>
 				</div>
 				<div class="col-sm-6">
 					<div class="card" >
-						<img class="card-img-top" src="..." alt="Card image cap">
+						<img class="card-img-top" src="images/gif.gif"  alt="Card image cap">
 						<div class="card-body">
 							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						</div>
@@ -135,8 +166,13 @@
 
 		</div>
 		<div class="col-3">
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, cum itaque odit debitis. Nostrum, necessitatibus aliquid nobis velit optio iste molestias, dignissimos in veniam nihil, beatae, dolor quas magnam soluta.</p>
-			<p>Nulla odio nihil ducimus veniam nobis aut nostrum deleniti, soluta maiores. Fuga perspiciatis suscipit corporis nesciunt mollitia nobis repellendus, excepturi, alias aspernatur animi repellat natus eaque reiciendis libero a facilis!</p>
+			<h4>Proyecto 1</h4>
+			<br>
+			<h4>Proyecto 1</h4>
+			<br>
+			<h4>Proyecto 1</h4>
+			<br>
+			<h4>Proyecto 1</h4>
 		</div>
 	</div>
 
