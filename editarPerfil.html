@@ -10,6 +10,31 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 	<title>Editar Perfil</title>
+	<style type="text/css">
+		.perf {
+			/*border: 2px solid rgb(25, 53, 179);*/
+			box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 1);
+			width: 210px;
+			height: 200px;
+			margin-top: 20px;
+		}
+
+		#nav {
+			position: fixed;
+			z-index: 100;
+			width: 100%;
+		}
+
+		img:hover {
+			opacity: 80%;
+		}
+
+		/*	.fijar{
+			position: fixed;
+			z-index: 100;
+			border: 2px solid cyan;
+		}*/
+	</style>
 </head>
 <body>
 	<!-- Navigation -->
@@ -54,22 +79,25 @@
 			</div>
 		</div>
 	</nav>
-
+	<br><br><br><br>
 <!-- Page Content -->
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-1"></div> <!--Esta col esta porque si no se queda la imagen de la foto descentrada-->
-		<img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="rounded-circle z-depth-0 mx-auto py-4"
+		<br>
+		<img src="images/gif.gif" class="rounded-circle z-depth-0 mx-auto  perf" alt="avatar image" class="rounded-circle z-depth-0 mx-auto py-4"
 		alt="avatar image" width="200px" height="200px" style="border: yellow solid 4px" > <!--Puse el heigth porque la imagen estaba ovalada-->
 		<div class="col-1 ">
 			<img src="images/ajustes.png" style="float: right; border: black solid 2px;">
 		</div>
 	</div>
+	<br>
 	<div class="row">
 		<div class="col mx-auto text-center mb-1"  ><!--boton para editar la foto-->
 			<input type="button" name="Foto" value="Editar Foto">
 		</div>
 	</div>	
+	<br>
 	<div class="row mb-2" style="border: solid yellow 4px">
 		<div class="mx-auto text-center">
 			<h3> Nombre y apellidos <br></h3>
@@ -97,80 +125,71 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col col-3" style="border: solid yellow 4px"> <!--el estilo de borde es solo para remarcar lo editable luego se borra cuando sea funcional-->
-			<ul style="list-style: none; margin-left: 0px"> <!--Lista creada para ver como quedarian los roles en lista mas algo de texto para que se describa-->
-				<li>Programador</li>
-				<li>Músico</li>
-				<li>Modelador 3d</li>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-			</ul>
+		<div class="col-3">
+			<br>
+			<div class="fijar">
+				<h3>Programador C#</h3>
+				<br>
+				<h3>Diseñador Grafico</h3>
+			</div>
 		</div>
-		<div class="col"> <!--he dejado las tarjestas no alineadas pero simetricas a ver que os parece tambien es porque no iba bien-->
+		<div class="col">
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="card">
-						<img class="card-img-top" src="images/1.png" alt="Card image cap">
+						<img class="card-img-top" src="images/gif.gif" alt="Card image cap">
 						<div class="card-body">
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							<p class="card-text">Some quick example text to build on the card title and make up the
+								bulk of the card's content.</p>
 						</div>
 					</div>
+					<br>
 				</div>
 				<div class="col-sm-6">
-					<div class="card" >
-						<img class="card-img-top" src="images/2.png" alt="Card image cap">
+					<div class="card">
+						<img class="card-img-top" src="images/gif.gif" alt="Card image cap">
 						<div class="card-body">
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							<p class="card-text">Some quick example text to build on the card title and make up the
+								bulk of the card's content.</p>
 						</div>
 					</div>
+					<br>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="card">
-						<img class="card-img-top" src="images/3.jpg" alt="Card image cap">
+						<img class="card-img-top" src="images/gif.gif" alt="Card image cap">
 						<div class="card-body">
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							<p class="card-text">Some quick example text to build on the card title and make up the
+								bulk of the card's content.</p>
 						</div>
 					</div>
+					<br>
 				</div>
-				<div class="col-sm-6 my-4">
-					<div class="card" >
-						<img class="card-img-top" src="images/4.jpg" alt="Card image cap">
+				<div class="col-sm-6">
+					<div class="card">
+						<img class="card-img-top" src="images/gif.gif" alt="Card image cap">
 						<div class="card-body">
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							<p class="card-text">Some quick example text to build on the card title and make up the
+								bulk of the card's content.</p>
 						</div>
 					</div>
 				</div>
 			</div>
 
 		</div>
-		<div class="col-3" style="background-color: grey;"> 
-			<h3 style="text-align: center">Tus Equipos</h3> <!--Titulo que me parece que quedaba bien-->
-			<!--He creado las listas para ver como quedaria los Grupos/Euipos y dentro los componentes de ellos-->
-			<ul style="list-style: none;">
-				<li style="border: solid red 3px">Grupo1</li>
-				 <ul style="list-style: none;">
-				 	<li>Manuel</li>
-				 	<li>Nobmaster66</li>
-				 	<li>PacoElDelPueblo</li>	
-				 </ul>
-				<li style="border: solid red 3px">Equipo2</li>
-				<ul style="list-style: none;">
-				 	<li>Jose Luis</li>
-				 	<li>Moscú</li>
-				 	<li>Tod</li>	
-				 </ul>
-				<p></p>
-
-			</ul>
+		<div class="col-3">
+			<h4>Proyecto 1</h4>
+			<br>
+			<h4>Proyecto 1</h4>
+			<br>
+			<h4>Proyecto 1</h4>
+			<br>
+			<h4>Proyecto 1</h4>
 		</div>
 	</div>
+
 	<div class="row">
 		<div class="col col-3 text-center">
 			<input type="button" name="roles" value="Editar"> <!--boton para editar los roles-->
@@ -182,7 +201,17 @@
 
 </div>
 <!-- /.container -->
-
+<hr>
+<footer>
+	<div class="container">
+		<p class="float-right">
+			<a href="#">Back to top</a>
+		</p>
+		<p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
+		<p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a
+				href="../../getting-started/">getting started guide</a>.</p>
+	</div>
+</footer>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
