@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Proyectos activos</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    .inputss {
+      border: 0;
+      z-index: 4;
+      width: 302px;
+      height: 30px;
+      border-bottom: solid 1px #f85703;
+      background-color: #ffffff;
+
+    }
+
+    .filtro {
+      width: 130px;
+      text-align: left;
+    }
+
+    hr {
+      width: 1400px;
+    }
+
+    /*GENERAL*/
+    .proyectos {
+      text-align: center;
+      margin-left: 200px;
+
+
+    }
+
+    /*Ficha de cada proyecto*/
+    .fichas {
+      border: 2px solid gray;
+      /* height: 200px;*/
+      padding-top: 20px;
+      margin-left: 20px;
+      margin-bottom: 50px;
+      /*Separacion entre tarjetas*/
+      background-color: rgb(161, 179, 211);
+    }
+
+    .fichas:hover {
+      opacity: 85%;
+    }
+
+    .participantes {
+      /* border: 2px solid rgb(68, 77, 68);*/
+      background-color: rgb(118, 175, 142);
+      margin-left: 320px;
+
+    }
+
+    .roles {
+      text-align: left;
+
+    }
+
+    .hr_debajo_del_titulo {
+      width: 350px;
+      box-shadow: 2px 1px 2px 1px blue;
+    }
+
+    .bajo_roles {
+      width: 400px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!--NAVEGACION-->
+  <nav class="navbar navbar-expand-lg navbar-white bg-light static-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="http://placehold.it/150x50?text=Logo" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <!--a class="nav-link" href="#">Home
+                              <span class="sr-only">(current)</span>
+                          </a-->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"
+              style="color: rgb(209, 36, 224); font-weight: 800; margin-top: 4px;">Publicaciones</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"
+              style="color: rgb(209, 36, 224); font-weight: 800; margin-top: 4px;">Proyectos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" style="color: rgb(209, 36, 224); font-weight: 800; margin-top: 4px;">Mis
+              proyectos</a>
+          </li>
+          <li class="nav-item avatar dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="rounded-circle z-depth-0"
+                alt="avatar image" width="40px">
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+              aria-labelledby="navbarDropdownMenuLink-55">
+              <a class="dropdown-item" href="#">Ver mi perfil</a>
+              <a class="dropdown-item" href="#">Editar mi perfil</a>
+              <a class="dropdown-item" href="#">Publicación nueva</a>
+              <a class="dropdown-item" href="#">Proyecto nuevo</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <br><br>
+
+  <!--BUSCAR Y FILTRAR-->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-6">
+        <form action="">
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp🔎
+          <input type="text" class="inputss">
+        </form>
+      </div>
+      <div class="col-4"></div>
+      <div class="col-2">
+        <button class="filtro nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">📃 Ordenar</button>
+        <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+          aria-labelledby="navbarDropdownMenuLink-55">
+          <a class="dropdown-item" href="#">Ordenar por Novedad</a>
+          <a class="dropdown-item" href="#">Mas miembros</a>
+          <a class="dropdown-item" href="#">Menos miembros</a>
+          <a class="dropdown-item" href="#">Plazo proximo</a>
+          <a class="dropdown-item" href="#">Plazo lejano</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <hr>
+  <br>
+
+  <!--ROW DE FICHAS DE PROYECTOS ABIERTOS-->
+  <div class="container proyectos">
+
+    <!--PRIMERA FILA-->
+    <div class="row">
+
+      <!--PRIMERA TARJETA-->
+      <div class="col-5 fichas">
+        <h3>Titulo</h3>
+        <hr class="hr_debajo_del_titulo">
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum molestiae perferendis soluta iure eaque
+          provident exercitationem quibusdam, minima nobis delectus ullam temporibus sapiente praesentium commodi,
+          veniam numquam illum ea neque.
+        </div>
+        <br>
+        <div class="participantes">
+          2/4 Miembros
+        </div>
+        <br>
+        <hr class="bajo_roles">
+        <div class="roles">
+          <strong>Programador C#</strong> - Persona con conocimientos de programacion <br>
+          <strong>Diseñador Grafico</strong> - Diseñador de mapeados pixelart <br>
+          <strong>Tecnico de sonido</strong> - Se busca banda sonora para un juego rpg de ambiente medieval<br>
+        </div>
+        <br>
+      </div>
+      <div class="col-1"></div>
+
+      <div class="col-5 fichas">
+        <h3>Titulo</h3>
+        <hr class="hr_debajo_del_titulo">
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum molestiae perferendis soluta iure eaque
+          provident exercitationem quibusdam, minima nobis delectus ullam temporibus sapiente praesentium commodi,
+          veniam numquam illum ea neque.
+        </div>
+        <br>
+        <div class="participantes">
+          2/4 Miembros
+        </div>
+        <br>
+        <hr class="bajo_roles">
+        <div class="roles">
+          <strong>Programador C#</strong> - Persona con conocimientos de programacion <br>
+          <strong>Diseñador Grafico</strong> - Diseñador de mapeados pixelart <br>
+          <strong>Tecnico de sonido</strong> - Se busca banda sonora para un juego rpg de ambiente medieval<br>
+        </div>
+        <br>
+      </div>
+      <div class="col-1"></div>
+
+
+
+
+    </div>
+
+    <!--COPIAS-->
+    <div class="row">
+
+      <!--PRIMERA TARJETA-->
+      <div class="col-5 fichas">
+        <h3>Titulo</h3>
+        <hr class="hr_debajo_del_titulo">
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum molestiae perferendis soluta iure eaque
+          provident exercitationem quibusdam, minima nobis delectus ullam temporibus sapiente praesentium commodi,
+          veniam numquam illum ea neque.
+        </div>
+        <br>
+        <div class="participantes">
+          2/4 Miembros
+        </div>
+        <br>
+        <hr class="bajo_roles">
+        <div class="roles">
+          <strong>Programador C#</strong> - Persona con conocimientos de programacion <br>
+          <strong>Diseñador Grafico</strong> - Diseñador de mapeados pixelart <br>
+          <strong>Tecnico de sonido</strong> - Se busca banda sonora para un juego rpg de ambiente medieval<br>
+        </div>
+        <br>
+      </div>
+      <div class="col-1"></div>
+
+      <div class="col-5 fichas">
+        <h3>Titulo</h3>
+        <hr class="hr_debajo_del_titulo">
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum molestiae perferendis soluta iure eaque
+          provident exercitationem quibusdam, minima nobis delectus ullam temporibus sapiente praesentium commodi,
+          veniam numquam illum ea neque.
+        </div>
+        <br>
+        <div class="participantes">
+          2/4 Miembros
+        </div>
+        <br>
+        <hr class="bajo_roles">
+        <div class="roles">
+          <strong>Programador C#</strong> - Persona con conocimientos de programacion <br>
+          <strong>Diseñador Grafico</strong> - Diseñador de mapeados pixelart <br>
+          <strong>Tecnico de sonido</strong> - Se busca banda sonora para un juego rpg de ambiente medieval<br>
+        </div>
+        <br>
+      </div>
+      <div class="col-1"></div>
+
+
+
+
+    </div>
+    <div class="row">
+
+      <!--PRIMERA TARJETA-->
+      <div class="col-5 fichas">
+        <h3>Titulo</h3>
+        <hr class="hr_debajo_del_titulo">
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum molestiae perferendis soluta iure eaque
+          provident exercitationem quibusdam, minima nobis delectus ullam temporibus sapiente praesentium commodi,
+          veniam numquam illum ea neque.
+        </div>
+        <br>
+        <div class="participantes">
+          2/4 Miembros
+        </div>
+        <br>
+        <hr class="bajo_roles">
+        <div class="roles">
+          <strong>Programador C#</strong> - Persona con conocimientos de programacion <br>
+          <strong>Diseñador Grafico</strong> - Diseñador de mapeados pixelart <br>
+          <strong>Tecnico de sonido</strong> - Se busca banda sonora para un juego rpg de ambiente medieval<br>
+        </div>
+        <br>
+      </div>
+      <div class="col-1"></div>
+
+      <div class="col-5 fichas">
+        <h3>Titulo</h3>
+        <hr class="hr_debajo_del_titulo">
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum molestiae perferendis soluta iure eaque
+          provident exercitationem quibusdam, minima nobis delectus ullam temporibus sapiente praesentium commodi,
+          veniam numquam illum ea neque.
+        </div>
+        <br>
+        <div class="participantes">
+          2/4 Miembros
+        </div>
+        <br>
+        <hr class="bajo_roles">
+        <div class="roles">
+          <strong>Programador C#</strong> - Persona con conocimientos de programacion <br>
+          <strong>Diseñador Grafico</strong> - Diseñador de mapeados pixelart <br>
+          <strong>Tecnico de sonido</strong> - Se busca banda sonora para un juego rpg de ambiente medieval<br>
+        </div>
+        <br>
+      </div>
+      <div class="col-1"></div>
+
+
+
+
+    </div>
+
+
+  </div>
+  <br>
+
+  <hr>
+  <footer>
+    <div class="container">
+      <p class="float-right">
+        <a href="#">Back to top</a>
+      </p>
+      <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
+      <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting
+          started guide</a>.</p>
+    </div>
+  </footer>
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
