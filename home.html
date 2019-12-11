@@ -47,6 +47,7 @@
             height: 120px;
 
         }
+
         .inputss {
             border: 0;
             z-index: 4;
@@ -54,28 +55,28 @@
             height: 30px;
             border-bottom: solid 1px #f85703;
             background-color: #ffffff;
-      
-          }
-      
-          .filtro {
+
+        }
+
+        .filtro {
             width: 130px;
             text-align: left;
-          }
-      
-          hr {
+        }
+
+        hr {
             width: 1400px;
-          }
-      
-          /*GENERAL*/
-          .proyectos {
+        }
+
+        /*GENERAL*/
+        .proyectos {
             text-align: center;
             margin-left: 200px;
-      
-      
-          }
-      
-          /*Ficha de cada proyecto*/
-          .fichas {
+
+
+        }
+
+        /*Ficha de cada proyecto*/
+        .fichas {
             border: 2px solid gray;
             /* height: 200px;*/
             padding-top: 20px;
@@ -84,34 +85,47 @@
             margin-top: -194px;
             /*Separacion entre tarjetas*/
             background-color: rgb(161, 179, 211);
-            
-          }
-      
-          .fichas:hover {
+
+        }
+
+        .fichas:hover {
             opacity: 85%;
-          }
-      
-          .participantes {
+        }
+
+        .participantes {
             /* border: 2px solid rgb(68, 77, 68);*/
             background-color: rgb(118, 175, 142);
             margin-left: 320px;
-      
-          }
-      
-          .roles {
+
+        }
+
+        .roles {
             text-align: left;
-      
-          }
-      
-          .hr_debajo_del_titulo {
+
+        }
+
+        .hr_debajo_del_titulo {
             width: 350px;
             box-shadow: 2px 1px 2px 1px blue;
-          }
-      
-          .bajo_roles {
+        }
+
+        .bajo_roles {
             width: 400px;
-          }
-          
+        }
+
+        .publicaciones {
+            margin: 20px;
+            width: 200px;
+        }
+
+        .publicaciones:hover{
+            opacity: 80%;
+        }
+
+        p{
+           text-align: center;
+           margin-left: 20px;
+        }
 
     </style>
 </head>
@@ -135,13 +149,16 @@
                         </a-->
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="color: rgb(209, 36, 224); font-weight: 800; margin-top: 4px;">Publicaciones</a>
+                        <a class="nav-link" href="#"
+                            style="color: rgb(209, 36, 224); font-weight: 800; margin-top: 4px;">Publicaciones</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="color: rgb(209, 36, 224); font-weight: 800; margin-top: 4px;">Proyectos</a>
+                        <a class="nav-link" href="#"
+                            style="color: rgb(209, 36, 224); font-weight: 800; margin-top: 4px;">Proyectos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="color: rgb(209, 36, 224); font-weight: 800; margin-top: 4px;">Mis proyectos</a>
+                        <a class="nav-link" href="#"
+                            style="color: rgb(209, 36, 224); font-weight: 800; margin-top: 4px;">Mis proyectos</a>
                     </li>
                     <li class="nav-item avatar dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
@@ -179,33 +196,26 @@
                 <div class="row">
                     <!--CARD-->
                     <div class="col-3">
-                        <div class="card" style="width: 12rem;">
-                            <div class="card-body tarjetas">
-                                <h5 class="card-title">Card title</h5>
-                            </div>
-                        </div>
+                        <img src="gif.gif" class="publicaciones">
+                        <p>Descripción de la fotografia</p>
                     </div>
                     <div class="col-1"></div>
                     <div class="col-3">
-                        <div class="card" style="width: 12rem;">
-                            <div class="card-body tarjetas">
-                                <h5 class="card-title">Card title</h5>
-                            </div>
-                        </div>
+                        <img src="gif.gif" class="publicaciones">
+
                     </div>
                     <div class="col-1"></div>
                     <div class="col-3">
-                        <div class="card" style="width: 12rem;">
-                            <div class="card-body tarjetas">
-                                <h5 class="card-title">Card title</h5>
-                            </div>
-                        </div>
+                        <img src="gif.gif" class="publicaciones">
+
                     </div>
                 </div>
             </div>
             <div class="col-2">
             </div>
             <div class="container-fluid"></div>
+            
+
 
 
             <!--Proyectos-->
@@ -214,29 +224,35 @@
                     <h3>Titulo</h3>
                     <hr class="hr_debajo_del_titulo">
                     <div>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum molestiae perferendis soluta iure eaque
-                      provident exercitationem quibusdam, minima nobis delectus ullam temporibus sapiente praesentium commodi,
-                      veniam numquam illum ea neque.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum molestiae perferendis soluta
+                        iure eaque
+                        provident exercitationem quibusdam, minima nobis delectus ullam temporibus sapiente praesentium
+                        commodi,
+                        veniam numquam illum ea neque.
                     </div>
                     <br>
                     <div class="participantes">
-                      2/4 Miembros
+                        2/4 Miembros
                     </div>
                     <br>
                     <hr class="bajo_roles">
                     <div class="roles">
-                      <strong>Programador C#</strong> - Persona con conocimientos de programacion <br>
-                      <strong>Diseñador Grafico</strong> - Diseñador de mapeados pixelart <br>
-                      <strong>Tecnico de sonido</strong> - Se busca banda sonora para un juego rpg de ambiente medieval<br>
+                        <strong>Programador C#</strong> - Persona con conocimientos de programacion <br>
+                        <strong>Diseñador Grafico</strong> - Diseñador de mapeados pixelart <br>
+                        <strong>Tecnico de sonido</strong> - Se busca banda sonora para un juego rpg de ambiente
+                        medieval<br>
                     </div>
                     <br>
-                  </div>
-                  <div class="col-1"></div>
-                  
-                  <!--OTRO-->
+                </div>
+                <div class="col-1"></div>
+
+                <!--OTRO-->
             </div>
-            
+
         </div>
+
+        
+        
     </div>
 
     <!--TEXTO OPCIONES PREMIUM-->
