@@ -34,6 +34,18 @@
 			z-index: 100;
 			border: 2px solid cyan;
 		}*/
+
+		body{
+			opacity: 80%;
+		}
+
+		.scroll{
+			height:450px; /*Tamaño*/
+			overflow-y: scroll;
+			
+				
+		}
+
 	</style>
 </head>
 <body>
@@ -80,28 +92,21 @@
 		</div>
 	</nav>
 	<br><br><br><br>
+
 <!-- Page Content -->
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-1"></div> <!--Esta col esta porque si no se queda la imagen de la foto descentrada-->
-		<br>
+
 		<img src="images/gif.gif" class="rounded-circle z-depth-0 mx-auto  perf" alt="avatar image" class="rounded-circle z-depth-0 mx-auto py-4"
 		alt="avatar image" width="200px" height="200px" style="border: yellow solid 4px" > <!--Puse el heigth porque la imagen estaba ovalada-->
-		<div class="col-1 ">
-			<img src="images/ajustes.png" style="float: right; border: black solid 2px;">
-		</div>
 	</div>
 	<br>
-	<div class="row">
-		<div class="col mx-auto text-center mb-1"  ><!--boton para editar la foto-->
-			<input type="button" name="Foto" value="Editar Foto">
-		</div>
-	</div>	
+
 	<br>
-	<div class="row mb-2" style="border: solid yellow 4px">
+	<div class="row mb-2">
 		<div class="mx-auto text-center">
 			<h3> Nombre y apellidos <br></h3>
-			<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati debitis, assumenda voluptate, velit quas impedit fugit nisi odio dolor dolore, incidunt dolorem nobis dolorum error laudantium perspiciatis necessitatibus dignissimos in!</p>
+			<input type="textarea" name="descripcion" style="border: solid yellow 4px; width: 700px; height: 100px" placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati debitis, assumenda voluptate, velit quas impedit fugit nisi odio dolor dolore, incidunt dolorem nobis dolorum error laudantium perspiciatis necessitatibus dignissimos in!"></input>
 
 		</div>	
 	</div>
@@ -110,6 +115,7 @@
 			<input type="button" name="Foto" value="Editar Datos">
 		</div>
 	</div>
+	<br>
 	<div class="row justify-content-md-center" style="display: none"> <!--DATOS DE SEGUIDORES OCULTADOS SI NO VEIS QUE ESTE BIEN LO QUITAMOS Y YA-->
 		<div class="col col-lg-2 text-center">
 			<p class="mb-0"><strong>567</strong></p>
@@ -127,13 +133,17 @@
 	<div class="row">
 		<div class="col-3">
 			<br>
-			<div class="fijar">
+			<div class="fijar px-1" style="border: 5px solid yellow;">
 				<h3>Programador C#</h3>
 				<br>
 				<h3>Diseñador Grafico</h3>
 			</div>
+			<div class="col col-3 text-center">
+				<input type="button" name="roles" value="Editar"> <!--boton para editar los roles-->
+			</div>
 		</div>
-		<div class="col">
+
+		<div class="col scroll">
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="card">
@@ -179,6 +189,7 @@
 			</div>
 
 		</div>
+
 		<div class="col-3">
 			<h4>Proyecto 1</h4>
 			<br>
@@ -187,21 +198,16 @@
 			<h4>Proyecto 1</h4>
 			<br>
 			<h4>Proyecto 1</h4>
+			
 		</div>
-	</div>
 
-	<div class="row">
-		<div class="col col-3 text-center">
-			<input type="button" name="roles" value="Editar"> <!--boton para editar los roles-->
-		</div>
-		<div class="col col-6 text-center">
-			<input type="button" name="publicaciones" value="Publicar"> <!--boton para ir a publicaciones-->
-		</div>
 	</div>
 
 </div>
 <!-- /.container -->
+<br>
 <hr>
+
 <footer>
 	<div class="container">
 		<p class="float-right">
