@@ -12,25 +12,31 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <style>
 
-    .foto{
-      width: 290px;
-      margin: 50px;
-    }
+    body{
+      overflow-x: hidden; 
+    } 
 
-    .seleccionar{
+    .seleccionar {
       width: 200px;
       text-align: left;
 
     }
 
-    .publicar{
+    .publicar {
       width: 150px;
-      height: 50px;
       box-shadow: 1px 1px 2px 2px rgb(0, 0, 0);
       background-color: rgb(21, 109, 209);
       color: white;
-      margin-bottom: 80px;
-      margin-top: 40px;
+
+    }
+
+
+    .foto_juego{
+      width: 290px;
+      margin-top: 80px;
+
+      border: 1px solid black;
+      box-shadow: 2px 2px 2px 4px black;
     }
 
   </style>
@@ -41,50 +47,48 @@
   <!--NAVEGACION-->
   <nav class="navbar navbar-expand-lg navbar-white bg-light static-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="http://placehold.it/150x50?text=Logo" alt="">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <!--a class="nav-link" href="#">Home
-                          <span class="sr-only">(current)</span>
-                      </a-->
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"
-              style="color: rgb(209, 36, 224); font-weight: 800; margin-top: 4px;">Publicaciones</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"
-              style="color: rgb(209, 36, 224); font-weight: 800; margin-top: 4px;">Proyectos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" style="color: rgb(209, 36, 224); font-weight: 800; margin-top: 4px;">Mis
-              proyectos</a>
-          </li>
-          <li class="nav-item avatar dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="rounded-circle z-depth-0"
-                alt="avatar image" width="40px">
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
-              aria-labelledby="navbarDropdownMenuLink-55">
-              <a class="dropdown-item" href="#">Ver mi perfil</a>
-              <a class="dropdown-item" href="#">Editar mi perfil</a>
-              <a class="dropdown-item" href="#">Publicación nueva</a>
-              <a class="dropdown-item" href="#">Proyecto nuevo</a>
-            </div>
-          </li>
-        </ul>
-      </div>
+        <a class="navbar-brand" href="#">
+            <img src="http://placehold.it/150x50?text=Logo" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <!--a class="nav-link" href="#">Home
+                        <span class="sr-only">(current)</span>
+                    </a-->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: rgb(209, 36, 224); font-weight: 800; margin-top: 4px;">Publicaciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: rgb(209, 36, 224); font-weight: 800; margin-top: 4px;">Proyectos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: rgb(209, 36, 224); font-weight: 800; margin-top: 4px;">Mis proyectos</a>
+                </li>
+                <li class="nav-item avatar dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg"
+                            class="rounded-circle z-depth-0" alt="avatar image" width="40px">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+                        aria-labelledby="navbarDropdownMenuLink-55">
+                        <a class="dropdown-item" href="#">Ver mi perfil</a>
+                        <a class="dropdown-item" href="#">Editar mi perfil</a>
+                        <a class="dropdown-item" href="#">Publicación nueva</a>
+                        <a class="dropdown-item" href="#">Proyecto nuevo</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
-  </nav>
+</nav>
+
 
   <!--FORMULARIO-->
   <div class="container-fluid">
@@ -100,31 +104,37 @@
         </form>
       </div>
 
-      <div class="col-6" align = "center">
-        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="rounded-circle z-depth-0 foto"
-        alt="avatar image" width="250px">
+      <div class="col-6" align="center">
+        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="rounded-circle z-depth-0 foto_juego"
+          alt="avatar image" width="250px">
         <br>
-        <div class="custom-file seleccionar">
-          <input type="file" class="custom-file-input" id="inputGroupFile01">
-          <label class="custom-file-label" for="inputGroupFile01">Subir foto</label>
+        <div class="container-fluid">
+          <br><br><br>
+          <div class="row">
+            <div class="col-3"></div>
+            <div class="col-1">
+              <input type="file" class="custom-file-input" id="inputGroupFile01">
+              <label class="custom-file-label" for="inputGroupFile01" style="width: 300px;">Seleccionar archivo <button style="height: 40px;" class="mx-5 my-3">Subir</button></label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-   
-  
   </div>
-  <hr>
-  
+
+  <br><br><br><hr style="width: 1200px;">
+
+
   <!--GENEROS Y VENTA-->
   <div class="container-fluid">
-    <div class="row" align = "center">
+    <div class="row" align="center">
       <div class="col-3 my-5 mx-5">
-        Genero Principal <br><br>
+        Genero<br><br>
         <input type="text">
       </div>
       <div class="col-3 my-5 mx-5">
-        Genero Secundario <br><br>
-        <input type="text">
+        <br><br>
+
       </div>
       <div class="col-3 my-5">
         Precio de venta <br><br>
@@ -132,29 +142,87 @@
       </div>
     </div>
   </div>
+  <br>
+  <hr style="width: 1200px;">
 
-  <div class="container">
+  <!--REQUISITOS-->
+  <div class="container-flui">
+
     <div class="row">
-      <div class="col-10"></div>
-      <div class="col-1"><button class="publicar">Publicar</button></div>
-      
+      <div class="col-3"></div>
+      <div class="col-4"><h3>Requisitos</h3><br></div>
+      <div class="col-4"></div>
     </div>
-    
+
+    <div class="row">
+      <div class="col-4"> </div>
+      <div class="col-2">&bull; Sistema Operativo</div>
+      <div class="col-1"><input type="text" name="" id=""></div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-4"> </div>
+      <div class="col-2">&bull; Memoria</div>
+      <div class="col-1"><input type="text" name="" id=""></div>
+    </div>
+
+    <br>
+    <div class="row">
+      <div class="col-4"> </div>
+      <div class="col-2">&bull; Graficos</div>
+      <div class="col-1"><input type="text" name="" id=""></div>
+    </div>
+
+    <br>
+    <div class="row">
+      <div class="col-4"> </div>
+      <div class="col-2">&bull; Procesador</div>
+      <div class="col-1"><input type="text" name="" id=""></div>
+    </div>
+
+    <br>
+    <div class="row">
+      <div class="col-4"> </div>
+      <div class="col-2">&bull;   Almacenamiento</div>
+      <div class="col-1"><input type="text" name="" id=""></div>
+    </div>
+
   </div>
+
+
   
 
 
+  <!--PUBLICAR-->
+
+  <div class="container-fluid">
+    <br><br><br>
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4"></div>
+      <div class="col-2">
+        <input type="file" class="custom-file-input" id="inputGroupFile01">
+        <label class="custom-file-label" for="inputGroupFile01">Seleccionar archivo</label>
+      </div>
+      <div class="col-2">
+        <button style="height: 40px;">Subir</button>
+      </div>
+    </div>
+  </div>
+
+  <br><br>
+
   <hr>
-	<footer>
-		<div class="container">
-			<p class="float-right">
-				<a href="#">Back to top</a>
-			</p>
-			<p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
-			<p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a
-					href="../../getting-started/">getting started guide</a>.</p>
-		</div>
-	</footer>
+  <footer>
+    <div class="container">
+      <p class="float-right">
+        <a href="#">Back to top</a>
+      </p>
+      <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
+      <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting
+          started guide</a>.</p>
+    </div>
+  </footer>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
