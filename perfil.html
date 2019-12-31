@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<title>Perfil</title>
+
+	<style type="text/css">
+		.perf {
+			/*border: 2px solid rgb(25, 53, 179);*/
+			box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 1);
+			width: 210px;
+			height: 200px;
+			margin-top: 20px;
+		}
+
+		#nav {
+			position: fixed;
+			z-index: 100;
+			width: 100%;
+		}
+
+		img:hover {
+			opacity: 80%;
+		}
+
+		/*	.fijar{
+			position: fixed;
+			z-index: 100;
+			border: 2px solid cyan;
+		}*/
+
+		.scroll{
+			height:450px; /*Tamaño*/
+			overflow-y: scroll;
+				
+		}
+
+	</style>
+</head>
+
+<body>
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-white bg-light " id="nav">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">
+				<img src="http://placehold.it/150x50?text=Logo" alt="">
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active">
+						<!--a class="nav-link" href="#">Home
+                            <span class="sr-only">(current)</span>
+                        </a-->
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#"
+							style="color: rgb(209, 36, 224); font-weight: 800; margin-top: 4px;">Publicaciones</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#"
+							style="color: rgb(209, 36, 224); font-weight: 800; margin-top: 4px;">Proyectos</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#"
+							style="color: rgb(209, 36, 224); font-weight: 800; margin-top: 4px;">Mis proyectos</a>
+					</li>
+					<li class="nav-item avatar dropdown">
+						<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+							<img src="images/gif.gif"
+								class="rounded-circle z-depth-0" alt="avatar image" width="40px">
+						</a>
+						<div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+							aria-labelledby="navbarDropdownMenuLink-55">
+							<a class="dropdown-item" href="#">Ver mi perfil</a>
+							<a class="dropdown-item" href="#">Editar mi perfil</a>
+							<a class="dropdown-item" href="#">Publicación nueva</a>
+							<a class="dropdown-item" href="#">Proyecto nuevo</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Page Content -->
+	<br>
+	<br><br><br>
+	<div class="container-fluid">
+		<div class="row">
+			<img src="images/gif.gif" class="rounded-circle z-depth-0 mx-auto  perf" alt="avatar image">
+			<!--Puse el heigth porque la imagen estaba ovalada-->
+		</div>
+		<div class="row mb-2">
+			<div class="mx-auto text-center">
+				<br>
+				<h3> Nombre y apellidos <br></h3>
+				<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati debitis,
+					assumenda voluptate, velit quas impedit fugit nisi odio dolor dolore, incidunt dolorem nobis dolorum
+					error laudantium perspiciatis necessitatibus dignissimos in!</p>
+
+			</div>
+		</div>
+
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2 text-center">
+				<p class="mb-0"><strong>567</strong></p>
+				<p class="text-muted">seguidos</p>
+			</div>
+			<div class="col-md-auto text-center">
+				<p class="mb-0"><strong>789</strong></p>
+				<p class="text-muted">seguidores</p>
+			</div>
+			<div class="col col-lg-2 text-center">
+				<p class="mb-0"><strong>1236</strong></p>
+				<p class="text-muted">publicaciones</p>
+			</div>
+		</div>
+		<hr>
+		<br>
+		<div class="row">
+			<div class="col-3">
+				<br>
+				<div class="fijar">
+					<h3>Programador C#</h3>
+					<br>
+					<h3>Diseñador Grafico</h3>
+				</div>
+			</div>
+
+			<!--PUBLICACIONES-->
+			<div class="col scroll">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="card">
+							<img class="card-img-top" src="images/gif.gif" alt="Card image cap">
+							<div class="card-body">
+								<p class="card-text">Some quick example text to build on the card title and make up the
+									bulk of the card's content.</p>
+							</div>
+						</div>
+						<br>
+					</div>
+					<div class="col-sm-6">
+						<div class="card">
+							<img class="card-img-top" src="images/gif.gif" alt="Card image cap">
+							<div class="card-body">
+								<p class="card-text">Some quick example text to build on the card title and make up the
+									bulk of the card's content.</p>
+							</div>
+						</div>
+						<br>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="card">
+							<img class="card-img-top" src="images/gif.gif" alt="Card image cap">
+							<div class="card-body">
+								<p class="card-text">Some quick example text to build on the card title and make up the
+									bulk of the card's content.</p>
+							</div>
+						</div>
+						<br>
+					</div>
+					<div class="col-sm-6">
+						<div class="card">
+							<img class="card-img-top" src="images/gif.gif" alt="Card image cap">
+							<div class="card-body">
+								<p class="card-text">Some quick example text to build on the card title and make up the
+									bulk of the card's content.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="col-3">
+				<h4>Proyecto 1</h4>
+				<br>
+				<h4>Proyecto 1</h4>
+				<br>
+				<h4>Proyecto 1</h4>
+				<br>
+				<h4>Proyecto 1</h4>
+			</div>
+		</div>
+
+	</div>
+	<hr>
+	<footer>
+		<div class="container">
+			<p class="float-right">
+				<a href="#">Back to top</a>
+			</p>
+			<p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
+			<p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a
+					href="../../getting-started/">getting started guide</a>.</p>
+		</div>
+	</footer>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>
