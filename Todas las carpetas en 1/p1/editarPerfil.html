@@ -9,15 +9,31 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+	<!--MONTSERRAT-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <!--FJALLA-->
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One&display=swap" rel="stylesheet">
 
 	<title>Editar Perfil</title>
 	<style type="text/css">
-		.perf {
-			/*border: 2px solid rgb(25, 53, 179);*/
-			box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 1);
-			width: 210px;
-			height: 200px;
-			margin-top: 20px;
+
+
+		
+		.descdat{
+			width: 950px; 
+			height: 100px;
+			box-shadow: inset 0px 0px 2px rgb(161, 222, 255);
+			border-radius: 10px;
+		    text-align: center;
+		}
+		.tusroles{
+			width: 250px;
+			height: 82px;
+			box-shadow: inset 0px 2px 2px rgb(161, 222, 255);
+			border-radius: 10px;
+			font-size: 30px;
+			font-family: Monserrat;
+			margin-bottom: 13px;
 		}
 
 		#nav {
@@ -37,7 +53,7 @@
 		}*/
 
 		body{
-			opacity: 80%;
+			overflow-x: hidden;
 		}
 
 		.scroll{
@@ -93,6 +109,43 @@
 			border-radius: 20px;
 	  
 		  }
+
+/*subir la imagen de perfil*/	  
+		.perf {
+			/*border: 2px solid rgb(25, 53, 179);*/
+			box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 1);
+			width: 210px;
+			height: 200px;
+			margin-top: 20px;	
+		}
+
+
+		#preview {
+			width: 200px;
+			margin: 0 auto;
+			margin-bottom: 10px;
+			position: relative;
+
+		}
+		
+		#seleccionar{
+			position: absolute;
+			top: -10px;
+			left: 50px;
+			
+		}
+
+		
+
+		#file-save{
+			position: absolute;
+			left: 190px;
+		}
+
+
+		
+
+
 		
 	</style>
 </head>
@@ -157,24 +210,48 @@
 
 <!-- Page Content -->
 <div class="container-fluid">
-	<div class="row">
+  <div class="row">
+  	<div class="col-4"></div>
+  	<div class="col-4">
+	 <div id="preview"  class="thumbnail py-4" >
+		<button href="#" id="seleccionar" class="btn btn-primary">Seleccionar</button>
+		<img  id="previo" src="images/gif.gif" class="rounded-circle z-depth-0 mx-auto  perf" alt="avatar image" width="200px" height="200px" style="border: solid 4px" >
+	 </div>		
+	 <button class="btn btn-primary" id="file-save">Guardar</button>
+	</div>
+	<div class="col-4"></div> 
+  </div>
 
-		<img src="images/gif.gif" class="rounded-circle z-depth-0 mx-auto  perf" alt="avatar image" class="rounded-circle z-depth-0 mx-auto py-4"
-		alt="avatar image" width="200px" height="200px" style="border: yellow solid 4px" > <!--Puse el heigth porque la imagen estaba ovalada-->
+
+		
+		
+
+
+
+
+
+
+
+
+		<!--<img src="images/gif.gif" class="rounded-circle z-depth-0 mx-auto  perf" alt="avatar image" class="rounded-circle z-depth-0 mx-auto py-4" width="200px" height="200px" style="border: solid 4px" >-->
 	</div>
 	<br>
 
-	<br>
+<br>
 	<div class="row mb-2">
 		<div class="mx-auto text-center">
-			<h3> Nombre y apellidos <br></h3>
-			<input type="textarea" name="descripcion" style="border: solid yellow 4px; width: 700px; height: 100px" placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati debitis, assumenda voluptate, velit quas impedit fugit nisi odio dolor dolore, incidunt dolorem nobis dolorum error laudantium perspiciatis necessitatibus dignissimos in!"></input>
+			<h3> Nombre y apellidos</h3>
+			<input type="textarea" name="descripcion" class="descdat" placeholder="Describete"></input>
+			 <!-- quepasa-->
 
 		</div>	
 	</div>
 	<div class="row">
 		<div class="col mx-auto text-center mb-1"  ><!--boton para editar nombre y texto-->
-			<input type="button" name="Foto" value="Editar Datos">
+		  <form method="" action="">
+			<input type="button" name="foto" value="Editar Datos">
+			<input type="button" name="guardar" value="Guardar">
+		  </form>	
 		</div>
 	</div>
 	<br>
@@ -195,13 +272,22 @@
 	<div class="row">
 		<div class="col-3">
 			<br>
-			<div class="fijar px-1" style="border: 5px solid yellow;">
-				<h3>Programador C#</h3>
+			<div class="fijar px-1">
+			  <button name="roles" value="Añadir" class="mb-2" style="margin-left: 80px" >Añadir</button>
+			  <form name="rol" method="post" action="">
+				<select class="tusroles">
+				<option value="1">Programador</option>
 				<br>
-				<h3>Diseñador Grafico</h3>
+				<option value="2">Diseñador Grafico</option>
+				<br>
+				<option value="3">Tecnico de sonido</option>
+				<br>
+				<option value="4">Guionista</option>
+				</select>
+			  </form>	
 			</div>
 			<div class="col col-3 text-center">
-				<input type="button" name="roles" value="Editar"> <!--boton para editar los roles-->
+				<button name="roles" value="Guardar" style="margin-left: 60px">Guardar</button>
 			</div>
 		</div>
 
@@ -283,6 +369,9 @@
 		  <img class="rrss" src="images/youtube.png"><a href="https://www.youtube.com/Dev2Play">YouTube</a><a href="https://www.facebook.com/Dev2Play"><img class="rrss" src="images/facebook.png"> Facebook</a><a href="https://twitter.com/Dev2Play" ><img class="rrss" src="images/twitter.png">Twitter<a href="https://www.instagram.com/Dev2Play/"><img class="rrss" src="images/instagram.jpg">Instagram</a></div>
 	  </div>
 	</footer>
+
+
+	
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
