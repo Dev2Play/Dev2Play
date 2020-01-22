@@ -1,0 +1,9 @@
+h1  {
+    color: white;
+    text-align: center;
+}
+footer {
+    /*background-color: rgb(138, 128, 128);*/
+    margin-top: 20px;
+    height: 120px;
+}
