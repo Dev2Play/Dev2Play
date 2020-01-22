@@ -13,6 +13,11 @@ app.get('/', function(req, res) {
     res.render('../views/index.hbs');
   });
 
+app.get('/perfil', (req, res) => {
+    res.render('../views/index')
+
+});
+
 /*
     Configuramos el puerto
 */
@@ -43,6 +48,12 @@ app.use(morgan('dev'));
     Rutas
 */
 
+
+/*
+    Archivos publicos
+*/
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 
