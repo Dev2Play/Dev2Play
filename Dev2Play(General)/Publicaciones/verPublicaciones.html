@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="Verport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!--MONTSERRAT-->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+  <!--FJALLA-->
+  <link href="https://fonts.googleapis.com/css?family=Fjalla+One&display=swap" rel="stylesheet">
+  <style>
+  .tarjeta{
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius:20px;
+    border-bottom-right-radius: 20px;
+
+   }
+
+   .fotos{
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px
+   }
+
+   .precio{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius:20px;
+    border-bottom-right-radius: 20px;
+
+   }  
+
+   .enlaces_nav{
+    color: rgb(60, 112, 216); 
+    font-weight: 900; 
+    margin-top: 4px;
+    font-family: 'Montserrat';
+    text-align: center;
+
+   }
+
+   #nav {
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+   }
+ 
+   .enlaces_nav:hover{
+    color: rgb(14, 73, 115);
+   }
+
+   .enlaces_nav:active{
+    color: rgb(60, 112, 216); /*COMO EL PRIMER COLOR*/
+   }
+
+   #navbarDropdownMenuLink-55{ /*flecha del dropdown*/
+    color: rgb(1, 2, 3);
+   }
+
+   #navbarDropdownMenuLink-55:hover{
+    color: rgb(88, 69, 193);
+   }
+
+   #navbarDropdownMenuLink-55:active{
+    color: rgb(39, 20, 255);
+   }
+
+   nav{
+    position: fixed;
+    }
+
+    .titulo{
+      text-align: center;
+      font-family: 'Montserrat';
+    }
+
+    .rrss{
+      height: 40px;
+      width: 40px;
+      margin-left: 30px;
+      border-radius: 20px;
+
+    }
+    .rrss{
+      height: 40px;
+      width: 40px;
+      margin-left: 30px;
+      border-radius: 20px;
+
+    }
+  
+
+  </style>
+   <title>Publicaciones</title>
+   </head>
+ <body>
+  <nav id="nav" class="navbar navbar-expand-lg navbar-white bg-light static-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="http://placehold.it/150x50?text=Logo" alt="" class="mx-5">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto mx-2 my-2">
+                <li class="nav-item active">
+                    <!--a class="nav-link" href="#">Home
+                        <span class="sr-only">(current)</span>
+                    </a-->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link enlaces_nav" href="tienda.html">Tienda</a>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link" href="#" style="color: rgb(161, 183, 226); font-weight: 800; margin-top: 4px;">|</p>
+                </li>
+                <li class="text-muted">
+                    <a class="nav-link enlaces_nav" href="verPublicaciones.html">Publicaciones</a>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link" href="#" style="color: rgb(161, 183, 226); font-weight: 800; margin-top: 4px;">|</p>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link enlaces_nav" href="proyectosActivos.html" >Proyectos</a>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link" href="#" style="color: rgb(161, 183, 226); font-weight: 800; margin-top: 4px;">|</p>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link enlaces_nav" href="#">Mis proyectos</a>
+                </li>
+                <li class="nav-item avatar dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg"
+                            class="rounded-circle z-depth-0" alt="avatar image" width="40px">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+                        aria-labelledby="navbarDropdownMenuLink-55" >
+                        <a class="dropdown-item" href="perfil.html">Ver mi perfil</a>
+                        <a class="dropdown-item" href="editarPerfil.html">Editar mi perfil</a>
+                        <a class="dropdown-item" href="#">Publicación nueva</a>
+                        <a class="dropdown-item" href="formularioProyecto.html">Proyecto nuevo</a>
+                    </div>
+                </li>
+                <li>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</li>
+            </ul>
+        </div>
+    </div>
+</nav>
+     <br>
+     <br> 
+
+            <div class="album py-5 bg-white">
+              <div class="container">
+                <div class="row">
+                  <div class="col-2">
+                    <form action="" class="mx-2">
+                      <select name="categorias" class="mt-2"> <!--ver el tpo de categoria seleccionada-->
+                        <option value="seleciona categoria">Seleciona categoria</option>
+                        <option value="sonido">Sonido</option>
+                        <option value="dibujo">Dibujo</option>
+                        <option value="animacion">Animación</option>
+                        <option value="modelado">Modeladoo</option>
+                        <option value="guion">Guión</option>
+                        <option value="codigo">Código</option>
+                      </select>
+                      <br><br>
+                    </form>
+                  </div>
+                  <div class="col-2">
+                   <form action="" class="mx-2">
+                    <select name="categorias" class="mt-2" > <!--filtos de busqueda-->
+                      <option value="filtros">Filtros</option>
+                      <option value="recientes">Recentes</option>
+                      <option value="mas valorados">Más Valorados</option>
+                      <option value="destacados">Destacados</option>
+                    </select>
+                    <br><br>
+                  </form>
+                  
+                </div>
+              </div> 
+              <hr>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <button type="button" class="btn btn-sm btn-outline-secondary  mx-3" data-toggle="modal" data-target="#nuevoReporte">🚩</button>
+                    <div class="card mb-4 box-shadow tarjeta">
+                      <img class="fotos" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="images/gif.gif" data-holder-rendered="true">
+                      <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                            
+                            <button type="button" class="btn btn-sm btn-outline-secondary">❤️</button>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <button type="button" class="btn btn-sm btn-outline-secondary  mx-3">🚩</button>
+                    <div class="card mb-4 box-shadow tarjeta">
+                      <img class="fotos" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src="images/gif.gif" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
+                      <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                            
+                            <button type="button" class="btn btn-sm btn-outline-secondary">❤️</button>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <button type="button" class="btn btn-sm btn-outline-secondary  mx-3">🚩</button>
+                    <div class="card mb-4 box-shadow tarjeta">
+                      <img class="fotos" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src="images/gif.gif" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
+                      <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                            
+                            <button type="button" class="btn btn-sm btn-outline-secondary">❤️</button>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <button type="button" class="btn btn-sm btn-outline-secondary  mx-3">🚩</button>
+                    <div class="card mb-4 box-shadow tarjeta">
+                      <img class="fotos" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src="images/gif.gif" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
+                      <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                            
+                            <button type="button" class="btn btn-sm btn-outline-secondary">❤️</button>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <button type="button" class="btn btn-sm btn-outline-secondary  mx-3">🚩</button>
+                    <div class="card mb-4 box-shadow tarjeta">
+                      <img class="fotos" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src="images/gif.gif" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
+                      <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                            
+                            <button type="button" class="btn btn-sm btn-outline-secondary">❤️</button>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <button type="button" class="btn btn-sm btn-outline-secondary  mx-3">🚩</button>
+                    <div class="card mb-4 box-shadow tarjeta">
+                      <img class="fotos" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src="images/gif.gif" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
+                      <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                            
+                            <button type="button" class="btn btn-sm btn-outline-secondary">❤️</button>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>  
+            </div>
+            
+
+            <!-- Modal Reporte -->
+            <div class="modal" id="nuevoReporte">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                 <!-- Modal Header -->
+                 <div class="modal-header">
+                  <h4 class="modal-title titulo">Reporte</h4> 
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                  <form action="" class="mx-2">
+                    <select name="causas" class="mt-2" > <!--Causa del reporte de la publicación-->
+                      <option value="selecionaCausa">Seleciona causa</option>
+                      <option value="ofensivo">Ofensivo</option>
+                      <option value="plagio">Plagio</option>
+                      <option value="ntsw">Inadecuado</option>
+                      <option value="otrasCausas">otros</option>
+                    </select>
+                    <br><br>
+                  </form>
+                  <textarea style="width:100%"   name="descripcion"></textarea>
+                  <button type="button" class="btn btn-primary bg-light float-right">📎</button>
+
+
+                </div> 
+
+
+
+
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary">Enviar</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          </div>
+
+
+
+
+
+          <footer>
+            <div class="container-fluid bg-light">
+              <p class="float-right">
+                <a href="#">Arriba</a>
+              </p>
+              <div class="text-center py-3">
+               <img src="http://placehold.it/150x50?text=Logo">
+              </div>
+              <p>Contacto <img src="images/correo.png"></p>
+                <div class="text-center">
+                  <img class="rrss" src="images/youtube.png"><a href="https://www.youtube.com/Dev2Play">YouTube</a><a href="https://www.facebook.com/Dev2Play"><img class="rrss" src="images/facebook.png"> Facebook</a><a href="https://twitter.com/Dev2Play" ><img class="rrss" src="images/twitter.png">Twitter<a href="https://www.instagram.com/Dev2Play/"><img class="rrss" src="images/instagram.jpg">Instagram</a></div>
+              </div>
+            </footer>
+
+
+
+
+
+
+
+
+
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</body>
+</html>
+
