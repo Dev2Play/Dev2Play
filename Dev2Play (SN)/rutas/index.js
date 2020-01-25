@@ -4,9 +4,10 @@ const dbconn = require('../src/db');
 
 
 
-router.get('/', (req, res) => {
+router.get('/',  (req, res) => {
 
     res.render('../views/home'); 
+
 
 }); 
 
