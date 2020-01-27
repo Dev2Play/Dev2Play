@@ -33,5 +33,9 @@
         -Tercera configuracion (src/index.js)
 
     11-Creamos todas las ventanas en partials
+
+    12-Conectamos la base de datos finalizada
+
+    13-Hacemos pruebas en la ventana publicaciones
     
 

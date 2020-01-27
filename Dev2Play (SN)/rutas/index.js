@@ -30,9 +30,34 @@ router.post('/tienda', (req, res) => {
 
 }); 
 
-router.get('/verPublicaciones', (req, res) => {
+//TODO: revisar errores de llamadas a la base de datos
+router.get('/verPublicaciones', async (req, res) => {
 
-    res.render('../views/partials/publicaciones/verPublicaciones'); 
+    const publicaciones = await dbconn.query('SELECT * FROM publicacion');
+    //console.log(publicaciones);
+
+    const publicaciones_valoradas = await dbconn.query(' SELECT * FROM publicacion ORDER BY likes DESC');
+
+    const publicaciones_destacadas = await dbconn.query('SELECT * FROM publicacion inner join usuario on publicacion.usuario_id = usuario.id_usuario inner join premium on usuario.premium = premium.id_premium WHERE oro > 0 or plata > 0  order by likes DESC LIMIT 8');
+
+    const publicaciones_Recientes = await dbconn.query('SELECT * FROM publicacion ORDER BY fecha_publicacion DESC');
+    //console.log(publicaciones_Recientes);
+
+    //TODO: ROLES
+
+    const publicaciones_sonido = await dbconn.query('SELECT * FROM publicacion inner join roles on publicacion.roles_id = roles.id_roles where roles.sonido=1');
+    //console.log(publicaciones_sonido);
+
+    const publicaciones_arte = await dbconn.query('SELECT * FROM publicacion inner join roles on publicacion.roles_id = roles.id_roles where roles.arte=1');
+    //console.log(publicaciones_arte);
+
+    const publicaciones_programacion = await dbconn.query('SELECT * FROM publicacion inner join roles on publicacion.roles_id = roles.id_roles where roles.programacion=1');
+    //console.log(publicaciones_programacion);
+
+    const publicaciones_guionista = await dbconn.query('SELECT* FROM publicacion inner join roles on publicacion.roles_id = roles.id_roles where roles.guionista=1');
+    //console.log(publicaciones_guionista)
+
+    res.render('../views/partials/publicaciones/verPublicaciones', {publicacion: publicaciones, publicacion_rec: publicaciones_Recientes, publicacion_sonido: publicaciones_sonido, publicacion_arte: publicaciones_arte, publicacion_programacion: publicaciones_programacion, publicacion_guionista: publicaciones_guionista}); 
 
 }); 
 
@@ -40,7 +65,6 @@ router.get('/verPublicaciones', (req, res) => {
 router.post('/verPublicaciones', (req, res) => {
 
     res.render('../views/partials/publicaciones/verPublicaciones'); 
-
 }); 
 
 

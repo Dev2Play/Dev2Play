@@ -5,7 +5,6 @@ const exphbs = require('express-handlebars');
 const router = express.Router();
 const app = express();
 var path = require('path');
-
 const {database} = require('./keys')
 
 

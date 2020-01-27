@@ -1,0 +1,1 @@
+    res.render('../views/partials/publicaciones/verPublicaciones', {enlace: enlaces[0]}); 
