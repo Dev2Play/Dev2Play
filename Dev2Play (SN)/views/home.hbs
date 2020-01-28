@@ -21,15 +21,15 @@
 
                                 <div class="form-group">
 
-
-                                    <input type="email" class="form-control" id="inputEmail"
+                                    {{!-- usuario es el nombre 00 --}}
+                                    <input type="user" name="usuario" class="form-control" id="inputEmail"
                                         placeholder="Email Address">
 
                                 </div>
 
                                 <div class="form-group">
-
-                                    <input type="password" class="form-control" id="inputPassword"
+                                    {{!-- la contraseña 00 --}}
+                                    <input type="password" name="password" class="form-control" id="inputPassword"
                                         placeholder="Password">
 
                                 </div>
@@ -190,9 +190,11 @@
                                         facere
                                         porro dolore accusamus, nobis sequi! Eaque possimus facere eligendi optio.
                                     </div>
-                                    <div class="col-1"><button id="like_boton"><p id="like">
-                                        ❤
-                                    </p></button></div>
+                                    <div class="col-1"><button id="like_boton">
+                                            <p id="like">
+                                                ❤
+                                            </p>
+                                        </button></div>
                                 </div>
                             </div>
                         </div>
@@ -225,49 +227,53 @@
         <div class="col-5 imagenes">
             <h3>Publicaciones Destacadas</h3>
             <!--Zona imagenes-->
+
             <div class="scroll">
                 <div class="row">
+                    <span id="publ_des">{{#each publicacion}}</span>
                     <!--CARD-->
                     <div class="col-4" data-toggle="modal" data-target="#publicacion" data-dismiss="modal">
-                        <img src="images/gif.gif" class="publicaciones">
+                        {{enlace}}
                     </div>
                     <div class="col-2"></div>
                     <div class="col-4" data-toggle="modal" data-target="#publicacion" data-dismiss="modal">
-                        <img src="images/gif.gif" class="publicaciones">
+                        {{enlace}}
 
                     </div>
                     <div class="col-2"></div>
                     <div class="col-4" data-toggle="modal" data-target="#publicacion" data-dismiss="modal">
-                        <img src="images/gif.gif" class="publicaciones">
+                        {{enlace}}
 
                     </div>
                     <div class="col-2"></div>
                     <div class="col-4" data-toggle="modal" data-target="#publicacion" data-dismiss="modal">
-                        <img src="images/gif.gif" class="publicaciones">
+                        {{enlace}}
 
                     </div>
                     <div class="col-2"></div>
                     <div class="col-4" data-toggle="modal" data-target="#publicacion" data-dismiss="modal">
-                        <img src="images/gif.gif" class="publicaciones">
+                        {{enlace}}
 
                     </div>
                     <div class="col-2"></div>
                     <div class="col-4" data-toggle="modal" data-target="#publicacion" data-dismiss="modal">
-                        <img src="images/gif.gif" class="publicaciones">
+                        {{enlace}}
 
                     </div>
                     <div class="col-2"></div>
                     <div class="col-4" data-toggle="modal" data-target="#publicacion" data-dismiss="modal">
-                        <img src="images/gif.gif" class="publicaciones">
+                        {{enlace}}
 
                     </div>
                     <div class="col-2"></div>
                     <div class="col-4" data-toggle="modal" data-target="#publicacion" data-dismiss="modal">
-                        <img src="images/gif.gif" class="publicaciones">
+                        {{enlace}}
 
                     </div>
+                    {{/each}}
                 </div>
             </div>
+
 
         </div>
         <div class="col-2">
@@ -285,7 +291,7 @@
                 </div>
                 <br>
                 <div class="participantes">
-                   {{equipos.usuario}} / Miembros
+                    {{'COUNT(equipos.usuario)'}} Miembros
                 </div>
                 <br>
                 <hr class="bajo_roles">

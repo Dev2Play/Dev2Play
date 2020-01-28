@@ -1,11 +1,13 @@
 const express = require('express');     
 const router = express.Router();    
 const dbconn = require('../src/db');
+const { isLoggedIn, isNotLoggedIn } = require('../lib/acceso'); //añadido
 
 
 
 router.get('/', async (req, res) => {
     
+    // MIRAR COMO VA EN OTRO PC
     const sacar_id = await dbconn.query('SELECT *, COUNT(*) FROM proyectos');
     //console.log(sacar_id);
 
@@ -18,13 +20,22 @@ router.get('/', async (req, res) => {
 
 
     var id_random = Math.round(Math.random() * (id_fin - 1) + 1);
-    //console.log("random: " + id_random);
+    if (id_random < 1){
+        id_random = 1;
+    }
+    console.log("random: " + id_random);
 
     //TODO: ERRORRRRRRRRR
-    const proyecto_destacado = await dbconn.query('SELECT *, COUNT(equipos.usuario) FROM proyectos WHERE id_proyectos = ?', [id_random]);
-    console.log(proyecto_destacado)
+    const proyecto_destacado = await dbconn.query('SELECT *, COUNT(equipos.usuario) FROM proyectos INNER JOIN equipos ON proyectos.id_proyectos = equipos.proyecto WHERE validacion=1 and id_proyectos=?;', [id_random]);
+    //console.log(proyecto_destacado)
 
-    res.render('../views/home', {proyecto: proyecto_destacado}); 
+    //PUBLICACIONES DESTACADAS 
+    const publicaciones_destacadas = await dbconn.query('SELECT * FROM publicacion inner join usuario on publicacion.usuario_id = usuario.id_usuario inner join premium on usuario.premium = premium.id_premium WHERE oro > 0 or plata > 0  order by likes DESC LIMIT 8');
+
+
+
+
+    res.render('../views/home', {proyecto: proyecto_destacado, publicacion: publicaciones_destacadas}); 
 }); 
 
 

@@ -3,17 +3,31 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');   
 const exphbs = require('express-handlebars');
 const router = express.Router();
-const app = express();
+
 var path = require('path');
-const {database} = require('./keys')
+const {database} = require('./keys');
+const session = require('express-session'); //00
+const MySQLStore = require('express-mysql-session')(session); //00
+const passport = require('passport'); //00 
 
 
 
-app.set('port', process.env.PORT || 3002)
+
+
+
+/*
+	Inicializaciones
+	Se inicializan los módulos cargados
+*/
+
+const app = express();	//00
+require('../lib/passport'); //00
 
 /*
     CONFIGURACIONES
 */
+
+app.set('port', process.env.PORT || 3002);
 app.set('views', 'views'); //A la variable views le asignamos el valor del directorio donde esta la aplicacion, y tiene la ruta hacia la carpeta views
 
 app.engine('.hbs', exphbs({     //.hbs porque me da la quiero, se puede llamar como se quiera
