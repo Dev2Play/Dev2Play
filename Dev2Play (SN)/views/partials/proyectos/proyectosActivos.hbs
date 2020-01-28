@@ -23,25 +23,25 @@
 <hr>
 <br>
 
+  
 <!--ROW DE FICHAS DE PROYECTOS ABIERTOS-->
 <div class="container proyectos">
 
+
   <!--PRIMERA FILA-->
   <div class="row">
-
+      {{#each proyecto}}
     <!--PRIMERA TARJETA-->
 
     <div class="col-5 fichas">
-      <h3>Titulo</h3>
+      <h3>{{titulo}}</h3>
       <hr class="hr_debajo_del_titulo">
       <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum molestiae perferendis soluta iure eaque
-        provident exercitationem quibusdam, minima nobis delectus ullam temporibus sapiente praesentium commodi,
-        veniam numquam illum ea neque.
+        {{descripcion}}
       </div>
       <br>
       <div class="participantes">
-        2/4 Miembros
+        {{'COUNT(equipos.usuario)'}} / Miembros
       </div>
       <br>
       <hr class="bajo_roles">
@@ -50,149 +50,19 @@
         <strong>Diseñador Grafico</strong> - Diseñador de mapeados pixelart <br>
         <strong>Tecnico de sonido</strong> - Se busca banda sonora para un juego rpg de ambiente medieval<br>
       </div>
-      <br>
-    </div>
-
-    <div class="col-1"></div>
-
-    <div class="col-5 fichas">
-      <h3>Titulo</h3>
-      <hr class="hr_debajo_del_titulo">
-      <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum molestiae perferendis soluta iure eaque
-        provident exercitationem quibusdam, minima nobis delectus ullam temporibus sapiente praesentium commodi,
-        veniam numquam illum ea neque.
-      </div>
-      <br>
-      <div class="participantes">
-        2/4 Miembros
-      </div>
-      <br>
-      <hr class="bajo_roles">
-      <div class="roles">
-        <strong>Programador C#</strong> - Persona con conocimientos de programacion <br>
-        <strong>Diseñador Grafico</strong> - Diseñador de mapeados pixelart <br>
-        <strong>Tecnico de sonido</strong> - Se busca banda sonora para un juego rpg de ambiente medieval<br>
+      <div class="container-fluid float-right">
+        <!--{{fecha_inicio}}-->
       </div>
       <br>
     </div>
-    <div class="col-1"></div>
-
-
-
-
+  <p></p>  <p></p>  <p></p>  
+  {{/each}}
   </div>
 
-  <!--COPIAS-->
-  <div class="row">
-    <!--PRIMERA TARJETA-->
-    <div class="col-5 fichas">
-      <h3>Titulo</h3>
-      <hr class="hr_debajo_del_titulo">
-      <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum molestiae perferendis soluta iure eaque
-        provident exercitationem quibusdam, minima nobis delectus ullam temporibus sapiente praesentium commodi,
-        veniam numquam illum ea neque.
-      </div>
-      <br>
-      <div class="participantes">
-        2/4 Miembros
-      </div>
-      <br>
-      <hr class="bajo_roles">
-      <div class="roles">
-        <strong>Programador C#</strong> - Persona con conocimientos de programacion <br>
-        <strong>Diseñador Grafico</strong> - Diseñador de mapeados pixelart <br>
-        <strong>Tecnico de sonido</strong> - Se busca banda sonora para un juego rpg de ambiente medieval<br>
-      </div>
-      <br>
-    </div>
-    <div class="col-1"></div>
-
-    <div class="col-5 fichas">
-      <h3>Titulo</h3>
-      <hr class="hr_debajo_del_titulo">
-      <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum molestiae perferendis soluta iure eaque
-        provident exercitationem quibusdam, minima nobis delectus ullam temporibus sapiente praesentium commodi,
-        veniam numquam illum ea neque.
-      </div>
-      <br>
-      <div class="participantes">
-        2/4 Miembros
-      </div>
-      <br>
-      <hr class="bajo_roles">
-      <div class="roles">
-        <strong>Programador C#</strong> - Persona con conocimientos de programacion <br>
-        <strong>Diseñador Grafico</strong> - Diseñador de mapeados pixelart <br>
-        <strong>Tecnico de sonido</strong> - Se busca banda sonora para un juego rpg de ambiente medieval<br>
-      </div>
-      <br>
-    </div>
-    <div class="col-1"></div>
-
-
-
-
-  </div>
-
-  <div class="row">
-
-    <!--PRIMERA TARJETA-->
-    <div class="col-5 fichas">
-      <h3>Titulo</h3>
-      <hr class="hr_debajo_del_titulo">
-      <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum molestiae perferendis soluta iure eaque
-        provident exercitationem quibusdam, minima nobis delectus ullam temporibus sapiente praesentium commodi,
-        veniam numquam illum ea neque.
-      </div>
-      <br>
-      <div class="participantes">
-        2/4 Miembros
-      </div>
-      <br>
-      <hr class="bajo_roles">
-      <div class="roles">
-        <strong>Programador C#</strong> - Persona con conocimientos de programacion <br>
-        <strong>Diseñador Grafico</strong> - Diseñador de mapeados pixelart <br>
-        <strong>Tecnico de sonido</strong> - Se busca banda sonora para un juego rpg de ambiente medieval<br>
-      </div>
-      <br>
-    </div>
-    <div class="col-1"></div>
-
-    <div class="col-5 fichas">
-      <h3>Titulo</h3>
-      <hr class="hr_debajo_del_titulo">
-      <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum molestiae perferendis soluta iure eaque
-        provident exercitationem quibusdam, minima nobis delectus ullam temporibus sapiente praesentium commodi,
-        veniam numquam illum ea neque.
-      </div>
-      <br>
-      <div class="participantes">
-        2/4 Miembros
-      </div>
-      <br>
-      <hr class="bajo_roles">
-      <div class="roles">
-        <strong>Programador C#</strong> - Persona con conocimientos de programacion <br>
-        <strong>Diseñador Grafico</strong> - Diseñador de mapeados pixelart <br>
-        <strong>Tecnico de sonido</strong> - Se busca banda sonora para un juego rpg de ambiente medieval<br>
-      </div>
-      <br>
-    </div>
-    <div class="col-1"></div>
-
-
-
-
-  </div>
 
 
 </div>
+
 <br>
 
 <!--Codigo enlace desde los div-->

@@ -274,21 +274,18 @@
         </div>
         <div class="container-fluid"></div>
 
+        {{#each proyecto}}
         <!--Proyectos-->
         <div class="container">
             <div class="col-5 fichas_home">
-                <h3>Titulo</h3>
+                <h3>{{titulo}}</h3>
                 <hr class="hr_debajo_del_titulo">
                 <div>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum molestiae perferendis soluta iure
-                    eaque
-                    provident exercitationem quibusdam, minima nobis delectus ullam temporibus sapiente praesentium
-                    commodi,
-                    veniam numquam illum ea neque.
+                    {{descripcion}}
                 </div>
                 <br>
                 <div class="participantes">
-                    2/4 Miembros
+                   {{equipos.usuario}} / Miembros
                 </div>
                 <br>
                 <hr class="bajo_roles">
@@ -304,6 +301,7 @@
 
             <!--OTRO-->
         </div>
+        {{/each}}
 
     </div>
 

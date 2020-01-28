@@ -4,11 +4,27 @@ const dbconn = require('../src/db');
 
 
 
-router.get('/',  (req, res) => {
+router.get('/', async (req, res) => {
+    
+    const sacar_id = await dbconn.query('SELECT *, COUNT(*) FROM proyectos');
+    //console.log(sacar_id);
 
-    res.render('../views/home'); 
+    const id_json = JSON.stringify(sacar_id);
+    //console.log("id_json: " + id_json);
+
+    //TODO: BUSCAR FORMA MAS SENCILLA PARA HACER ESTO
+    const id_fin = id_json.substring(183, 184);  //vemos el valor
+    //console.log("id fin: " + id_fin);
 
 
+    var id_random = Math.round(Math.random() * (id_fin - 1) + 1);
+    //console.log("random: " + id_random);
+
+    //TODO: ERRORRRRRRRRR
+    const proyecto_destacado = await dbconn.query('SELECT *, COUNT(equipos.usuario) FROM proyectos WHERE id_proyectos = ?', [id_random]);
+    console.log(proyecto_destacado)
+
+    res.render('../views/home', {proyecto: proyecto_destacado}); 
 }); 
 
 
@@ -69,9 +85,13 @@ router.post('/verPublicaciones', (req, res) => {
 
 
 
-router.get('/proyectosActivos', (req, res) => {
+router.get('/proyectosActivos', async (req, res) => {
 
-    res.render('../views/partials/proyectos/proyectosActivos'); 
+    const proyectos = await dbconn.query('SELECT  *, COUNT(equipos.usuario) FROM proyectos INNER JOIN equipos ON proyectos.id_proyectos = equipos.proyecto WHERE validacion = 1');
+    console.log(proyectos)
+
+
+    res.render('../views/partials/proyectos/proyectosActivos', {proyecto: proyectos}); 
 
 }); 
 
