@@ -2,13 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');   
 const exphbs = require('express-handlebars');
-const router = express.Router();
-
 var path = require('path');
 const {database} = require('./keys');
-const session = require('express-session'); //00
-const MySQLStore = require('express-mysql-session')(session); //00
-const passport = require('passport'); //00 
+const session = require('express-session'); 
+const MySQLStore = require('express-mysql-session')(session); 
+const passport = require('passport');
+const flash = require('connect-flash');
 
 
 
@@ -20,8 +19,8 @@ const passport = require('passport'); //00
 	Se inicializan los módulos cargados
 */
 
-const app = express();	//00
-require('../lib/passport'); //00
+const app = express();
+require('../lib/passport'); 
 
 /*
     CONFIGURACIONES
@@ -45,10 +44,26 @@ app.set('view engine', '.hbs');
     MIDLEWARES
 */
 // Convierte una petición recibida (POST-GET...) a objeto JSON
+
+
+//Datos de sesion
+app.use(session({
+	secret: '1234',
+	resave: false, // para que no se renueve si pones true es que se quedan los dados de sesion
+	saveUninitialized: false, //para que no se guarde sin inicializar
+	//mira modulo express msql
+	store: new MySQLStore(database) //para guardarla en la BBDD
+}));
+
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 app.use(morgan('dev'));
+
+app.use(flash());
+app.use(passport.initialize());  
+app.use(passport.session());
+
 
 /*
     ARCHIVOS PUBLICOS
@@ -63,6 +78,7 @@ app.use(express.static(path.join(__dirname, 'public')));
     RUTAS
 */
 app.use(require('../rutas/index.js'));
+app.use(require('../rutas/usuarios'));
 
 /*
     INCILIZAR SERVIDOR

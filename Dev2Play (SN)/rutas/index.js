@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
     if (id_random < 1){
         id_random = 1;
     }
-    console.log("random: " + id_random);
+    //console.log("random: " + id_random);
 
     //TODO: ERRORRRRRRRRR
     const proyecto_destacado = await dbconn.query('SELECT *, COUNT(equipos.usuario) FROM proyectos INNER JOIN equipos ON proyectos.id_proyectos = equipos.proyecto WHERE validacion=1 and id_proyectos=?;', [id_random]);

@@ -12,22 +12,21 @@ const helpers = require('./helpers');
 passport.use('local.registro', new LocalStrategy({
 	usernameField: 'nombre', 
     passwordField: 'password',
-    emailField: 'email',
 	passReqToCallback: true  //OJO
-}, async (req, username, password, done) => {
+}, async (req, nombre, password, done) => {
 
-	//objeto que representa un nuevo usuario(nuevoUsuario)  paso 44
-	//si el nombre no fuese el mismo pondiarmos fullname: 'nombre',
-	const { nombre } = req.body;
+	
+	const { nick } = req.body;
 	let nuevoUsuario = { 
-		nombre:  
 		nick,
-		password
+		nombre,
+		password,
+		
 	};
 
 
     //Ciframos la contraseña paso 45
-    nuevoUsuario.password = await helpers.encryptPassword(password); //se pone el await para esperar a que nos den el cifrado
+    nuevoUsuario.password = await helpers.encryptPassword(password); 
 
     // grabar en la bd usuario nombre tabla
     const result = await dbconn.query('INSERT INTO usuario SET ? ', nuevoUsuario);
@@ -36,30 +35,22 @@ passport.use('local.registro', new LocalStrategy({
 
 }));
 
-passport.serializeUser((user, done) => {
-	//console.log(user);
-	done(null, user.id)
-});
-
-passport.deserializeUser(async (id, done) => {
-	const rows = await dbconn.query('SELECT * FROM usuario WHERE id_usuario = ?', [id_usuario]);
-	done(null, rows[0]);
-});
 
 
-///deberiamos encriptar la clave y que la clave vieje encriptada conexion https OJO 49
+
+///deberiamos encriptar la clave y que la clave vieje encriptada 
 passport.use('local.login', new LocalStrategy({
 	usernameField: 'nombre', 
 	passwordField: 'password',
 	passReqToCallback: true  
 }, async (req, nombre, password, done) => {
-	console.log(req.body);
+	//console.log(req.body);
 	const rows = await dbconn.query('SELECT * FROM usuario WHERE nombre = ?', [nombre]);
 	if (rows.length > 0) {
-		const user = rows[0];
-		const validPassword = await helpers.matchPassword(password, user.password)
+		const usuario = rows[0];
+		const validPassword = await helpers.matchPassword(password, usuario.password)
 		if (validPassword) {
-			done(null, user, req.flash('exito', 'Buenas ' + usuario.nombre + ' .'));
+			done(null, usuario, req.flash('exito', 'Buenas ' + usuario.nombre + ' .'));
 		}else{
 			done(null, false, req.flash('message', 'Clave erronea'));
 		}
@@ -67,3 +58,14 @@ passport.use('local.login', new LocalStrategy({
 		return done(null, false, req.flash('message', 'El Usuario no existe'));
 	}
 }));
+
+passport.serializeUser((usuario, done) => {
+	console.log(usuario); 
+	done(null, usuario.id);
+});
+
+passport.deserializeUser(async (id_usuario, done) => {
+	console.log(id_usuario);
+	const rows = await dbconn.query('SELECT * FROM usuario WHERE id_usuario = ?', [id_usuario]);
+	done(null, rows[0]);
+});

@@ -1,0 +1,25 @@
+CREATE TABLE `mydb`.`juegos` (
+  `id_juegos` INT NOT NULL,
+  `titulo` VARCHAR(150) NULL,
+  `descripcion` MEDIUMTEXT NULL,
+  `genero` INT NULL,
+  `precio` FLOAT NULL,
+  `imagen` VARCHAR(255) NULL,
+  `sistema_operativo` VARCHAR(150) NULL,
+  `memoria` VARCHAR(45) NULL,
+  `graficos` VARCHAR(45) NULL,
+  `procesador` VARCHAR(45) NULL,
+  `almacenamiento` VARCHAR(45) NULL,
+  PRIMARY KEY (`id_juegos`),
+  INDEX `fk_genero_jueg_idx` (`genero` ASC) VISIBLE,
+  CONSTRAINT `fk_genero_jueg`
+    FOREIGN KEY (`genero`)
+    REFERENCES `mydb`.`genero` (`id_genero`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+juegos
+
+
+INSERT INTO `mydb`.`juegos` (`id_juegos`, `titulo`, `descripcion`, `genero`, `precio`, `sistema_operativo`, `memoria`, `graficos`, `procesador`, `almacenamiento`) VALUES ('1', 'bugisoft', 'juego de hormigas de ubisoft', '2', '10', '	Windows 10, 64 bits', '	Windows 10, 64 bits', '	GeForce GTX 750 Ti or Radeon HD 7950', '	Intel Core i5-2400 or AMD Phenom II X6 1100T', ' 	36 GB de espacio disponible');
