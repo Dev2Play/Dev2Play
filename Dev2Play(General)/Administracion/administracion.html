@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="administracion.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.12.0/js/v4-shims.js"></script>
+
+</head>
+
+<body>
+    <!--NAVBAR-->
+    <div class="container-fluid bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-light container">
+            <a class="navbar-brand" href="#">Panel De Administración</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ml-auto">
+                    <i class="fas fa-sign-out-alt" data-toggle="modal" data-target="#exampleModal"></i>
+                </div>
+            </div>
+    </div>
+    </nav>
+    <!-- Modal Sign Out-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Sign Out</h5>
+        </div>
+        <div class="modal-body text-center">
+          <p>Estás a punto de desconectarte.</p>
+          <b>¿Estas seguro?</b>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Aún No</button>
+          <button type="button" class="btn btn-primary">Salir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!--MENU VERTICAL-->
+    <div class="container">
+        <div class="mt-5 rounded tablamenu">
+            <div class="bg-info text-center pt-3 rounded-top menutitulo">Opciones de Administración</div>
+            <div class="text-center py-3">
+            <a id="revisaproyectos" >Revisar Proyectos</a><br><hr>
+            <a id="revisareportes">Revisar Reportes</a><br><hr>
+            <a  data-toggle="modal" data-target="#modalrol">Añadir Rol</a><br><hr>
+            <a  data-toggle="modal" data-target="#modalcategoria">Añadir Categoria</a><br><hr>
+            <a id="revisausuarios">Administrar Usuarios</a>
+            </div>
+        </div>
+    </div>
+    <!--Tabla Proyectos-->
+    <div class="container mt-5">
+    <table class="table col-md-8" id="tablaproyectos">
+      <h3>Proyectos:</h3>
+  <thead>
+    <tr>
+      <th scope="col">Usuario</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Nombre de Proyecto</th>
+      <th scope="col">@</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Mark Marksen</td>
+      <td>26/06/2020</td>
+      <td>Dragon Slayer</td>
+      <td><i class="fas fa-eye" data-toggle="modal" data-target="#modalproyectos"></i></td>
+    </tr>
+    <tr>
+      <td>Mark Marksen</td>
+      <td>26/06/2020</td>
+      <td>Dragon Slayer</td>
+      <td><i class="fas fa-eye" data-toggle="modal" data-target="#modalproyectos"></i></td>
+    </tr>
+    <tr>
+      <td>Mark Marksen</td>
+      <td>26/06/2020</td>
+      <td>Dragon Slayer</td>
+      <td><i class="fas fa-eye" data-toggle="modal" data-target="#modalproyectos"></i></td>
+    </tr>
+    
+  </tbody>
+</table>
+</div>
+<!--Tabla Reportes-->
+<div class="container mt-5">
+  <table class="table col-md-8" id="tablareportes">
+    <h3>Reportes:</h3>
+<thead>
+  <tr>
+    <th scope="col">Usuario</th>
+    <th scope="col">Publicación</th>
+    <th scope="col">Tipo de Reporte</th>
+    <th scope="col">@</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Mark Marksen</td>
+    <td>Ilustracion 1</td>
+    <td>Apropiación de Contenido</td>
+    <td><i class="fas fa-eye" data-toggle="modal" data-target="#modalreportes"></i></td>
+  </tr>
+  <tr>
+    <td>Mark Marksen</td>
+    <td>Ilustracion 1</td>
+    <td>Apropiación de Contenido</td>
+    <td><i class="fas fa-eye" data-toggle="modal" data-target="#modalreportes"></i></td>
+  </tr>
+  <tr>
+    <td>Mark Marksen</td>
+    <td>Ilustracion 1</td>
+    <td>Apropiación de Contenido</td>
+    <td><i class="fas fa-eye" data-toggle="modal" data-target="#modalreportes"></i></td>
+  </tr>
+  
+</tbody>
+</table>
+</div>
+<!--Tabla Administrar Usuarios-->
+<div class="container mt-5">
+  <table class="table col-md-8" id="tablausuarios">
+    <h3>Administrar Usuarios:</h3>
+<thead>
+  <tr>
+    <th scope="col">Usuario</th>
+    <th scope="col">Fecha Registro</th>
+    <th scope="col">@</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Mark Marksen</td>
+    <td>14/02/2020</td>
+    <td><i class="fas fa-eye" data-toggle="modal" data-target="#modalusuario"></i></td>
+  </tr>
+  <tr>
+    <td>Mark Marksen</td>
+    <td>14/02/2020</td>
+    <td><i class="fas fa-eye" data-toggle="modal" data-target="#modalusuario"></i></td>
+  </tr>
+  <tr>
+    <td>Mark Marksen</td>
+    <td>14/02/2020</td>
+    <td><i class="fas fa-eye" data-toggle="modal" data-target="#modalusuario"></i></td>
+  </tr>
+  
+</tbody>
+</table>
+</div>
+<!--Modal Revisar Proyectos-->
+<div class="modal fade" id="modalproyectos" tabindex="-1" role="dialog" aria-labelledby="modalproyectos" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalproyectos">Dragon Slayer</h5>
+      </div>
+      <div class="modal-body ">
+        <h6>By Mark Marksen</h6>
+        <img src="/images/proyect1.jpeg" width="465" class="mx-auto"><br><br>
+        <b>Resumen:</b>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam asperiores dolore tenetur rerum ducimus quam voluptates qui sunt, maiores dicta eaque pariatur accusamus fugit! Porro iste omnis eius at quis?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No dá la talla</button>
+        <button type="button" class="btn btn-primary">Aprobar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal Reportes-->
+<div class="modal fade" id="modalreportes" tabindex="-1" role="dialog" aria-labelledby="modalreportes"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalreportes">Reporte: "Ilustración 1"</h5>
+      </div>
+      <div class="modal-body ">
+        <h6>Report made by Mark Marksen</h6>
+        <b>Explicación:</b>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam asperiores dolore tenetur rerum ducimus
+          quam voluptates qui sunt, maiores dicta eaque pariatur accusamus fugit! Porro iste omnis eius at quis?</p>
+        <img src="/images/proyect1.jpeg" width="465" class="mx-auto"><br><br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Reporte Falso</button>
+        <button type="button" class="btn btn-danger">Eliminar Publicación</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal Usuario-->
+<div class="modal fade" id="modalusuario" tabindex="-1" role="dialog" aria-labelledby="modalusuario" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalusuario">Mark Marksen</h5>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <img src="images/userimage.png" alt="profile picture" width="150" height="150" class="mx-auto">
+        </div>
+        <br>
+        <h6 class="text-center">10/01/2020</h6>
+        <b>Descripción:</b>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam asperiores dolore tenetur rerum ducimus
+          quam voluptates qui sunt, maiores dicta eaque pariatur accusamus fugit! Porro iste omnis eius at quis?</p>
+          <b>Roles:</b>
+          <div class="row">         
+          <ul>
+            <li>Programador</li>
+            <li>Ilustrador</li>
+            <li>Animador</li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Reporte Falso</button>
+        <button type="button" class="btn btn-danger">Eliminar Publicación</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <!--Modal Añadir Rol-->
+    <div class="modal fade" id="modalrol" tabindex="-1" role="dialog" aria-labelledby="modalrol"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Añadir Rol</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" placeholder="Nuevo Rol" class="form-control validate" >
+        </div>
+        <div class="md-form mb-5">
+          <div>
+            <ul>
+              <li>Programador</li>
+              <li>Ilustrador</li>
+              <li>Animador</li>
+              <li>Productor Musical</li>
+            </ul>
+          </div>
+        </div>
+
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-primary">Añadir</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!--Modal Añadir Categoria-->
+    <div class="modal fade" id="modalcategoria" tabindex="-1" role="dialog" aria-labelledby="modalcategoria"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">Añadir Categoria</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body mx-3">
+          <div class="md-form mb-5">
+            <input type="text" placeholder="Nuevo Rol" class="form-control validate" >
+          </div>
+          <div class="md-form mb-5">
+            <div>
+              <ul>
+                <li>Supervivencia</li>
+                <li>Acción</li>
+                <li>RPG</li>
+                <li>Deporte</li>
+                <li>Aventuras</li>
+                <li>Lucha</li>
+                <li>Música</li>
+              </ul>
+            </div>
+          </div>
+  
+        <div class="modal-footer d-flex justify-content-center">
+          <button class="btn btn-primary">Añadir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- Optional JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous">
+      </script>
+      <script>
+        $(document).ready(function () {
+            $('#tablaproyectos').hide();
+            $('#tablareportes').hide();
+            $('#tablausuarios').hide();
+
+            /*Tabla Proyectos Toggle*/
+            $('#revisaproyectos').on('click', function () {
+              $('#tablaproyectos').toggle();
+
+            });
+            /*Tabla Reportes Toggle*/
+            $('#revisareportes').on('click', function () {
+              $('#tablareportes').toggle();
+
+            });
+              /*Tabla Usuarios Toggle*/
+              $('#revisausuarios').on('click', function () {
+              $('#tablausuarios').toggle();
+            });
+
+          });
+      </script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
