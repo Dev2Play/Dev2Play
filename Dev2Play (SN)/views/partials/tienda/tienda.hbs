@@ -9,11 +9,15 @@
                             <select name="categorias" class="mt-2">
                                 <!--ver el tpo de categoria seleccionada-->
                                 <option value="seleciona tipo">Seleciona tipo</option>
-                                <option value="supervivencia">Supervivencia</option>
-                                <option value="accion">Accion</option>
-                                <option value="rpg">RPG</option>
-                                <option value="deportes">Deportes</option>
+                                <option value="lucha">Lucha</option>
                                 <option value="aventuras">Aventuras</option>
+                                <option value="estrategia">Estrategia</option>
+                                <option value="simulacion">Simulacion</option>
+                                <option value="deportes">Deportes</option>
+                                <option value="rpg">RPG</option>
+                                <option value="musica">Música</option>
+                                <option value="accion">Accion</option>
+                                <option value="supervivencia">Supervivencia</option>
                             </select>
                             <br><br>
                         </form>
@@ -35,171 +39,25 @@
         
         <!--TARJETAS-->
                 <div class="row">
+                   <span id="sacar_jueg"> {{#each tienda}}</span>
                     <div class="col-md-3">
                         <div class="card mb-3 box-shadow tarjeta">
-                            <img class="fotos"
-                                data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-                                alt="Thumbnail [100%x225]"
-                                style="height: 350px; width: 100%; display: block; border-radius: 20px 20px 0px 0px;"
-                                src="images/portada.jpg" data-holder-rendered="true">
+                            {{imagen}}
                             <div class="card-body">
-                                <p class="card-text" style="margin-top: -10px; font-size: 15px;"><b>The Secret Of Monkey
-                                        Island</b></p>
+                                <p class="card-text" style="margin-top: -10px; font-size: 15px;"><b>{{titulo}}</b></p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
         
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Buy Now | 12'99$</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Buy Now | {{precio}}</button>
                                     </div>
         
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card mb-3 box-shadow tarjeta">
-                            <img class="fotos"
-                                data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-                                alt="Thumbnail [100%x225]"
-                                style="height: 350px; width: 100%; display: block; border-radius: 20px 20px 0px 0px;"
-                                src="images/portada2.jpg" data-holder-rendered="true">
-                            <div class="card-body">
-                                <p class="card-text" style="margin-top: -10px; font-size: 15px;"><b>Street Fighter ALPHA 2</b>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
+                    
         
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Buy Now | 20'99$</button>
-                                    </div>
-        
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card mb-3 box-shadow tarjeta">
-                            <img class="fotos"
-                                data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-                                alt="Thumbnail [100%x225]"
-                                style="height: 350px; width: 100%; display: block; border-radius: 20px 20px 0px 0px;"
-                                src="images/portada.jpg" data-holder-rendered="true">
-                            <div class="card-body">
-                                <p class="card-text" style="margin-top: -10px; font-size: 15px;"><b>The Secret Of Monkey
-                                        Island</b></p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-        
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Buy Now | 12'99$</button>
-                                    </div>
-        
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-        
-                    <div class="col-md-3">
-                        <div class="card mb-3 box-shadow tarjeta">
-                            <img class="fotos"
-                                data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-                                alt="Thumbnail [100%x225]"
-                                style="height: 350px; width: 100%; display: block; border-radius: 20px 20px 0px 0px;"
-                                src="images/portada2.jpg" data-holder-rendered="true">
-                            <div class="card-body">
-                                <p class="card-text" style="margin-top: -10px; font-size: 15px;"><b>Street Fighter ALPHA 2</b>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-        
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Buy Now | 20'99$</button>
-                                    </div>
-        
-        
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card mb-3 box-shadow tarjeta">
-                            <img class="fotos"
-                                data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-                                alt="Thumbnail [100%x225]"
-                                style="height: 350px; width: 100%; display: block; border-radius: 20px 20px 0px 0px;"
-                                src="images/portada.jpg" data-holder-rendered="true">
-                            <div class="card-body">
-                                <p class="card-text" style="margin-top: -10px; font-size: 15px;"><b>The Secret Of Monkey
-                                        Island</b></p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-        
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Buy Now | 12'99$</button>
-                                    </div>
-        
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card mb-3 box-shadow tarjeta">
-                            <img class="fotos"
-                                data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-                                alt="Thumbnail [100%x225]"
-                                style="height: 350px; width: 100%; display: block; border-radius: 20px 20px 0px 0px;"
-                                src="images/portada2.jpg" data-holder-rendered="true">
-                            <div class="card-body">
-                                <p class="card-text" style="margin-top: -10px; font-size: 15px;"><b>Street Fighter ALPHA 2</b>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-        
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Buy Now | 20'99$</button>
-                                    </div>
-        
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card mb-3 box-shadow tarjeta">
-                            <img class="fotos"
-                                data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-                                alt="Thumbnail [100%x225]"
-                                style="height: 350px; width: 100%; display: block; border-radius: 20px 20px 0px 0px;"
-                                src="images/portada.jpg" data-holder-rendered="true">
-                            <div class="card-body">
-                                <p class="card-text" style="margin-top: -10px; font-size: 15px;"><b>The Secret Of Monkey
-                                        Island</b></p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-        
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Buy Now | 12'99$</button>
-                                    </div>
-        
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-        
-                    <div class="col-md-3">
-                        <div class="card mb-3 box-shadow tarjeta">
-                            <img class="fotos"
-                                data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-                                alt="Thumbnail [100%x225]"
-                                style="height: 350px; width: 100%; display: block; border-radius: 20px 20px 0px 0px;"
-                                src="images/portada2.jpg" data-holder-rendered="true">
-                            <div class="card-body">
-                                <p class="card-text" style="margin-top: -10px; font-size: 15px;"><b>Street Fighter ALPHA 2</b>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-        
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Buy Now | 20'99$</button>
-                                    </div>
-        
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-        
-        
+                {{/each}}
                 </div>
             </div>
         </div>
@@ -218,4 +76,13 @@
                 </li>
             </ul>
         </nav>
+        <br>
+        <br>
      
+<script>
+     $(document).ready(function () {
+    $(document).on('click', '.tarjeta', function () {
+      location.href = '/fichaJuego';
+    })
+  });
+</script>

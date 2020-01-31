@@ -1,9 +1,10 @@
-
 const express = require('express');
-const router = express.Router();
+const router = express.Router()
 const passport = require('passport'); 
 
-const { isNotLoggedIn } = require('../lib/acceso'); 
+const { isLoggedIn, isNotLoggedIn } = require('../lib/acceso'); 
+
+const dbconn = require('../src/db');
 
 
 router.get('/registro', isNotLoggedIn, (req, res) => { 
@@ -11,7 +12,7 @@ router.get('/registro', isNotLoggedIn, (req, res) => {
 });	
 
 
-router.post('/registro', isNotLoggedIn,  passport.authenticate('local.registro', { 
+router.post('/registro',  passport.authenticate('local.registro', { 
 	successRedirect: '/perfil',
 	failureRedirect: '/registro',
 	failureFlash: true
@@ -21,17 +22,28 @@ router.post('/registro', isNotLoggedIn,  passport.authenticate('local.registro',
 
 router.get('/login', isNotLoggedIn, (req, res) => {
 	
-	res.render('../views/layouts/login') 
+	res.render('../views/layouts/login');
+	
 	
 });
 
 
-router.post('/login', isNotLoggedIn, (req, res, next) => {
+router.post('/login', (req, res, next) => {
  passport.authenticate('local.login', { 
 	successRedirect: '/perfil',
 	failureRedirect: '/login',
 	failureFlash: true
   })(req, res, next);
+});
+
+router.get('/salir', (req, res) => {
+	req.logOut();  
+	res.redirect('/');	
+});
+
+router.get('/recuperar', (req, res) => {
+
+	res.render('../views/layouts/recuperar')
 });
 
 

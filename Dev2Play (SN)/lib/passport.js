@@ -30,7 +30,7 @@ passport.use('local.registro', new LocalStrategy({
 
     // grabar en la bd usuario nombre tabla
     const result = await dbconn.query('INSERT INTO usuario SET ? ', nuevoUsuario);
-    nuevoUsuario.id = result.insertId;
+    nuevoUsuario.id_usuario = result.insertId;
     return done(null, nuevoUsuario);
 
 }));
@@ -60,12 +60,11 @@ passport.use('local.login', new LocalStrategy({
 }));
 
 passport.serializeUser((usuario, done) => {
-	console.log(usuario); 
-	done(null, usuario.id);
+	done(null, usuario.id_usuario); // si se cambia a usuario.id funciona el registro y si no el login
 });
 
 passport.deserializeUser(async (id_usuario, done) => {
-	console.log(id_usuario);
+	//console.log(id_usuario);
 	const rows = await dbconn.query('SELECT * FROM usuario WHERE id_usuario = ?', [id_usuario]);
 	done(null, rows[0]);
 });
