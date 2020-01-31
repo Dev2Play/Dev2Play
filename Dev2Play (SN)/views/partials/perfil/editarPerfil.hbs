@@ -10,7 +10,9 @@
 	 <!--Edicion de la foto-->
 	 <div class="row">
 		 <div class="col-5">
-			<input type="file" name="imagen" id="imagen_perfil" class="my-2 mt-4">
+			 <form action="/editarPerfil" method="UPDATE">
+
+			<input type="file" name="foto" id="imagen_perfil" class="my-2 mt-4">
 		 </div>
 		 <div class="col-2"></div>
 		 <div class="col-5">
@@ -55,8 +57,7 @@
 	</div>
 	<div class="row">
 		<div class="col mx-auto text-center mb-1"  ><!--boton para editar nombre y texto-->
-		  <form method="" action="">
-		  </form>	
+		 
 		</div>
 	</div>
 	<br>
@@ -89,7 +90,7 @@
 				<button name="roles"  class="mx-5" value="Guardar" id="aniadir_rol">Añadir</button>
 			</div>
 		</div>
-
+</form>
 		<div class="col scroll">
 			<div class="row">
 				<div class="col-sm-6">

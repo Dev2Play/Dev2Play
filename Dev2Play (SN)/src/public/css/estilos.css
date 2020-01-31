@@ -714,6 +714,11 @@ p {
 }
 
 .descdat{
+    width: 950px; 
+    height: 100px;
+    box-shadow: inset 0px 0px 2px rgb(161, 222, 255);
+    border-radius: 10px;
+    text-align: center;
     text-align: left;	
 }
 

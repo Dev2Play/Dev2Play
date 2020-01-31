@@ -1,24 +1,22 @@
 <!-- Page Content -->
-
+{{#each usuario}}
 	<div class="container-fluid">
 		<div class="row">
+			<span id="sacar_us"> </span> 
 			<img src="images/gif.gif" class="rounded-circle z-depth-0 mx-auto  perf" alt="avatar image">
 			<!--Puse el heigth porque la imagen estaba ovalada-->
 		</div>
 		<div class="row mb-2">
 			<div class="mx-auto text-center">
 				<br>
-				<h3> Nombre y apellidos <br></h3>
+				<h3>{{nombre}} </h3><br>
 				<div class="container">
-					<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati debitis,
-						assumenda voluptate, velit quas impedit fugit nisi odio dolor dolore, incidunt dolorem nobis
-						dolorum
-						error laudantium perspiciatis necessitatibus dignissimos in!</p>
+					<p class="text-muted">{{sobremi}}</p>
 				</div>
 
 			</div>
 		</div>
-
+<!--
 		<div class="row justify-content-md-center">
 			<div class="col col-lg-2 text-center">
 				<p class="mb-0"><strong>567</strong></p>
@@ -33,6 +31,7 @@
 				<p class="text-muted">publicaciones</p>
 			</div>
 		</div>
+		-->
 		<hr>
 		<br>
 		<div class="row">
@@ -44,53 +43,21 @@
 					<h3>Diseñador Grafico</h3>
 				</div>
 			</div>
+		
 
 			<!--PUBLICACIONES-->
 			<div class="col scroll">
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="card">
-							<img class="card-img-top" src="images/gif.gif" data-toggle="modal" data-target="#publicacion" data-dismiss="modal" alt="Card image cap">
+							<img class="card-img-top" src={{archivo}} data-toggle="modal" data-target="#publicacion" data-dismiss="modal" alt="Card image cap">
 							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the
-									bulk of the card's content.</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					<div class="col-sm-6">
-						<div class="card">
-							<img class="card-img-top" src="images/gif.gif" data-toggle="modal" data-target="#publicacion" data-dismiss="modal" alt="Card image cap">
-							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the
-									bulk of the card's content.</p>
+								<p class="card-text">{{descripcion}}</p>
 							</div>
 						</div>
 						<br>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="card">
-							<img class="card-img-top" src="images/gif.gif" data-toggle="modal" data-target="#publicacion" data-dismiss="modal" alt="Card image cap">
-							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the
-									bulk of the card's content.</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					<div class="col-sm-6">
-						<div class="card">
-							<img class="card-img-top" src="images/gif.gif" data-toggle="modal" data-target="#publicacion" data-dismiss="modal" alt="Card image cap">
-							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the
-									bulk of the card's content.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
 			</div>
 
 			<div class="col-3">
@@ -116,6 +83,7 @@
 			</div>
 		</div>
 	</div>
+{{/each}}
 
 
 <!--MODAL PUBLICACION-->
@@ -169,8 +137,9 @@
 					<div id="posicion_imagen">
 						<!--DIV DONDE SE PREVISUALIZA LA IMAGEN-->
 					</div>
-					<input type="file" name="imagen" id="imagen_perfil_archivo" class="my-2 mx-2 mt-4">
-					<form action="" class="mx-2">
+					
+					<form action='http://localhost:3002/upload' method="POST" enctype="multipart/form-data" class="mx-2">
+						<input type="file" name="file" id="imagen_perfil_archivo" class="my-2 mx-2 mt-4">
 						<select name="categorias" class="mt-2">
 							<!--seleccion de categorias para la publicacion-->
 							<option value="seleciona categoria">Seleciona categoria</option>
@@ -187,7 +156,7 @@
 				</div>
 				<!-- Modal footer -->
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary" data-dismiss="modal">Publicar</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" value="Subir">Publicar</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 
 				</div>
