@@ -37,6 +37,15 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 /*
+        VARIABLES GLOBALES
+*/
+
+app.use((req,res,next) => {
+
+    next();
+});
+
+/*
     ARCHIVOS PUBLICOS
 
 */

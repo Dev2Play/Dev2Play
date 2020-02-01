@@ -1,97 +1,36 @@
-  <!--Titular-->
-    <div class="contaienr">
-        <div class="row">
-            <div class="col-5"></div>
-            <div class="col-4 my-5">
-                <h2>Creación de proyecto</h2>
-            </div>
+<!--Titular-->
+<div class="container">
+    <div class="row">
+        <div class="col-5"></div>
+        <div class="col-4 my-5">
+            <h2>Creación de proyecto</h2>
         </div>
     </div>
+</div>
 
+<form action="" id="envia_datos" method="POST">
     <!--Datos-->
     <div class="container">
         <!--Nombre-->
         <div class="row">
             <div class="col-1"></div>
             <div class="col-5 my-5">
-                <input type="text" placeholder=" Nombre del Proyecto" class="inputs_formulario_ficha_proyecto">
+                <input type="text" name="nombre" placeholder=" Nombre del Proyecto" required id="nombre_proyecto"
+                    class="inputs_formulario_ficha_proyecto">
             </div>
         </div>
 
-        <!--ROL-->
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-5 mb-5">
-                <label for="state_id" class="control-label col-md-1 col-md-offset-2 text-center"></label>
-                <select class="form-control" id="state_id">
-                    <option value="AL">Juego de accion</option>
-                    <option value="AK">Juego de lucha</option>
-                    <option value="AZ">Juego de aventuras</option>
-                    <option value="AR">Juego de estrategia</option>
-                    <option value="CA">Juego de simulación</option>
-                    <option value="CO">Juego de deportes</option>
-                    <option value="CT">Juego de musica</option>
-                </select>
-            </div>
-        </div>
         <hr>
         <!--Programador, diseñador...-->
 
         <div class="row">
-            <div class="col-1"></div>
+            <div class="col-2"></div>
             <div class="col-5">
-                <table>
-                    <tr>
-                        <th>Que necesitas?</th>
-                    </tr>
-                    <tr>
-                        <td>&nbsp</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                            <p class="mr-5" style="margin-left: 0px;">Programador</p>
-                            <input type="number" class="inputs_numeros_ficha_proyecto " placeholder="   0">
-                        </td>
-                        <td>
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                            <p class="mr-5" style="margin-left: -22px;">Ilustrador</p>
-                            <input type="number" class="inputs_numeros_ficha_proyecto " placeholder="   0">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp</td>
-                    </tr>
-                    <tr>
+                <!-- TODO: TABLA -->
 
-                        <td></td>
-                        <td>
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                            <p  style="margin-left: -75px;">Diseñador</p>
-                            <input type="number" class="inputs_numeros_ficha_proyecto " placeholder="   0">
-                        </td>
-                        <td>
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                            <p style="margin-left: -2px;">Técnico de sonido</p>
-                            <input type="number" class="inputs_numeros_ficha_proyecto " placeholder="   0">
-                        </td>
-                    </tr>
+                <textarea name="necesita" id="necesita" class="mt-5 ml-3" cols="90" rows="7" required placeholder="Que necesitas? (programador, diseñador...)"></textarea>
 
-                    <tr>
-                        <td></td>
 
-                        <td>
-                            <br>
-                            <input class="form-check-input" type="checkbox" value="" id="otro">
-                            <p style="margin-left: -110px;">Otro</p>
-                            <input type="text" name="" id="otro_txt">
-                            <input type="number" id="otro_numero" class="inputs_numeros_ficha_proyecto "
-                                placeholder="   0">
-                        </td>
-                    </tr>
-
-                </table>
             </div>
         </div>
 
@@ -101,50 +40,46 @@
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-5">
-                    <textarea name="" id="" cols="90" rows="7" placeholder=" Descripcion..."></textarea>
+                    <textarea name="descripcion" id="descripcion_proy" required cols="90" rows="7"
+                        placeholder=" Descripcion..."></textarea>
                 </div>
             </div>
         </div>
 
-        <!--Seleccionar archivo-->
-        <!--div class="container">
-            <div class="row">
-                <div class="col-2"></div>
-                <div class="col-4">
-                    <div class="form-group col-xs-12 col-sm-6 col-md-4">
-                        <label for="banner"></label>
-                        <div class="input-group">
-                            <label class="input-group-btn">
-                                <span class="btn btn-primary btn-file">
-                                    <input accept=".jpg,.png,.jpeg,.gif" class="hidden" name="banner" type="file">
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4"></div>
-            </div>
-        </div-->
-    
+
 
         <!--Enviar-->
         <div class="form-group">
             <div class="col-md-12 text-center">
-                <button type="submit" class="btn btn-primary btn-lg mb-2 mt-3">Publicar</button>
+                <button type="submit" id="publicar_proy" class="btn btn-primary btn-lg mb-2 mt-3">Publicar</button>
             </div>
         </div>
 
 
     </div>
+</form>
 
-        <script>
-        $(document).ready(function () {
-            $('#otro_txt').toggle()
-            $('#otro_numero').toggle()
 
-            $('#otro').click(function () {
-                $('#otro_txt').toggle()
-                $('#otro_numero').toggle()
-            });
+<script>
+    $(document).ready(function () {
+        $('#otro_txt').toggle();
+        $('#otro_numero').toggle();
+
+        $('#otro').click(function () {
+            $('#otro_txt').toggle();
+            $('#otro_numero').toggle();
         });
-    </script>
+
+
+        $('#publicar_proy').click(function () {
+
+            console.log(String($('#nombre_proyecto').val()));
+            console.log(String($('#descripcion_proy').val()));
+
+            $('#envia_datos').attr('action', '/publicado/' + String($('#nombre_proyecto').val()));
+
+        });
+
+
+    });
+</script>
