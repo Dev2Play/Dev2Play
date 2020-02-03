@@ -1,235 +1,342 @@
-const express = require('express');     
-const router = express.Router();    
+const express = require('express');
+const router = express.Router();
 const dbconn = require('../src/db');
-const { isLoggedIn, isNotLoggedIn } = require('../lib/acceso'); //añadido
 
-//{usuario: req.user} esta puesto en los get para que funcione la barra de navegacion con el login
+const { isLoggedIn, isNotLoggedIn } = require('../lib/acceso'); 
+
 
 router.get('/', async (req, res) => {
-    
-    
-    const sacar_id = await dbconn.query('SELECT *, COUNT(*) FROM proyectos');
-    //console.log(sacar_id);
 
-    const id_json = JSON.stringify(sacar_id);
-    //console.log("id_json: " + id_json);
+        //TODO: , COUNT(equipos.usuario) ... INNER JOIN equipos ON proyectos.id_proyectos = equipos.proyecto WHERE validacion = 1
+        var proyecto_destacado = await dbconn.query('SELECT * FROM proyectos');
+        //console.log(proyecto_destacado[0])
+        //console.log(proyecto_destacado)
 
-    //TODO: BUSCAR FORMA MAS SENCILLA PARA HACER ESTO
-    const id_fin = id_json.substring(183, 184);  //vemos el valor
-    //console.log("id fin: " + id_fin);
+        if(proyecto_destacado.length > 1){
+            var id_random = Math.round(Math.random() * (proyecto_destacado.length - 1) + 1);
+            //console.log(id_random)
+            var proyecto_destacado = await dbconn.query('SELECT * FROM proyectos WHERE id_proyectos = ?', id_random);
 
+            const publicaciones_destacadas = await dbconn.query('SELECT * FROM publicacion inner join usuario on publicacion.usuario_id = usuario.id_usuario inner join premium on usuario.premium = premium.id_premium WHERE oro > 0 or plata > 0  order by likes DESC LIMIT 8');
 
-    var id_random = Math.round(Math.random() * (id_fin - 1) + 1);
-    if (id_random < 1){
-        id_random = 1;
-    }
-    //console.log("random: " + id_random);
-
-    //PROYECTO DESTACADO
-    const proyecto_destacado = await dbconn.query('SELECT *, COUNT(equipos.usuario) FROM proyectos INNER JOIN equipos ON proyectos.id_proyectos = equipos.proyecto WHERE validacion=1 and id_proyectos=?', [id_random]);
-    //console.log(proyecto_destacado)
-
-    //PUBLICACIONES DESTACADAS 
-    const publicaciones_destacadas = await dbconn.query('SELECT * FROM publicacion inner join usuario on publicacion.usuario_id = usuario.id_usuario inner join premium on usuario.premium = premium.id_premium WHERE oro > 0 or plata > 0  order by likes DESC LIMIT 8');
-
-
-
-
-    res.render('../views/home', {proyecto: proyecto_destacado, publicacion: publicaciones_destacadas, usuario: req.user}); 
-}); 
+            res.render('../views/home', {proyecto: proyecto_destacado, publicacion: publicaciones_destacadas, usuario: req.user}); 
+        }
+});
 
 
 router.post('/', (req, res) => {
 
-    res.render('../views/home'); 
-
-}); 
-
-router.get('/tienda', async (req, res) => {
-
-    //LA TIENDA POR DEFECTO
-    const juegos_tienda = await dbconn.query('SELECT * FROM tienda INNER JOIN juegos ON tienda.juego_id = juegos.id_juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE lucha=1 or aventuras=1 or estrategia=1 or simulacion=1 or deportes=1 or musica=1 or accion=1 or supervivencia=1 ORDER BY fecha_subida DESC');
-
-
-    //POR GENEROS
-    const genero_lucha =  await dbconn.query('SELECT * FROM tienda INNER JOIN juegos ON tienda.juego_id = juegos.id_juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE lucha=1 ORDER BY fecha_subida DESC');
-    
-    const genero_aventuras =  await dbconn.query('SELECT * FROM tienda INNER JOIN juegos ON tienda.juego_id = juegos.id_juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE aventuras=1 ORDER BY fecha_subida DESC');
-
-    const genero_estrategia =  await dbconn.query('SELECT * FROM tienda INNER JOIN juegos ON tienda.juego_id = juegos.id_juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE estrategia=1 ORDER BY fecha_subida DESC');
-
-    const genero_simulacion =  await dbconn.query('SELECT * FROM tienda INNER JOIN juegos ON tienda.juego_id = juegos.id_juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE simulacion=1 ORDER BY fecha_subida DESC');
-
-    const genero_deportes =  await dbconn.query('SELECT * FROM tienda INNER JOIN juegos ON tienda.juego_id = juegos.id_juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE deportes=1 ORDER BY fecha_subida DESC');
-
-    const genero_rpg =  await dbconn.query('SELECT * FROM tienda INNER JOIN juegos ON tienda.juego_id = juegos.id_juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE rpg=1 ORDER BY fecha_subida DESC');
-
-    const genero_musica =  await dbconn.query('SELECT * FROM tienda INNER JOIN juegos ON tienda.juego_id = juegos.id_juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE musica=1 ORDER BY fecha_subida DESC');
-
-    const genero_accion =  await dbconn.query('SELECT * FROM tienda INNER JOIN juegos ON tienda.juego_id = juegos.id_juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE accion=1 ORDER BY fecha_subida DESC');
-
-    const genero_supervivencia =  await dbconn.query('SELECT * FROM tienda INNER JOIN juegos ON tienda.juego_id = juegos.id_juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE supervivencia=1 ORDER BY fecha_subida DESC');
-
-    //ORDENADO POR PRECIO MAS BAJO
-   const precio_tienda = await dbconn.query('SELECT * FROM tienda INNER JOIN juegos ON tienda.juego_id = juegos.id_juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE lucha=1 or aventuras=1 or estrategia=1 or simulacion=1 or deportes=1 or musica=1 or accion=1 or supervivencia=1 ORDER BY precio DESC'); 
-
-
-
-
-    res.render('../views/partials/tienda/tienda', {tienda: juegos_tienda, genero_lucha, genero_aventuras, genero_estrategia, genero_simulacion, genero_deportes, genero_rpg, genero_musica, genero_accion, genero_supervivencia, usuario: req.user}); 
-
-}); 
-
-router.post('/tienda', (req, res) => {
-    
-
-    res.render('../views/partials/tienda/tienda'); 
-
-}); 
-
-
-
-router.get('/fichaJuego/', async (req, res) => {
-    
-    //const { id } = req.params;
-    //console.log(id);
-    const ficha = await  dbconn.query('SELECT * FROM juegos INNER JOIN tienda ON   juegos.id_juegos = tienda.juego_id INNER JOIN genero ON juegos.genero = genero.id_genero WHERE id_juegos=2');//cambio
-    //console.log(ficha);
-    //console.log(req)
-    if (ficha.length == 0) {
-        res.send(' el registro no existe.');
-    } else { 
-        res.render('../views/partials/juegos/fichaJuego' , {usuario: req.user, juegos: ficha}); 
-    }
-}); 
-
-router.post('/fichaJuego', (req, res) => {
-
-    res.render('../views/partials/juegos/fichaJuego'); 
+    res.render('../views/home', {usuario: req.user});
 
 });
 
-router.get('/formularioJuego', isLoggedIn, (req, res) => {
 
-    res.render('../views/partials/juegos/formularioJuego', {usuario: req.user}); 
 
-});
-
-router.post('/formularioJuego', (req, res) => {
-
-    res.render('../views/partials/juegos/formularioJuego'); 
-
-});
-
-//TODO: revisar errores de llamadas a la base de datos
+//TODO: PUBLICACIONES
 router.get('/verPublicaciones', async (req, res) => {
 
-    const publicaciones = await dbconn.query('SELECT * FROM publicacion');
+    const publicaciones = await dbconn.query('SELECT *, usuario.nombre FROM publicacion INNER JOIN usuario ON publicacion.usuario_id = usuario.id_usuario ORDER BY fecha_publicacion DESC');
     //console.log(publicaciones);
 
-    const publicaciones_valoradas = await dbconn.query(' SELECT * FROM publicacion ORDER BY likes DESC');
+    //console.log(publicaciones)
 
-    const publicaciones_destacadas = await dbconn.query('SELECT * FROM publicacion inner join usuario on publicacion.usuario_id = usuario.id_usuario inner join premium on usuario.premium = premium.id_premium WHERE oro > 0 or plata > 0  order by likes DESC LIMIT 8');
+    res.render('../views/partials/publicaciones/verPublicaciones', { publicacion: publicaciones, usuario: req.user });
 
-    const publicaciones_Recientes = await dbconn.query('SELECT * FROM publicacion ORDER BY fecha_publicacion DESC');
-    //console.log(publicaciones_Recientes);
-
-    //TODO: ROLES
-
-    const publicaciones_sonido = await dbconn.query('SELECT * FROM publicacion inner join roles on publicacion.roles_id = roles.id_roles where roles.sonido=1');
-    //console.log(publicaciones_sonido);
-
-    const publicaciones_arte = await dbconn.query('SELECT * FROM publicacion inner join roles on publicacion.roles_id = roles.id_roles where roles.arte=1');
-    //console.log(publicaciones_arte);
-
-    const publicaciones_programacion = await dbconn.query('SELECT * FROM publicacion inner join roles on publicacion.roles_id = roles.id_roles where roles.programacion=1');
-    //console.log(publicaciones_programacion);
-
-    const publicaciones_guionista = await dbconn.query('SELECT* FROM publicacion inner join roles on publicacion.roles_id = roles.id_roles where roles.guionista=1');
-    //console.log(publicaciones_guionista)
-
-    res.render('../views/partials/publicaciones/verPublicaciones', {publicacion: publicaciones, publicacion_rec: publicaciones_Recientes, publicacion_sonido: publicaciones_sonido, publicacion_arte: publicaciones_arte, publicacion_programacion: publicaciones_programacion, publicacion_guionista: publicaciones_guionista, usuario: req.user}); 
-
-}); 
+});
 
 
-router.post('/verPublicaciones', (req, res) => {
+router.post('/verPublicaciones', async (req, res) => {
 
-    res.render('../views/partials/publicaciones/verPublicaciones'); 
-}); 
+    const publicaciones = await dbconn.query('SELECT *, usuario.nombre FROM publicacion INNER JOIN usuario ON publicacion.usuario_id = usuario.id_usuario');
+    //console.log(publicaciones);
+
+    const id_publicacion = req.query.id_publicacion
+    console.log(id_publicacion);
+
+    //console.log(publicaciones)
+
+    res.render('../views/partials/publicaciones/verPublicaciones', { publicacion: publicaciones });
+});
 
 
 
-router.get('/proyectosActivos', async (req, res) => {
+//TODO: PUBLICACIONES POR FILTRO
+router.get('/verPublicaciones/filtro/:filtro', async (req, res) => {
+    const { filtro } = req.params;
+    //console.log("filtro: " + filtro)
+    if (filtro == 1) {
+        const publicaciones = await dbconn.query('SELECT *, usuario.nombre FROM publicacion INNER JOIN usuario ON publicacion.usuario_id = usuario.id_usuario ORDER BY fecha_publicacion DESC');
+        res.render('../views/partials/publicaciones/verPublicaciones', { publicacion: publicaciones, usuario: req.user });
+    }
 
-    const proyectos = await dbconn.query('SELECT  *, COUNT(equipos.usuario) FROM proyectos INNER JOIN equipos ON proyectos.id_proyectos = equipos.proyecto WHERE validacion = 1');
+    if (filtro == 2) {
+        const publicaciones = await dbconn.query('SELECT *, usuario.nombre FROM publicacion INNER JOIN usuario ON publicacion.usuario_id = usuario.id_usuario ORDER BY likes DESC');
+        res.render('../views/partials/publicaciones/verPublicaciones', { publicacion: publicaciones, usuario: req.user });
+    }
+
+    if (filtro == 3) {
+        const publicaciones = await dbconn.query('SELECT * FROM publicacion inner join usuario on publicacion.usuario_id = usuario.id_usuario inner join premium on usuario.premium = premium.id_premium WHERE oro > 0 or plata > 0  order by likes DESC LIMIT 8');
+
+        res.render('../views/partials/publicaciones/verPublicaciones', { publicacion: publicaciones, usuario:  req.user });
+    }
+
+
+});
+
+//TODO: PUBLIACIONES LIKE
+router.get('/verPublicaciones/:id', isLoggedIn,  async (req, res) => {
+
+    const { id } = req.params;
+    //console.log("id del like: " + id)
+
+    const like = await dbconn.query('UPDATE publicacion SET likes = likes + 1 WHERE id_publicacion = ?', id);
+
+    const publicaciones = await dbconn.query('SELECT *, usuario.nombre FROM publicacion INNER JOIN usuario ON publicacion.usuario_id = usuario.id_usuario ORDER BY fecha_publicacion DESC');
+    //console.log(publicaciones);
+
+    res.redirect("/verPublicaciones/")
+
+});
+
+
+//TODO: REPORTE
+router.get('/reporte/:id', isLoggedIn, async (req, res) => {
+    const { id } = req.params;
+    //console.log(id)
+    const publicaciones = await dbconn.query('SELECT *, usuario.nombre FROM publicacion INNER JOIN usuario ON publicacion.usuario_id = usuario.id_usuario WHERE id_publicacion = ?', [id]);
+
+    const usu_rep = await dbconn.query('SELECT usuario.nombre FROM usuario INNER JOIN publicacion ON usuario.id_usuario = publicacion.usuario_id WHERE id_publicacion=? ', id);
+
+
+    var salida_pnt = JSON.stringify(usu_rep).indexOf(":");
+    var salida_ll = JSON.stringify(usu_rep).indexOf("}");
+
+    const usu_json = JSON.stringify(usu_rep).substring(salida_pnt + 2, salida_ll - 1);
+
+
+    //TODO: falta el usuario
+    const reporte = await dbconn.query("INSERT INTO reportes (publicacion_reportada, reportado) VALUES (?, ?)", [id, usu_json])
+
+    res.render('../views/partials/publicaciones/reporte', { publicacion: publicaciones, usuario: req.user });
+});
+
+
+
+router.post('/reporte/:id', async (req, res) => {
+
+    res.render('../views/partials/publicaciones/reporte', {usuario: req.user})
+});
+
+//TODO: CREACION DE PROYECTO
+router.post('/publicado/:titulo', isLoggedIn, async (req, res) => {
+    const { titulo } = req.params
+    const { descripcion, necesita } = req.body;
+    //console.log("Necesita: " + necesita)
+    //TODO: PROCESAR FECHA
+    var d = new Date();
+    var fecha_inicio = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate(); //+1 porque diciembre es el 0
+    var fecha_final = d.getFullYear() + "-" + (d.getMonth() + 3) + "-" + d.getDate();
+    //console.log("FECHA: " + String(fecha_inicio) + "FINAL: " + String(fecha_final));
+
+    const insertar = await dbconn.query('INSERT INTO proyectos (titulo, descripcion, fecha_inicio, fecha_final, roles) VALUES (?, ?, ?, ?, ?)', [titulo, descripcion, fecha_inicio, fecha_final, necesita]);
+
+    //const proyectos = await dbconn.query('SELECT  * FROM proyectos');
+
+    res.redirect('/proyectosActivos');
+});
+
+
+router.get('/views/partials/proyectos/proyectosActivos', async (req, res) => {
+
+    const proyectos = await dbconn.query('SELECT  * FROM proyectos');
     //console.log(proyectos)
 
 
-    res.render('../views/partials/proyectos/proyectosActivos', {proyecto: proyectos, usuario: req.user}); 
+    res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos, usuario: req.user });
+    
 
-}); 
+});
+
+
+//TODO: , COUNT(equipos.usuario) ... INNER JOIN equipos ON proyectos.id_proyectos = equipos.proyecto WHERE validacion = 1
+router.get('/proyectosActivos', async (req, res) => {
+
+    const proyectos = await dbconn.query('SELECT * FROM proyectos ORDER BY fecha_inicio DESC');
+    //console.log(proyectos)
+
+
+    res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos, usuario: req.user });
+
+});
+
+//TODO: PROYECTOS ACTIVOS
+router.post('/proyectosActivos/nombre/:datos', async (req, res) => {
+
+    const { datos } = req.params;
+    //console.log("buscar: " + datos);
+
+
+
+    const proyectos = await dbconn.query('SELECT * FROM proyectos WHERE titulo = (?)', datos);
+
+    res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos, usuario: req.user });
+
+
+});
+
+//TODO: PARA PODER DARLE A BUSCAR PROYECTO Y QUE SI EL CAMPO ESTA VACIO QUE NO PASE NADA MALO
+router.post('/proyectosActivos', (req, res) => {
+    
+    res.redirect('/proyectosActivos')
+})
+
+router.get('/proyectosActivos/nombre/:datos', async (req, res) => {
+
+    const { datos } = req.params;
+    console.log("buscar: " + datos);
+
+
+
+    const proyectos = await dbconn.query('SELECT * FROM proyectos WHERE titulo = (?)', datos);
+
+    res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos, usuario: req.user });
+
+
+});
+
+//TODO: FILTADO DE PROYECTOS
+router.get('/proyectosActivos/filtro/:filtro', async (req, res) => {
+
+    const { filtro } = req.params;
+    if (filtro == 1) {
+        const proyectos = await dbconn.query('SELECT * FROM proyectos ORDER BY fecha_inicio DESC');
+        res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos, usuario: req.user });
+    }
+
+    if (filtro == 2) {
+        const proyectos = await dbconn.query('SELECT * FROM proyectos ORDER BY fecha_inicio ASC');
+        res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos, usuario: req.user });
+    }
+
+
+});
 
 
 router.get('/fichaProyecto', (req, res) => {
 
-    res.render('../views/partials/proyectos/fichaProyecto', {usuario: req.user}); 
+    res.render('../views/partials/proyectos/fichaProyecto', {usuario: req.user});
 
-}); 
-
-
-router.post('/fichaProyecto', (req, res) => {
-
-    res.render('../views/partials/proyectos/fichaProyecto'); 
-
-}); 
+});
 
 
-router.get('/formularioProyecto', isLoggedIn, (req, res) => {
-
-    res.render('../views/partials/proyectos/formularioProyecto' , {usuario: req.user}); 
-
-}); 
 
 
-router.post('/formularioProyecto', (req, res) => {
 
-    res.render('../views/partials/proyectos/formularioProyecto' ); 
+router.get('/formularioProyecto', (req, res) => {
 
-}); 
+    res.render('../views/partials/proyectos/formularioProyecto', {usuario: req.user});
+
+});
+
+
 
 router.get('/perfil', isLoggedIn, (req, res) => {
-    //console.log(req.user);
-    res.render('../views/partials/perfil/perfil', {usuario: req.user}); 
+
+    console.log(req.user)
+    res.render('../views/partials/perfil/perfil', {usuario: req.user});
+
+});
+
+
+
+
+router.get('/editarPerfil', isLoggedIn,(req, res) => {
+
+    res.render('../views/partials/perfil/editarPerfil', {usuario: req.user});
+
+});
+
+router.get('/tienda', async (req, res) => {
+   //LA TIENDA POR DEFECTO
+   const juegos_tienda = await dbconn.query('SELECT * FROM juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE id_genero < 10 ORDER BY fecha_subida DESC;');
+
+   res.render('../views/partials/tienda/tienda', { juegos: juegos_tienda, usuario: req.user}); 
+
+}); 
+
+router.post('/tienda', isLoggedIn, async (req, res) => {
+
+    const { titulo, descripcion, genero,  precio, imagen,  sistema_operativo, memoria, graficos, procesador, almacenamiento } = req.body;
+
+    var d = new Date();
+    var fecha_inicio = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+ 
+    const nuevo_juego = {
+        titulo,
+        descripcion,
+        genero,
+        precio,
+        imagen,
+        sistema_operativo,
+        memoria, graficos,
+        procesador, 
+        almacenamiento,
+        fecha_subida: fecha_inicio
+    };
+    const jueg= await dbconn.query('INSERT INTO juegos set ?', [nuevo_juego]); //como hacer que le genero entre
+    const juegos_tienda = await dbconn.query('SELECT * FROM juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE id_genero < 10 ORDER BY fecha_subida DESC;');
+    
+    res.redirect('tienda'); 
 
 }); 
 
 
-router.post('/perfil', (req, res) => {
+router.get('/tienda/:filtro', async (req, res) => {
 
-    res.render('../views/partials/perfil/perfil'); 
+    const { filtro } = req.params;
+    if(filtro == 1){
+        const juegos = await dbconn.query('SELECT * FROM juegos ORDER BY precio DESC');
+        res.render('../views/partials/tienda/tienda', {juegos: juegos, usuario: req.user})
+    }
+    if(filtro == 2){
+        const juegos = await dbconn.query('SELECT * FROM juegos ORDER BY precio ASC');
+        res.render('../views/partials/tienda/tienda', {juegos: juegos, usuario: req.user})
+    }
+});
 
+
+router.get('/fichaJuego/:id', async (req, res) => {
+   
+   const { id } = req.params;
+   console.log(id);
+   const ficha = await  dbconn.query('SELECT * FROM juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE id_juegos=?', id);//cambio
+   //console.log(ficha);
+   //console.log(req)
+   res.render('../views/partials/juegos/fichaJuego' , {usuario: req.user, juegos: ficha}); 
 }); 
 
-router.get('/editarPerfil',  isLoggedIn, (req, res) => {
+router.post('/fichaJuego', (req, res) => {
 
-    res.render('../views/partials/perfil/editarPerfil', {usuario: req.user}); 
+   res.render('../views/partials/juegos/fichaJuego'); 
 
-}); 
+});
 
+router.get('/formularioJuego/', isLoggedIn, async (req, res) => {
 
-router.post('/editarPerfil', (req, res) => {
+  
 
-    res.render('../views/partials/perfil/editarPerfil'); 
+   
 
-}); 
+   res.render('../views/partials/juegos/formularioJuego', {usuario: req.user}); 
 
-
-
-
-
+});
 
 
+
+router.get('/404', (req, res) => {
+
+    res.render('../views/partials/Errores/404', {usuario: req.user});
+});
 
 
 module.exports = router;

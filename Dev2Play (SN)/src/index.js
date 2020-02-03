@@ -9,24 +9,14 @@ const MySQLStore = require('express-mysql-session')(session);
 const passport = require('passport');
 const flash = require('connect-flash');
 
-
-
-
-
-
-/*
-	Inicializaciones
-	Se inicializan los módulos cargados
-*/
-
 const app = express();
 require('../lib/passport'); 
+
+app.set('port', process.env.PORT || 3002)
 
 /*
     CONFIGURACIONES
 */
-
-app.set('port', process.env.PORT || 3002);
 app.set('views', 'views'); //A la variable views le asignamos el valor del directorio donde esta la aplicacion, y tiene la ruta hacia la carpeta views
 
 app.engine('.hbs', exphbs({     //.hbs porque me da la quiero, se puede llamar como se quiera
@@ -41,12 +31,10 @@ app.set('view engine', '.hbs');
 
 
 /*
-    MIDLEWARES
+    MIDLEWARES Y SESION
 */
 // Convierte una petición recibida (POST-GET...) a objeto JSON
 
-
-//Datos de sesion
 app.use(session({
 	secret: '1234',
 	resave: false, // para que no se renueve si pones true es que se quedan los dados de sesion
@@ -64,6 +52,16 @@ app.use(flash());
 app.use(passport.initialize());  
 app.use(passport.session());
 
+app.use(morgan('dev'));
+
+/*
+        VARIABLES GLOBALES
+*/
+
+app.use((req,res,next) => {
+
+    next();
+});
 
 /*
     ARCHIVOS PUBLICOS
@@ -79,6 +77,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 */
 app.use(require('../rutas/index.js'));
 app.use(require('../rutas/usuarios'));
+
+//TODO: ERROR 404
+app.use(function(req, res, next){
+    res.status(404);
+  
+    // Respuesta html
+    if (req.accepts('html')) {
+      res.redirect('/404');
+      return;
+    }
+  
+    // Respuesta json
+    if (req.accepts('json')) {
+      res.send({ error: 'Not found' });
+      return;
+    }
+  
+    // Texto plano
+    res.type('txt').send('Not found');
+  });
 
 /*
     INCILIZAR SERVIDOR

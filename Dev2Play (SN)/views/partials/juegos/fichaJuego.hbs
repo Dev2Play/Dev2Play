@@ -13,7 +13,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 mx-2">
-                        {{imagen}}
+                        <img src="{{imagen}}" class="img_form_juego">
                     </div>
                 </div>
             </div> 
@@ -38,7 +38,7 @@
                             <tr>
                                 <th>Memoria:</th>
                                 <td>&nbsp</td>
-                                <td>8Gb</td>
+                                <td>{{memoria}}</td>
                             </tr>
                             <tr>
                                 <th>Graficos:</th>
@@ -79,7 +79,7 @@
                         <h3>Comprar</h3>
                     </div>
                     <div class="col-6">
-                        <button type="" style="width: 80px; height: 50px">{{precio}}€</button>
+                        <button type="" id="comprar" style="width: 80px; height: 50px">{{precio}}€</button>
                     </div>
   
                 </div>
@@ -89,3 +89,15 @@
     </div>
     <br><br>
     {{/each}}
+
+
+<script>
+
+    $(document).ready(function(){
+        $('#comprar').click(function(){
+            alert("Proximamente")
+        });
+
+    });
+
+</script>

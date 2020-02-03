@@ -38,7 +38,7 @@ router.post('/login', (req, res, next) => {
 
 router.get('/salir', (req, res) => {
 	req.logOut();  
-	res.redirect('/');	
+	res.redirect('/')
 });
 
 router.get('/recuperar', (req, res) => {
@@ -49,4 +49,3 @@ router.get('/recuperar', (req, res) => {
 
 
 module.exports = router;
-
