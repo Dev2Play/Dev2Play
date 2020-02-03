@@ -1,3 +1,4 @@
+
 <div class="modal log uk-modal-dialog" id="nuevaPublicacion">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -162,110 +163,36 @@
 
 
 
-
-
-<!--MODAL PUBLICACION-->
-
-<div class="modal " id="publicacion">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <div class="container">
-                    <img src="images/concept_4.jpg" class="publicaciones_modal">
-                </div>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div class="container">
-                    <div class="container justify-content-center">
-                        <div class="container">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-11 float-left">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti error sapiente
-                                        assumenda. Exercitationem dolores, corporis eius perspiciatis rerum consectetur
-                                        facere
-                                        porro dolore accusamus, nobis sequi! Eaque possimus facere eligendi optio.
-                                    </div>
-                                    <div class="col-1"><button id="like_boton"><p id="like">
-                                        ❤
-                                    </p></button></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
 <!--Banner Jumbotron-->
-<div class="jumbotron jumbotron-fluid banner">
+<div class="jumbotron banner container-fluid">
     <div class="container">
-        <h1 class="display-4">Fluid jumbotron</h1>
-        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+        <h1 class="display-4">Dev2Play</h1>
+        <p class="lead" style="text-align: left;">En esta web podras conocer gente nueva con la que crear el videojuego de tus sueños.
+        Ahora podras crear tu videojuego sin tener que saber hacer de todo, ya que puedes crear proyectos y decir el tipo de personas que necesitas como pueden ser programadores, ilustradores y mas puestos que acaben en dores.
+        </p>
     </div>
 </div>
+
+
 
 <!--Imagenes y proyectos visibles-->
 <div class="container-fluid">
     <div class="row mx-auto">
         <div class="col-5 imagenes">
-            <h3>Publicaciones Destacadas</h3>
-            <!--Zona imagenes-->
-            <div class="scroll">
-                <div class="row">
+
+            <h3 class="float-left ml-4"><u>Publicaciones Destacadas</u></h3>
+
+            <div style="overflow-y: auto; overflow-x: hidden; width: 800px; max-height: 520px; min-height: 520px;">
+                <div class="row ml-2 mt-4">
                     <!--CARD-->
-                    <div class="col-4" data-toggle="modal" data-target="#publicacion" data-dismiss="modal">
-                        <img src="images/gif.gif" class="publicaciones">
+                    {{#each publicacion}}
+
+                    <div class="col-4 clickeame">
+                        <img src="{{enlace}}" class="publicaciones_home">
+                        <p>&nbsp;</p>
                     </div>
                     <div class="col-2"></div>
-                    <div class="col-4" data-toggle="modal" data-target="#publicacion" data-dismiss="modal">
-                        <img src="images/gif.gif" class="publicaciones">
-
-                    </div>
-                    <div class="col-2"></div>
-                    <div class="col-4" data-toggle="modal" data-target="#publicacion" data-dismiss="modal">
-                        <img src="images/gif.gif" class="publicaciones">
-
-                    </div>
-                    <div class="col-2"></div>
-                    <div class="col-4" data-toggle="modal" data-target="#publicacion" data-dismiss="modal">
-                        <img src="images/gif.gif" class="publicaciones">
-
-                    </div>
-                    <div class="col-2"></div>
-                    <div class="col-4" data-toggle="modal" data-target="#publicacion" data-dismiss="modal">
-                        <img src="images/gif.gif" class="publicaciones">
-
-                    </div>
-                    <div class="col-2"></div>
-                    <div class="col-4" data-toggle="modal" data-target="#publicacion" data-dismiss="modal">
-                        <img src="images/gif.gif" class="publicaciones">
-
-                    </div>
-                    <div class="col-2"></div>
-                    <div class="col-4" data-toggle="modal" data-target="#publicacion" data-dismiss="modal">
-                        <img src="images/gif.gif" class="publicaciones">
-
-                    </div>
-                    <div class="col-2"></div>
-                    <div class="col-4" data-toggle="modal" data-target="#publicacion" data-dismiss="modal">
-                        <img src="images/gif.gif" class="publicaciones">
-
-                    </div>
+                    {{/each}}
                 </div>
             </div>
 
@@ -278,34 +205,32 @@
         <!--Proyectos-->
         <div class="container">
             <div class="col-5 fichas_home">
-                <h3>{{titulo}}</h3>
-                <hr class="hr_debajo_del_titulo">
-                <div>
-                    {{descripcion}}
+                <div class="row">
+                    <div class="col-12">
+                        <h3 style="font-family: fjalla;">{{titulo}}</h3>
+                    </div>
                 </div>
-                <br>
-                <div class="participantes">
-                   {{'COUNT(equipos.usuario)'}} / Miembros
+                <hr class="mb-4">
+                <div class="row">
+                    <p id="desc">{{descripcion}}</p>
                 </div>
-                <br>
-                <hr class="bajo_roles">
-                <div class="roles">
-                    <strong>Programador C#</strong> - Persona con conocimientos de programacion <br>
-                    <strong>Diseñador Grafico</strong> - Diseñador de mapeados pixelart <br>
-                    <strong>Tecnico de sonido</strong> - Se busca banda sonora para un juego rpg de ambiente
-                    medieval<br>
+                <hr class="my-3">
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="mb-3">Se busca:</h5>
+                    </div>
                 </div>
-                <br>
+                <div class="row mb-1 mr-1">
+                    <p class="roles">{{roles}}</p>
+                </div>
+                <hr>
+                <div class="participantes mt-4">
+                    {{'COUNT(equipos.usuario)'}} / Miembros
+                </div>
             </div>
-            <div class="col-1"></div>
-
-            <!--OTRO-->
         </div>
         {{/each}}
-
     </div>
-
-
 
 </div>
 
@@ -320,26 +245,32 @@
     <div class="container">
         <div class="row">
             <div class="col-5">
-                <img src="images/5euros.png" class="dinero" width="700px">
+                <img src="images/5euros.png" class="dinero5" width="700px">
             </div>
             <div class="col-1"></div>
             <div class="col-5">
-                <img src="images/10euros.png" class="dinero" width="620px">
+                <img src="images/10euros.png" class="dinero10" width="620px">
             </div>
         </div>
     </div>
-    <br><br>
-
-
 </div>
-
+    <br><br>
 
 
 <!--Codigo enlace desde los div-->
 <script>
     $(document).ready(function () {
+
+        //console.log($('.fichas_home').html());
+
         $(document).on('click', '.fichas_home', function () {
             location.href = '/fichaProyecto';
         })
+
+        $('.clickeame').click(function () {
+            location.href = "/verPublicaciones/filtro/3"
+        });
+
+
     });
 </script>

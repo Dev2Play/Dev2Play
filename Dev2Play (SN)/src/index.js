@@ -2,12 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');   
 const exphbs = require('express-handlebars');
-const router = express.Router();
-const app = express();
 var path = require('path');
-const {database} = require('./keys')
+const {database} = require('./keys');
+const session = require('express-session'); 
+const MySQLStore = require('express-mysql-session')(session); 
+const passport = require('passport');
+const flash = require('connect-flash');
 
-
+const app = express();
+require('../lib/passport'); 
 
 app.set('port', process.env.PORT || 3002)
 
@@ -28,11 +31,26 @@ app.set('view engine', '.hbs');
 
 
 /*
-    MIDLEWARES
+    MIDLEWARES Y SESION
 */
 // Convierte una petición recibida (POST-GET...) a objeto JSON
+
+app.use(session({
+	secret: '1234',
+	resave: false, // para que no se renueve si pones true es que se quedan los dados de sesion
+	saveUninitialized: false, //para que no se guarde sin inicializar
+	//mira modulo express msql
+	store: new MySQLStore(database) //para guardarla en la BBDD
+}));
+
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
+
+app.use(morgan('dev'));
+
+app.use(flash());
+app.use(passport.initialize());  
+app.use(passport.session());
 
 app.use(morgan('dev'));
 
@@ -58,6 +76,27 @@ app.use(express.static(path.join(__dirname, 'public')));
     RUTAS
 */
 app.use(require('../rutas/index.js'));
+app.use(require('../rutas/usuarios'));
+
+//TODO: ERROR 404
+app.use(function(req, res, next){
+    res.status(404);
+  
+    // Respuesta html
+    if (req.accepts('html')) {
+      res.redirect('/404');
+      return;
+    }
+  
+    // Respuesta json
+    if (req.accepts('json')) {
+      res.send({ error: 'Not found' });
+      return;
+    }
+  
+    // Texto plano
+    res.type('txt').send('Not found');
+  });
 
 /*
     INCILIZAR SERVIDOR

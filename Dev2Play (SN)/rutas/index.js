@@ -2,49 +2,35 @@ const express = require('express');
 const router = express.Router();
 const dbconn = require('../src/db');
 
-//TODO: revisar los post
+const { isLoggedIn, isNotLoggedIn } = require('../lib/acceso'); 
 
 
 router.get('/', async (req, res) => {
 
-    const sacar_id = await dbconn.query('SELECT * FROM proyectos');
-    const long_id = sacar_id.length;
-    //console.log(sacar_id);
+        //TODO: , COUNT(equipos.usuario) ... INNER JOIN equipos ON proyectos.id_proyectos = equipos.proyecto WHERE validacion = 1
+        var proyecto_destacado = await dbconn.query('SELECT * FROM proyectos');
+        //console.log(proyecto_destacado[0])
+        //console.log(proyecto_destacado)
 
+        if(proyecto_destacado.length > 1){
+            var id_random = Math.round(Math.random() * (proyecto_destacado.length - 1) + 1);
+            //console.log(id_random)
+            var proyecto_destacado = await dbconn.query('SELECT * FROM proyectos WHERE id_proyectos = ?', id_random);
 
-    var id_random = Math.round(Math.random() * (long_id - 1) + 1);
-    if (id_random < 1) {
-        id_random = 1;
-    }
+            const publicaciones_destacadas = await dbconn.query('SELECT * FROM publicacion inner join usuario on publicacion.usuario_id = usuario.id_usuario inner join premium on usuario.premium = premium.id_premium WHERE oro > 0 or plata > 0  order by likes DESC LIMIT 8');
 
-    //console.log("random: " + id_random);
-
-    //TODO: ERRORRRRRRRRR => , COUNT(equipos.usuario)
-    const proyecto_destacado = await dbconn.query('SELECT *, COUNT(equipos.usuario) FROM proyectos INNER JOIN equipos ON proyectos.id_proyectos = equipos.proyecto WHERE id_proyectos = ?', [id_random]);
-
-    //console.log(proyecto_destacado)
-
-    res.render('../views/home', { proyecto: proyecto_destacado });
+            res.render('../views/home', {proyecto: proyecto_destacado, publicacion: publicaciones_destacadas, usuario: req.user}); 
+        }
 });
 
 
 router.post('/', (req, res) => {
 
-    res.render('../views/home');
+    res.render('../views/home', {usuario: req.user});
 
 });
 
-router.get('/tienda', (req, res) => {
 
-    res.render('../views/partials/tienda/tienda');
-
-});
-
-router.post('/tienda', (req, res) => {
-
-    res.render('../views/partials/tienda/tienda');
-
-});
 
 //TODO: PUBLICACIONES
 router.get('/verPublicaciones', async (req, res) => {
@@ -54,7 +40,7 @@ router.get('/verPublicaciones', async (req, res) => {
 
     //console.log(publicaciones)
 
-    res.render('../views/partials/publicaciones/verPublicaciones', { publicacion: publicaciones });
+    res.render('../views/partials/publicaciones/verPublicaciones', { publicacion: publicaciones, usuario: req.user });
 
 });
 
@@ -80,25 +66,25 @@ router.get('/verPublicaciones/filtro/:filtro', async (req, res) => {
     //console.log("filtro: " + filtro)
     if (filtro == 1) {
         const publicaciones = await dbconn.query('SELECT *, usuario.nombre FROM publicacion INNER JOIN usuario ON publicacion.usuario_id = usuario.id_usuario ORDER BY fecha_publicacion DESC');
-        res.render('../views/partials/publicaciones/verPublicaciones', { publicacion: publicaciones });
+        res.render('../views/partials/publicaciones/verPublicaciones', { publicacion: publicaciones, usuario: req.user });
     }
 
     if (filtro == 2) {
         const publicaciones = await dbconn.query('SELECT *, usuario.nombre FROM publicacion INNER JOIN usuario ON publicacion.usuario_id = usuario.id_usuario ORDER BY likes DESC');
-        res.render('../views/partials/publicaciones/verPublicaciones', { publicacion: publicaciones });
+        res.render('../views/partials/publicaciones/verPublicaciones', { publicacion: publicaciones, usuario: req.user });
     }
 
     if (filtro == 3) {
-        const publicaciones = await dbconn.query('SELECT *, usuario.nombre FROM publicacion INNER JOIN usuario ON publicacion.usuario_id = usuario.id_usuario inner join premium on usuario.premium = premium.id_premium WHERE oro > 0 or plata > 0  order by fecha_publicacion DESC LIMIT 8');
+        const publicaciones = await dbconn.query('SELECT * FROM publicacion inner join usuario on publicacion.usuario_id = usuario.id_usuario inner join premium on usuario.premium = premium.id_premium WHERE oro > 0 or plata > 0  order by likes DESC LIMIT 8');
 
-        res.render('../views/partials/publicaciones/verPublicaciones', { publicacion: publicaciones });
+        res.render('../views/partials/publicaciones/verPublicaciones', { publicacion: publicaciones, usuario:  req.user });
     }
 
 
 });
 
 //TODO: PUBLIACIONES LIKE
-router.get('/verPublicaciones/:id', async (req, res) => {
+router.get('/verPublicaciones/:id', isLoggedIn,  async (req, res) => {
 
     const { id } = req.params;
     //console.log("id del like: " + id)
@@ -114,7 +100,7 @@ router.get('/verPublicaciones/:id', async (req, res) => {
 
 
 //TODO: REPORTE
-router.get('/reporte/:id', async (req, res) => {
+router.get('/reporte/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params;
     //console.log(id)
     const publicaciones = await dbconn.query('SELECT *, usuario.nombre FROM publicacion INNER JOIN usuario ON publicacion.usuario_id = usuario.id_usuario WHERE id_publicacion = ?', [id]);
@@ -131,18 +117,18 @@ router.get('/reporte/:id', async (req, res) => {
     //TODO: falta el usuario
     const reporte = await dbconn.query("INSERT INTO reportes (publicacion_reportada, reportado) VALUES (?, ?)", [id, usu_json])
 
-    res.render('../views/partials/publicaciones/reporte', { publicacion: publicaciones });
+    res.render('../views/partials/publicaciones/reporte', { publicacion: publicaciones, usuario: req.user });
 });
 
 
 
 router.post('/reporte/:id', async (req, res) => {
 
-    res.render('../views/partials/publicaciones/reporte')
+    res.render('../views/partials/publicaciones/reporte', {usuario: req.user})
 });
 
 //TODO: CREACION DE PROYECTO
-router.post('/publicado/:titulo', async (req, res) => {
+router.post('/publicado/:titulo', isLoggedIn, async (req, res) => {
     const { titulo } = req.params
     const { descripcion, necesita } = req.body;
     //console.log("Necesita: " + necesita)
@@ -166,7 +152,7 @@ router.get('/views/partials/proyectos/proyectosActivos', async (req, res) => {
     //console.log(proyectos)
 
 
-    res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos });
+    res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos, usuario: req.user });
     
 
 });
@@ -175,11 +161,11 @@ router.get('/views/partials/proyectos/proyectosActivos', async (req, res) => {
 //TODO: , COUNT(equipos.usuario) ... INNER JOIN equipos ON proyectos.id_proyectos = equipos.proyecto WHERE validacion = 1
 router.get('/proyectosActivos', async (req, res) => {
 
-    const proyectos = await dbconn.query('SELECT *, COUNT(equipos.usuario) FROM proyectos INNER JOIN equipos ON proyectos.id_proyectos = equipos.proyecto WHERE validacion = 1 ');
+    const proyectos = await dbconn.query('SELECT * FROM proyectos ORDER BY fecha_inicio DESC');
     //console.log(proyectos)
 
 
-    res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos });
+    res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos, usuario: req.user });
 
 });
 
@@ -193,10 +179,16 @@ router.post('/proyectosActivos/nombre/:datos', async (req, res) => {
 
     const proyectos = await dbconn.query('SELECT * FROM proyectos WHERE titulo = (?)', datos);
 
-    res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos });
+    res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos, usuario: req.user });
 
 
 });
+
+//TODO: PARA PODER DARLE A BUSCAR PROYECTO Y QUE SI EL CAMPO ESTA VACIO QUE NO PASE NADA MALO
+router.post('/proyectosActivos', (req, res) => {
+    
+    res.redirect('/proyectosActivos')
+})
 
 router.get('/proyectosActivos/nombre/:datos', async (req, res) => {
 
@@ -207,7 +199,7 @@ router.get('/proyectosActivos/nombre/:datos', async (req, res) => {
 
     const proyectos = await dbconn.query('SELECT * FROM proyectos WHERE titulo = (?)', datos);
 
-    res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos });
+    res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos, usuario: req.user });
 
 
 });
@@ -218,23 +210,21 @@ router.get('/proyectosActivos/filtro/:filtro', async (req, res) => {
     const { filtro } = req.params;
     if (filtro == 1) {
         const proyectos = await dbconn.query('SELECT * FROM proyectos ORDER BY fecha_inicio DESC');
-        res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos });
+        res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos, usuario: req.user });
     }
 
     if (filtro == 2) {
         const proyectos = await dbconn.query('SELECT * FROM proyectos ORDER BY fecha_inicio ASC');
-        res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos });
+        res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos, usuario: req.user });
     }
 
 
 });
 
 
-
-
 router.get('/fichaProyecto', (req, res) => {
 
-    res.render('../views/partials/proyectos/fichaProyecto');
+    res.render('../views/partials/proyectos/fichaProyecto', {usuario: req.user});
 
 });
 
@@ -244,29 +234,109 @@ router.get('/fichaProyecto', (req, res) => {
 
 router.get('/formularioProyecto', (req, res) => {
 
-    res.render('../views/partials/proyectos/formularioProyecto');
+    res.render('../views/partials/proyectos/formularioProyecto', {usuario: req.user});
 
 });
 
 
 
-router.get('/perfil', (req, res) => {
+router.get('/perfil', isLoggedIn, (req, res) => {
 
-    res.render('../views/partials/perfil/perfil');
-
-});
-
-
-
-
-router.get('/editarPerfil', (req, res) => {
-
-    res.render('../views/partials/perfil/editarPerfil');
+    console.log(req.user)
+    res.render('../views/partials/perfil/perfil', {usuario: req.user});
 
 });
 
 
 
+
+router.get('/editarPerfil', isLoggedIn,(req, res) => {
+
+    res.render('../views/partials/perfil/editarPerfil', {usuario: req.user});
+
+});
+
+router.get('/tienda', async (req, res) => {
+   //LA TIENDA POR DEFECTO
+   const juegos_tienda = await dbconn.query('SELECT * FROM juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE id_genero < 10 ORDER BY fecha_subida DESC;');
+
+   res.render('../views/partials/tienda/tienda', { juegos: juegos_tienda, usuario: req.user}); 
+
+}); 
+
+router.post('/tienda', isLoggedIn, async (req, res) => {
+
+    const { titulo, descripcion, genero,  precio, imagen,  sistema_operativo, memoria, graficos, procesador, almacenamiento } = req.body;
+
+    var d = new Date();
+    var fecha_inicio = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+ 
+    const nuevo_juego = {
+        titulo,
+        descripcion,
+        genero,
+        precio,
+        imagen,
+        sistema_operativo,
+        memoria, graficos,
+        procesador, 
+        almacenamiento,
+        fecha_subida: fecha_inicio
+    };
+    const jueg= await dbconn.query('INSERT INTO juegos set ?', [nuevo_juego]); //como hacer que le genero entre
+    const juegos_tienda = await dbconn.query('SELECT * FROM juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE id_genero < 10 ORDER BY fecha_subida DESC;');
+    
+    res.redirect('tienda'); 
+
+}); 
+
+
+router.get('/tienda/:filtro', async (req, res) => {
+
+    const { filtro } = req.params;
+    if(filtro == 1){
+        const juegos = await dbconn.query('SELECT * FROM juegos ORDER BY precio DESC');
+        res.render('../views/partials/tienda/tienda', {juegos: juegos, usuario: req.user})
+    }
+    if(filtro == 2){
+        const juegos = await dbconn.query('SELECT * FROM juegos ORDER BY precio ASC');
+        res.render('../views/partials/tienda/tienda', {juegos: juegos, usuario: req.user})
+    }
+});
+
+
+router.get('/fichaJuego/:id', async (req, res) => {
+   
+   const { id } = req.params;
+   console.log(id);
+   const ficha = await  dbconn.query('SELECT * FROM juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE id_juegos=?', id);//cambio
+   //console.log(ficha);
+   //console.log(req)
+   res.render('../views/partials/juegos/fichaJuego' , {usuario: req.user, juegos: ficha}); 
+}); 
+
+router.post('/fichaJuego', (req, res) => {
+
+   res.render('../views/partials/juegos/fichaJuego'); 
+
+});
+
+router.get('/formularioJuego/', isLoggedIn, async (req, res) => {
+
+  
+
+   
+
+   res.render('../views/partials/juegos/formularioJuego', {usuario: req.user}); 
+
+});
+
+
+
+router.get('/404', (req, res) => {
+
+    res.render('../views/partials/Errores/404', {usuario: req.user});
+});
 
 
 module.exports = router;

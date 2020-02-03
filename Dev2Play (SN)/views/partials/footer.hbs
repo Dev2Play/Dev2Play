@@ -2,9 +2,8 @@
         <div class="container-fluid">
             <hr width="80%" style="background-color : rgb(63, 28, 201);" class="my-4">
             <!--a href="#" style="float: right; margin-top: -20px" class="mx-5 ">Inicio</a-->
-            <a href="#"><button style="float: right; outline: none; box-shadow: 1px 2px rgba(184, 173, 173, 0.32); height: 120px; width: 50px; background-color: rgba(221, 215, 215, 0);
-                border-radius: 90px;"
-                    class="mx-5">⬆</button></a>
+            <button style="float: right; outline: none; box-shadow: 1px 2px rgba(184, 173, 173, 0.32); height: 120px; width: 50px; background-color: rgba(221, 215, 215, 0);
+                border-radius: 90px;" id="arriba" class="mx-5">⬆</button>
         </div>
 
         <div class="container-fluid">
@@ -13,7 +12,7 @@
                     <p class="mx-5">Contacto: &nbsp<img src="images/correo.png" ></p>
                 </div>
                 <div class="col-4 text-center py-3">
-                    <a href="/"><img src="images/logo.png" class="logo_footer my-1"></a>
+                    <img src="images/logo.png" class="logo_footer my-1">
                 </div>
                 <div class="col-4 my-3 ">
                     <div class="row mx-5">
@@ -39,3 +38,19 @@
 
         </div>
     </footer>
+
+    <script>
+        $(document).ready(function(){
+
+            $('#arriba').click(function(){
+                //console.log(location.href)
+                location.href = location.href
+            });
+
+            $(".logo_footer").click(function(){
+                location.href = "/"
+            })
+
+        });
+
+    </script>
