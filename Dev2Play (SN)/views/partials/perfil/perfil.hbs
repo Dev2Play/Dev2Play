@@ -10,87 +10,39 @@
 				<br>
 				<h3> {{usuario.nombre}} <br></h3>
 				<div class="container">
-					<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati debitis,
-						assumenda voluptate, velit quas impedit fugit nisi odio dolor dolore, incidunt dolorem nobis
-						dolorum
-						error laudantium perspiciatis necessitatibus dignissimos in!</p>
+					<p class="text-muted">{{usuario.sobremi}}</p>
 				</div>
 
 			</div>
 		</div>
 
-		<div class="row justify-content-md-center">
-			<div class="col col-lg-2 text-center">
-				<p class="mb-0"><strong>567</strong></p>
-				<p class="text-muted">seguidos</p>
-			</div>
-			<div class="col-md-auto text-center">
-				<p class="mb-0"><strong>789</strong></p>
-				<p class="text-muted">seguidores</p>
-			</div>
-			<div class="col col-lg-2 text-center">
-				<p class="mb-0"><strong>1236</strong></p>
-				<p class="text-muted">publicaciones</p>
-			</div>
-		</div>
 		<hr>
 		<br>
 		<div class="row">
 			<div class="col-3">
 				<br>
 				<div class="fijar">
-					<h3>Programador C#</h3>
+			
+					<h3>{{roles}}</h3>
 					<br>
-					<h3>Diseñador Grafico</h3>
+					<h3>Programador</h3>	
+							
 				</div>
 			</div>
 
 			<!--PUBLICACIONES-->
-			<div class="col scroll">
+		<div class="col scroll">
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="card">
-							<img class="card-img-top" src="images/gif.gif" data-toggle="modal" data-target="#publicacion" data-dismiss="modal" alt="Card image cap">
+							<img class="card-img-top" src={{archivo}} data-toggle="modal" data-target="#publicacion" data-dismiss="modal" alt="Card image cap">
 							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the
-									bulk of the card's content.</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					<div class="col-sm-6">
-						<div class="card">
-							<img class="card-img-top" src="images/gif.gif" data-toggle="modal" data-target="#publicacion" data-dismiss="modal" alt="Card image cap">
-							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the
-									bulk of the card's content.</p>
+								<p class="card-text">{{descripcion}}</p>
 							</div>
 						</div>
 						<br>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="card">
-							<img class="card-img-top" src="images/gif.gif" data-toggle="modal" data-target="#publicacion" data-dismiss="modal" alt="Card image cap">
-							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the
-									bulk of the card's content.</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					<div class="col-sm-6">
-						<div class="card">
-							<img class="card-img-top" src="images/gif.gif" data-toggle="modal" data-target="#publicacion" data-dismiss="modal" alt="Card image cap">
-							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the
-									bulk of the card's content.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
 			</div>
 
 			<div class="col-3">
@@ -219,7 +171,9 @@
 			$('#imagen_perfil_archivo').change(function () {
 
 				filePreview(this);
+			
 			});
 
+				console.log("aqui: " + $('.fijar').text())
 		});
 	</script>

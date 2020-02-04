@@ -240,11 +240,19 @@ router.get('/formularioProyecto', (req, res) => {
 
 
 
-router.get('/perfil', isLoggedIn, (req, res) => {
+router.get('/perfil', isLoggedIn, async (req, res) => {
 
-    console.log(req.user)
-    res.render('../views/partials/perfil/perfil', {usuario: req.user});
+    //console.log(req.user)
+    const nombre = await dbconn.query('SELECT * FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
+    //const roles = await dbconn.query('SELECT * FROM especialidad_usuarios inner join roles on especialidad_usuarios.rol_us = roles.id_roles inner join usuario on especialidad_usuarios.usuario = usuario.id_usuario WHERE id_roles = ?', req.user.id_usuario);
+    
+    const public = await dbconn.query('SELECT * FROM usuario inner join publicacion on usuario.id_usuario = publicacion.usuario_id   WHERE id_usuario = ?', req.user.id_usuario);
 
+    const rol = await dbconn.query('SELECT * FROM roles inner join especialidad_usuarios on roles.id_roles = especialidad_usuarios.rol_us inner join usuario on especialidad_usuarios.usuario = usuario.id_usuario WHERE id_usuario = 13');
+    console.log((rol))
+
+    res.render('../views/partials/perfil/perfil', {usuario: req.user, roles: rol[0].nombre_rol});
+    
 });
 
 
