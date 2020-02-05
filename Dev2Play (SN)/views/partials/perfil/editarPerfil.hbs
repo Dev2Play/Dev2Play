@@ -40,15 +40,16 @@
 <br>
 	<div class="row mb-2">
 		<div class="mx-auto text-center">
-			<input type="text" class="my-3 nombre_editar" placeholder=" NOMBRE">
 			<br>
+			<form action="" method="POST" id="envi_form">
 			<div class="container-fluid">
 				<div class="row">
 
-					<div class="col-4"><textarea rows="6" class="descdat" cols="150" placeholder="Describete"></textarea></div>
-					<div class="col-8">	<input type="button" class="my-5 float-right" name="guardar" value="Guardar"></div>
+					<div class="col-4"><textarea rows="6" class="descdat" cols="150" > {{descrip}}</textarea></div>
+					<div class="col-8">	<input type="submit" class="my-5 float-right" name="guardar" value="Guardar" id="sobre"></div>
 				</div>
 			</div>
+			</form>
 			 <!-- quepasa-->
 
 		</div>	
@@ -187,6 +188,14 @@
 					  
 				}
 			});
+
+			$('#sobre').click(function(){
+				var de = $('.descdat').val();
+				//location.href = "sobremi/" + de
+				$('#envi_form').attr('action', '/sobremi/'+de)
+
+			});
+
 
 		});
 

@@ -240,28 +240,36 @@ router.get('/formularioProyecto', (req, res) => {
 
 
 
-router.get('/perfil', isLoggedIn, async (req, res) => {
 
+router.get('/perfil', isLoggedIn, async (req, res) => {
     //console.log(req.user)
     const nombre = await dbconn.query('SELECT * FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
     //const roles = await dbconn.query('SELECT * FROM especialidad_usuarios inner join roles on especialidad_usuarios.rol_us = roles.id_roles inner join usuario on especialidad_usuarios.usuario = usuario.id_usuario WHERE id_roles = ?', req.user.id_usuario);
     
     const public = await dbconn.query('SELECT * FROM usuario inner join publicacion on usuario.id_usuario = publicacion.usuario_id   WHERE id_usuario = ?', req.user.id_usuario);
 
-    const rol = await dbconn.query('SELECT * FROM roles inner join especialidad_usuarios on roles.id_roles = especialidad_usuarios.rol_us inner join usuario on especialidad_usuarios.usuario = usuario.id_usuario WHERE id_usuario = 13');
+    const rol = await dbconn.query('SELECT * FROM roles inner join especialidad_usuarios on roles.id_roles = especialidad_usuarios.rol_us inner join usuario on especialidad_usuarios.usuario = usuario.id_usuario WHERE id_usuario = ?' , [req.user.id_usuario]);
+    if (rol.length == 0 && equipo.length == 0){
+        res.render('../views/partials/perfil/perfil' , {roles: rol[0].nombre_rol, equipos: equipo[0].titulo})
+    }
+    const equipo = await dbconn.query('SELECT * FROM proyectos inner join equipos on proyectos.id_proyectos = equipos.proyecto INNER JOIN usuario ON equipos.usuario = usuario.id_usuario WHERE id_usuario = ?',[req.user.id_usuario] );
     console.log((rol))
 
-    res.render('../views/partials/perfil/perfil', {usuario: req.user, roles: rol[0].nombre_rol});
+    res.render('../views/partials/perfil/perfil', {usuario: req.user,});
     
 });
 
 
 
 
-router.get('/editarPerfil', isLoggedIn,(req, res) => {
-
-    res.render('../views/partials/perfil/editarPerfil', {usuario: req.user});
-
+router.get('/editarPerfil', isLoggedIn, async(req, res) => {
+    //console.log(req.user.sobremi)
+    const editdescrip = await dbconn.query('UPDATE usuario SET sobremi = ? WHERE id_usuario = ?',[req.user.sobremi , req.user.id_usuario]);
+    //console.log(editdescrip)
+    const desc = await dbconn.query('SELECT sobremi FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
+    console.log(desc)
+    res.render('../views/partials/perfil/editarPerfil', {usuario: req.user , descrip: desc[0].sobremi});
+   
 });
 
 router.get('/tienda', async (req, res) => {
@@ -346,5 +354,14 @@ router.get('/404', (req, res) => {
     res.render('../views/partials/Errores/404', {usuario: req.user});
 });
 
+
+router.post('/sobremi/:de', async (req, res) => {
+    const { de } = req.params;
+    console.log(de);
+
+    res.redirect('/perfil')
+
+
+});
 
 module.exports = router;
