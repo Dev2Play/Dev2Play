@@ -8,9 +8,12 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session); 
 const passport = require('passport');
 const flash = require('connect-flash');
+const fileUpload = require ('express-fileupload');
+
 
 const app = express();
 require('../lib/passport'); 
+app.use(fileUpload());
 
 app.set('port', process.env.PORT || 3002)
 

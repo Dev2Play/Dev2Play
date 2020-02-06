@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const dbconn = require('../src/db');
+const fileUpload = require ('express-fileupload');
+const app = express();
 
 const { isLoggedIn, isNotLoggedIn } = require('../lib/acceso'); 
 
@@ -245,7 +247,7 @@ router.get('/perfil', isLoggedIn, async (req, res) => {
     //console.log(req.user)
     const nombre = await dbconn.query('SELECT * FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
     //const roles = await dbconn.query('SELECT * FROM especialidad_usuarios inner join roles on especialidad_usuarios.rol_us = roles.id_roles inner join usuario on especialidad_usuarios.usuario = usuario.id_usuario WHERE id_roles = ?', req.user.id_usuario);
-    
+    const foto = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
     const public = await dbconn.query('SELECT * FROM usuario inner join publicacion on usuario.id_usuario = publicacion.usuario_id   WHERE id_usuario = ?', req.user.id_usuario);
 
     const rol = await dbconn.query('SELECT * FROM roles inner join especialidad_usuarios on roles.id_roles = especialidad_usuarios.rol_us inner join usuario on especialidad_usuarios.usuario = usuario.id_usuario WHERE id_usuario = ?' , [req.user.id_usuario]);
@@ -255,7 +257,7 @@ router.get('/perfil', isLoggedIn, async (req, res) => {
     const equipo = await dbconn.query('SELECT * FROM proyectos inner join equipos on proyectos.id_proyectos = equipos.proyecto INNER JOIN usuario ON equipos.usuario = usuario.id_usuario WHERE id_usuario = ?',[req.user.id_usuario] );
     console.log((rol))
 
-    res.render('../views/partials/perfil/perfil', {usuario: req.user,});
+    res.render('../views/partials/perfil/perfil', {usuario: req.user, photo: foto[0].foto});
     
 });
 
@@ -266,9 +268,13 @@ router.get('/editarPerfil', isLoggedIn, async(req, res) => {
     //console.log(req.user.sobremi)
     const editdescrip = await dbconn.query('UPDATE usuario SET sobremi = ? WHERE id_usuario = ?',[req.user.sobremi , req.user.id_usuario]);
     //console.log(editdescrip)
+    const editfoto = await dbconn.query('UPDATE usuario SET foto = ? WHERE id_usuario = ?',[req.user.foto ,req.user.id_usuario]);
     const desc = await dbconn.query('SELECT sobremi FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
-    console.log(desc)
-    res.render('../views/partials/perfil/editarPerfil', {usuario: req.user , descrip: desc[0].sobremi});
+    const foto = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
+    
+    
+    res.render('../views/partials/perfil/editarPerfil', {usuario: req.user , descrip: desc[0].sobremi , photo: foto[0].foto });
+    console.log(foto)
    
 });
 
@@ -357,11 +363,31 @@ router.get('/404', (req, res) => {
 
 router.post('/sobremi/:de', async (req, res) => {
     const { de } = req.params;
+    const editdescrip = await dbconn.query('UPDATE usuario SET sobremi = ? WHERE id_usuario = ?',[de , req.user.id_usuario]);
     console.log(de);
 
     res.redirect('/perfil')
 
 
 });
+
+router.post('/foto', async (req, res) => {
+    let file = req.files.file;
+    //console.log(file)
+    file.mv(`src/public/imagenesperfil/${file.name}`, async err =>{
+        if (err) return res.status(500).send({ message: err })
+        const nombre_pub = 'imagenesperfil/' + file.name
+
+        const editfoto = await dbconn.query('UPDATE usuario SET foto = ? WHERE id_usuario = ?',[nombre_pub,req.user.id_usuario]);
+
+        res.redirect('/perfil');
+
+    });
+
+
+});
+
+
+
 
 module.exports = router;

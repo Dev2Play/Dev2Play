@@ -1,30 +1,26 @@
-
 <!-- Page Content -->
 <div class="container-fluid">
-  <div class="row">
-  	<div class="col-4"></div>
-  	<div class="col-4">
-	 <div id="preview"  class="thumbnail py-4" >
-		<img   src="images/gif.gif" class="rounded-circle z-depth-0 mx-auto  perf" alt="avatar image" width="200px" height="200px" style="border: solid 4px" >
-	 </div>		
-	 <!--Edicion de la foto-->
-	 <div class="row">
-		 <div class="col-5">
-			<input type="file" name="imagen" id="imagen_perfil" class="my-2 mt-4">
-		 </div>
-		 <div class="col-2"></div>
-		 <div class="col-5">
-			 <button class="my-4 mx-5">Guardar</button>
-		 </div>
-	 </div>
+	<div class="row">
+		<div class="col-4"></div>
+		<div class="col-4">
+			<div id="preview" class="thumbnail py-4">
+				<img src="{{photo}}" class="rounded-circle z-depth-0 mx-auto  perf" alt="avatar image" width="200px"
+					height="200px" style="border: solid 4px">
+			</div>
+			<!--Edicion de la foto-->
+			<div class="container-fluid">
+				<div class="row" style="width: 600px"><form action="" method="POST" id="form_foto_perfil"
+					enctype="multipart/form-data">
+					<input type="file" name="file" id="imagen_perfil" class="my-2 mt-4" style="margin-left: -32px;">
+					<button class="my-4" id="nueva_foto" type="submit" style="margin-left: 22px;">Guardar</button>
 
+
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="col-4"></div>
 	</div>
-	<div class="col-4"></div> 
-  </div>
-
-
-		
-		
 
 
 
@@ -33,170 +29,242 @@
 
 
 
-		<!--<img src="images/gif.gif" class="rounded-circle z-depth-0 mx-auto  perf" alt="avatar image" class="rounded-circle z-depth-0 mx-auto py-4" width="200px" height="200px" style="border: solid 4px" >-->
-	</div>
-	<br>
+
+
+
+
+	<!--<img src="images/gif.gif" class="rounded-circle z-depth-0 mx-auto  perf" alt="avatar image" class="rounded-circle z-depth-0 mx-auto py-4" width="200px" height="200px" style="border: solid 4px" >-->
+</div>
+<br>
 
 <br>
-	<div class="row mb-2">
-		<div class="mx-auto text-center">
-			<br>
-			<form action="" method="POST" id="envi_form">
+<div class="row mb-2">
+	<div class="mx-auto text-center">
+		<br>
+		<form action="" method="POST" id="envi_form">
 			<div class="container-fluid">
 				<div class="row">
 
-					<div class="col-4"><textarea rows="6" class="descdat" cols="150" > {{descrip}}</textarea></div>
-					<div class="col-8">	<input type="submit" class="my-5 float-right" name="guardar" value="Guardar" id="sobre"></div>
+					<div class="col-4"><textarea rows="6" id="descdat" cols="150"> {{descrip}}</textarea></div>
+					<div class="col-8"> <input type="button" class="my-5 float-right" name="guardar" value="Guardar"
+							id="sobre"></div>
 				</div>
 			</div>
+		</form>
+		<!-- quepasa-->
+
+	</div>
+</div>
+<div class="row">
+	<div class="col mx-auto text-center mb-1">
+		<!--boton para editar nombre y texto-->
+		<form method="" action="">
+		</form>
+	</div>
+</div>
+<br>
+
+
+
+
+
+<div class="row">
+	<div class="col-3 fijar scroll">
+		<br>
+		<h4 style="text-align: center;" class="mb-3"><u>Especialidades</u></h4>
+		<div class="salida_roles px-1 mb-5">
+			<div>
+				<p id="p_programador"> </p>
+				<p id="p_ilustrador"> </p>
+				<p id="p_sonido"> </p>
+				<p id="p_animador"> </p>
+				<p id="p_guion"> </p>
+				<p id="p_modelador"> </p>
+			</div>
+			<form name="rol" class="mx-5" method="post" action="">
+			<input type="checkbox" value="1" id="programador"> Programador <br>
+			<input type="checkbox" value="2" id="ilustrador"> Ilustrador <br>
+			<input type="checkbox" value="3" id="sonido"> Sonido <br>
+			<input type="checkbox" value="4" id="animador"> Animador <br>
+			<input type="checkbox" value="5" id="guion"> Guión <br>
+			<input type="checkbox" value="6" id="modelador"> Modelador <br>
+
 			</form>
-			 <!-- quepasa-->
-
-		</div>	
+		</div>
+		
 	</div>
-	<div class="row">
-		<div class="col mx-auto text-center mb-1"  ><!--boton para editar nombre y texto-->
-		  <form method="" action="">
-		  </form>	
-		</div>
-	</div>
-	<br>
 
-	
-
-
-
-	<div class="row">
-		<div class="col-3 fijar scroll">
-			<br>
-			<div class="salida_roles px-1 mb-5">
-
-			  <form name="rol" class="mx-5" method="post" action="">
-				<select class="tusroles">
-				<option value="0">Añadir</option>
+	<div class="col scroll">
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="card">
+					<img class="card-img-top" src="images/gif.gif" alt="Card image cap">
+					<div class="card-body">
+						<p class="card-text">Some quick example text to build on the card title and make up the
+							bulk of the card's content.</p>
+					</div>
+				</div>
 				<br>
-				<option value="1">Programador</option>
-				<br>
-				<option value="2">Diseñador Grafico</option>
-				<br>
-				<option value="3">Tecnico de sonido</option>
-				<br>
-				<option value="4">Guionista</option>
-				</select>
-				
-			  </form>	
 			</div>
-			<div class="col col-3 text-center">
-				<button name="roles"  class="mx-5" value="Guardar" id="aniadir_rol">Añadir</button>
+			<div class="col-sm-6">
+				<div class="card">
+					<img class="card-img-top" src="images/gif.gif" alt="Card image cap">
+					<div class="card-body">
+						<p class="card-text">Some quick example text to build on the card title and make up the
+							bulk of the card's content.</p>
+					</div>
+				</div>
+				<br>
 			</div>
 		</div>
-
-		<div class="col scroll">
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="card">
-						<img class="card-img-top" src="images/gif.gif" alt="Card image cap">
-						<div class="card-body">
-							<p class="card-text">Some quick example text to build on the card title and make up the
-								bulk of the card's content.</p>
-						</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="card">
+					<img class="card-img-top" src="images/gif.gif" alt="Card image cap">
+					<div class="card-body">
+						<p class="card-text">Some quick example text to build on the card title and make up the
+							bulk of the card's content.</p>
 					</div>
-					<br>
 				</div>
-				<div class="col-sm-6">
-					<div class="card">
-						<img class="card-img-top" src="images/gif.gif" alt="Card image cap">
-						<div class="card-body">
-							<p class="card-text">Some quick example text to build on the card title and make up the
-								bulk of the card's content.</p>
-						</div>
-					</div>
-					<br>
-				</div>
+				<br>
 			</div>
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="card">
-						<img class="card-img-top" src="images/gif.gif" alt="Card image cap">
-						<div class="card-body">
-							<p class="card-text">Some quick example text to build on the card title and make up the
-								bulk of the card's content.</p>
-						</div>
-					</div>
-					<br>
-				</div>
-				<div class="col-sm-6">
-					<div class="card">
-						<img class="card-img-top" src="images/gif.gif" alt="Card image cap">
-						<div class="card-body">
-							<p class="card-text">Some quick example text to build on the card title and make up the
-								bulk of the card's content.</p>
-						</div>
+			<div class="col-sm-6">
+				<div class="card">
+					<img class="card-img-top" src="images/gif.gif" alt="Card image cap">
+					<div class="card-body">
+						<p class="card-text">Some quick example text to build on the card title and make up the
+							bulk of the card's content.</p>
 					</div>
 				</div>
 			</div>
-
-		</div>
-
-		<div class="col-3" style="text-align: center;">
-			<h4>Proyecto 1</h4>
-			<br>
-			<h4>Proyecto 1</h4>
-			<br>
-			<h4>Proyecto 1</h4>
-			<br>
-			<h4>Proyecto 1</h4>
-			
 		</div>
 
 	</div>
+
+	<div class="col-3" style="text-align: center;">
+		<h4>Proyecto 1</h4>
+		<br>
+		<h4>Proyecto 1</h4>
+		<br>
+		<h4>Proyecto 1</h4>
+		<br>
+		<h4>Proyecto 1</h4>
+
+	</div>
+
+</div>
 
 </div>
 <!-- /.container -->
 <br>
 
 
-	<script>
+<script>
 
-		$(document).ready(function () {
+	$(document).ready(function () {
 
-			function filePreview(input) {
-				//Miramos si hay archivos seleccionados
-				if (input.files && input.files[0]) {
-					var reader = new FileReader(); //Esto nos permite leer archivos
+		function filePreview(input) {
+			//Miramos si hay archivos seleccionados
+			if (input.files && input.files[0]) {
+				var reader = new FileReader(); //Esto nos permite leer archivos
 
-					reader.onload = function (e) { //el parametro nos permite acceder a la ruta de la imagen
-						$('#preview').html("<img src = '" + e.target.result + "'  class='rounded-circle z-depth-0 mx-auto  perf' alt='avatar image'  '/>"); //Ponemos la imagen dentro del div
+				reader.onload = function (e) { //el parametro nos permite acceder a la ruta de la imagen
+					$('#preview').html("<img src = '" + e.target.result + "'  class='rounded-circle z-depth-0 mx-auto  perf' alt='avatar image'  '/>"); //Ponemos la imagen dentro del div
 
-					}
-
-					reader.readAsDataURL(input.files[0]);
 				}
+
+				reader.readAsDataURL(input.files[0]);
 			}
+		}
 
-			$('#imagen_perfil').change(function () {
+		$('#imagen_perfil').change(function () {
 
-				filePreview(this);
-			});
-
-
-			$('#aniadir_rol').click(function(){
-				if($('.tusroles').val() > 0){
-					$('.salida_roles').after(" <form name='rol' class='mx-5 my-5' method='post' action=''> <select class='tusroles'><option value='0'>Añadir</option><br><option value='1'>Programador</option><br><option value='2'>Diseñador Grafico</option><br><option value='3'>Tecnico de sonido</option>	<br><option value='4'>Guionista</option>	</select> </form>	")
+			filePreview(this);
+		});
 
 
-					  
-				}
-			});
 
-			$('#sobre').click(function(){
-				var de = $('.descdat').val();
-				//location.href = "sobremi/" + de
-				$('#envi_form').attr('action', '/sobremi/'+de)
-
-			});
-
+		$('#sobre').click(function () {
+			var de = $('#descdat').val();
+			//location.href = "sobremi/" + de
+			$('#envi_form').attr('action', '/sobremi/' + de);
+			$('#envi_form').submit()
 
 		});
 
-	</script>
+
+
+
+		$('#nueva_foto').click(function () {
+			$('#form_foto_perfil').attr('action', '/foto')
+		});
+
+        //Rol Programador
+		$('#programador').on('change', function(){
+			console.log($('#programador').prop('checked'));
+			if($('#programador').prop('checked')){
+				
+				$('#p_programador').html('Programador');
+			}else{
+				$('#p_programador').html('')
+			}
+			
+			
+			
+			
+		});
+		
+			/*console.log("rds")
+			var programador = 1;
+			//$('#p_programador').html('Programador');
+			
+
+		}else{
+			var programador = 0;
+		};*/
+
+/*		//Rol Ilustrador
+			$('#ilustrador').on('change', function(){$('#p_ilustrador').html('Ilustrador')}){
+			var ilustrador = 1;
+
+		}else{
+			var ilustrador = 0;
+		}
+
+
+		//Rol Sonido
+			if($('#ilustrador').on('change', function(){$('#p_programador').html('Programador')})){
+			var ilustrador = 1;
+
+		}else{
+			var ilustrador = 0;
+		}
+
+		// Rol Animador
+			if($('#animador').on('change', function(){$('#p_programador').html('Programador')})){
+			var animador = 1;
+
+		}else{
+			var animador = 0;
+		}
+
+		//Rol Guión
+			if($('#guion').on('change', function(){$('#p_programador').html('Programador')})){
+			var guion = 1;
+
+		}else{
+			var guion = 0;
+		}
+
+		//Rol Modelador
+			if($('#modelador').on('change', function(){$('#p_programador').html('Programador')})){
+			var modelador = 1;
+
+		}else{
+			var modelador = 0;
+		}*/
+
+	});
+
+
+</script>
