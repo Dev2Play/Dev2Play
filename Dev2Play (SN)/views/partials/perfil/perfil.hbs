@@ -1,167 +1,125 @@
 <!-- Page Content -->
 
-	<div class="container-fluid">
-		<div class="row">
-			<img src="images/gif.gif" class="rounded-circle z-depth-0 mx-auto  perf" alt="avatar image">
-			<!--Puse el heigth porque la imagen estaba ovalada-->
-		</div>
-		<div class="row mb-2">
-			<div class="mx-auto text-center">
-				<br>
-				<h3> {{usuario.nombre}} <br></h3>
-				<div class="container">
-					<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati debitis,
-						assumenda voluptate, velit quas impedit fugit nisi odio dolor dolore, incidunt dolorem nobis
-						dolorum
-						error laudantium perspiciatis necessitatibus dignissimos in!</p>
-				</div>
-
-			</div>
-		</div>
-
-		<div class="row justify-content-md-center">
-			<div class="col col-lg-2 text-center">
-				<p class="mb-0"><strong>567</strong></p>
-				<p class="text-muted">seguidos</p>
-			</div>
-			<div class="col-md-auto text-center">
-				<p class="mb-0"><strong>789</strong></p>
-				<p class="text-muted">seguidores</p>
-			</div>
-			<div class="col col-lg-2 text-center">
-				<p class="mb-0"><strong>1236</strong></p>
-				<p class="text-muted">publicaciones</p>
-			</div>
-		</div>
-		<hr>
-		<br>
-		<div class="row">
-			<div class="col-3">
-				<br>
-				<div class="fijar">
-					<h3>Programador C#</h3>
-					<br>
-					<h3>Diseñador Grafico</h3>
-				</div>
+<div class="container-fluid">
+	<div class="row">
+		<img src="{{photo}}" class="rounded-circle z-depth-0 mx-auto  perf">
+		<!--Puse el heigth porque la imagen estaba ovalada-->
+	</div>
+	<div class="row mb-2">
+		<div class="mx-auto text-center">
+			<br>
+			<h3> {{usuario.nombre}} <br></h3>
+			<div class="container">
+				<p class="text-muted">{{usuario.sobremi}}</p>
 			</div>
 
-			<!--PUBLICACIONES-->
-			<div class="col scroll">
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="card">
-							<img class="card-img-top" src="images/gif.gif" data-toggle="modal" data-target="#publicacion" data-dismiss="modal" alt="Card image cap">
-							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the
-									bulk of the card's content.</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					<div class="col-sm-6">
-						<div class="card">
-							<img class="card-img-top" src="images/gif.gif" data-toggle="modal" data-target="#publicacion" data-dismiss="modal" alt="Card image cap">
-							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the
-									bulk of the card's content.</p>
-							</div>
-						</div>
-						<br>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="card">
-							<img class="card-img-top" src="images/gif.gif" data-toggle="modal" data-target="#publicacion" data-dismiss="modal" alt="Card image cap">
-							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the
-									bulk of the card's content.</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					<div class="col-sm-6">
-						<div class="card">
-							<img class="card-img-top" src="images/gif.gif" data-toggle="modal" data-target="#publicacion" data-dismiss="modal" alt="Card image cap">
-							<div class="card-body">
-								<p class="card-text">Some quick example text to build on the card title and make up the
-									bulk of the card's content.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-
-			<div class="col-3">
-				<h4>Proyecto 1</h4>
-				<br>
-				<h4>Proyecto 1</h4>
-				<br>
-				<h4>Proyecto 1</h4>
-				<br>
-				<h4>Proyecto 1</h4>
-			</div>
-		</div>
-		<br>
-		<div class="row">
-			<div class="col-4"></div>
-			<div class="col-4"></div>
-
-			<div class="col-1">
-				<button class="mb-2 my-2" type="button" class="btn btn-primary" data-toggle="modal"
-					data-target="#nuevaPublicacion" style="width: 150px;">
-					Publicacion Nueva
-				</button>
-			</div>
 		</div>
 	</div>
+
+	<hr>
+	<br>
+	<h4 style="text-align: left; margin-left: 100px"><u>Especialidades</u></h4>
+	<br>
+	<div class="row">
+		<div class="col-3" style="height: 400px; max-height: 400px; overflow-y: auto">
+			<br>
+			{{#each roles}}
+			<div class="fijar">
+				<h3>{{nombre_rol}}</h3>
+				<br>
+			</div>
+		{{/each}}
+		</div>
+
+		<!--PUBLICACIONES-->
+		<div class="col scroll" >
+			<div class="row" >
+				{{#each archivo}}
+				<div class="col-sm-6 clickeame">
+					<div class="card publis_per" >
+						<img class="card-img-top" id="publi_per" src={{enlace}} alt="Card image cap">
+						<p style="display:none;">{{enlace}}º </p>
+						<div class="card-body">
+							<p class="card-text" id="descri_per_pub">{{descripcion}}</p>
+						</div>
+
+					</div>
+					<br>
+				</div>
+				{{/each}}
+			</div>
+		</div>
+
+		<div class="col-3">
+			<h4 style="text-align: center;"><u>Proyecto Actual</u></h4>
+			<br>
+			<h4 style="text-align: center;">{{equipos}}</h4>
+			
+			<br>
+		</div>
+
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-4"></div>
+		<div class="col-4"></div>
+
+		<div class="col-1">
+			<button class="mb-2 my-2" type="button" class="btn btn-primary" data-toggle="modal"
+				data-target="#nuevaPublicacion" style="width: 150px;">
+				Publicacion Nueva
+			</button>
+		</div>
+	</div>
+</div>
 
 
 <!--MODAL PUBLICACION-->
 
-<div class="modal " id="publicacion">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+<div class="modal" id="publicacion">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
 
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <div class="container">
-                    <img src="images/concept_4.jpg" class="publicaciones_modal">
-                </div>
-            </div>
+			<!-- Modal Header -->
+			<div class="modal-header" >
+				<div class="container publicaciones_modal mt-2">
+					<!--FOTO-->
+					<div class="container-fluid foto_modal" id="foto_publ"></div>
+				</div>
+				<br>
 
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div class="container">
-                    <div class="container justify-content-center">
-                        <div class="container">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-11 float-left">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti error sapiente
-                                        assumenda. Exercitationem dolores, corporis eius perspiciatis rerum consectetur
-                                        facere
-                                        porro dolore accusamus, nobis sequi! Eaque possimus facere eligendi optio.
-                                    </div>
-                                    <div class="col-1"><button id="like_boton"><p id="like">
-                                        ❤
-                                    </p></button></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div class="container">
+					<div class="container">
+
+					</div>
+					<div class="container justify-content-center">
+						<div class="container">
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-11 float-left" id="descrip_publ_modal">
+										<!--descrip-->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 
 
-	<!--MODAL DE PUBLICACION-->
-	<div class="modal" id="nuevaPublicacion">
-		<div class="modal-dialog modal-lg">
+
+<!--MODAL SUBIDA DE PUBLICACION-->
+<div class="modal" id="nuevaPublicacion">
+	<div class="modal-dialog modal-lg">
+		<form action="/perfil" enctype="multipart/form-data" method="POST">
 			<div class="modal-content">
 
 				<!-- Modal body -->
@@ -169,57 +127,77 @@
 					<div id="posicion_imagen">
 						<!--DIV DONDE SE PREVISUALIZA LA IMAGEN-->
 					</div>
-					<input type="file" name="imagen" id="imagen_perfil_archivo" class="my-2 mx-2 mt-4">
-					<form action="" class="mx-2">
-						<select name="categorias" class="mt-2">
-							<!--seleccion de categorias para la publicacion-->
-							<option value="seleciona categoria">Seleciona categoria</option>
-							<option value="sonido">Sonido</option>
-							<option value="dibujo">Dibujo</option>
-							<option value="animacion">Animación</option>
-							<option value="modelado">Modeladoo</option>
-							<option value="guion">Guión</option>
-							<option value="codigo">Código</option>
-						</select>
-						<br><br>
-					</form>
-					<textarea rows="2" cols="102" name="desc"></textarea>
+
+					<input type="file" name="file" id="imagen_perfil_archivo" class="my-2  mt-4">
+					<textarea rows="2" cols="102" class="mt-2" name="desc" required></textarea>
 				</div>
 				<!-- Modal footer -->
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary" data-dismiss="modal">Publicar</button>
+					<button type="submit" class="btn btn-primary">Publicar</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 
 				</div>
 
 			</div>
-		</div>
+		</form>
 	</div>
+</div>
 
 
-    
-	<script>
-		$(document).ready(function () {
 
-			function filePreview(input) {
-				//Miramos si hay archivos seleccionados
-				if (input.files && input.files[0]) {
-					var reader = new FileReader(); //Esto nos permite leer archivos
+<script>
+	$(document).ready(function () {
 
-					reader.onload = function (e) { //el parametro nos permite acceder a la ruta de la imagen
-						$('#posicion_imagen').html("<img src = '" + e.target.result + "' style = 'width: 100%' '/>"); //Ponemos la imagen dentro del div
+		function filePreview(input) {
+			//Miramos si hay archivos seleccionados
+			if (input.files && input.files[0]) {
+				var reader = new FileReader(); //Esto nos permite leer archivos
 
-					}
+				reader.onload = function (e) { //el parametro nos permite acceder a la ruta de la imagen
+					$('#posicion_imagen').html("<img src = '" + e.target.result + "' style = 'width: 100%' '/>"); //Ponemos la imagen dentro del div
 
-					reader.readAsDataURL(input.files[0]);
 				}
+
+				reader.readAsDataURL(input.files[0]);
 			}
+		}
 
 
-			$('#imagen_perfil_archivo').change(function () {
+		$('#imagen_perfil_archivo').change(function () {
 
-				filePreview(this);
-			});
+			filePreview(this);
 
 		});
-	</script>
+
+		//console.log("aqui: " + $('.fijar').text());
+
+
+		$('.clickeame').click(function () {
+			console.log("s")
+			$("#publicacion").modal("show");
+			//console.log(publicacion);
+			var nueva_desc = String($(this).text());
+
+			var bre1 = nueva_desc.indexOf('º');
+
+			var enlace = nueva_desc.substring(0, bre1);
+			var des = nueva_desc.substring(bre1+1);
+
+			$('#descrip_publ_modal').text(des);
+
+			var imagen = enlace;
+			var img = new Image();
+			img.src = imagen;
+			var imagen_final = img.src;
+			//console.log(imagen_final)
+			//console.log(imagen);
+
+			//$('#foto_publ').html(img)
+			$('#foto_publ').css('background-image', 'url(' + imagen_final + ')');
+			$('#foto_publ').css("background-repeat", 'no-repeat');
+			$('#foto_publ').css("background-repeat", 'no-repeat');
+			$('#foto_publ').css("background-size", "100% 100%");
+
+		});
+	});
+</script>

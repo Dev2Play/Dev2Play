@@ -1,19 +1,15 @@
 <br><br>
-
 <!--BUSCAR Y FILTRAR-->
 <div class="container-fluid">
   <div class="row">
     <div class="col-6">
       <div id="busqueda">
-
         <form action="" id="formulario" method="POST">
           &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp🔎
           &nbsp
           <input type="text" id="datos" class="inputs_proyectos"> &nbsp <button id="buscar"
             type="submit">Buscar</button>
         </form>
-
-
       </div>
     </div>
     <div class="col-4"></div>
@@ -31,45 +27,44 @@
 <hr>
 <br>
 
-
 <!--ROW DE FICHAS DE PROYECTOS ABIERTOS-->
 <div class="container proyectos">
 
 
-  <!--PRIMERA FILA-->
+  <!--TODO: PRIMERA FILA-->
 
   <div class="row">
     {{#each proyecto}}
     <div class="col-5 fichas">
       <div class="row">
         <div class="col-12">
-          <h3 style="font-family: fjalla;">{{titulo}}</h3>
+          <h3 style="font-family: fjalla;">&bull;{{titulo}}</h3>
+          <p style="color: rgba(0, 0, 0, 0%);">*</p>
         </div>
       </div>
-      <hr class="mb-4">
+      <hr class="mb-4 mx-5">
       <div class="row">
         <p id="desc">{{descripcion}}</p>
       </div>
-      <hr class="my-3">
+      <hr class="my-3 mx-5">
       <div class="row">
         <div class="col-12">
-          <h5 class="mb-3">Se busca:</h5>
+          <h5 class="mb-3" id="se_busca"><u>Se busca:</u></h5>
         </div>
       </div>
       <div class="row mb-1 mr-1">
-        <p class="roles">{{roles}}</p>
+        <p class="roles"><i>{{roles}}</i></p>
+        <p style="color:  rgba(0, 0, 0, 0%);">$</p>
       </div>
-      <hr>
+      <hr class="mx-5">
       <div class="participantes mt-4">
         {{'COUNT(equipos.usuario)'}} / Miembros
       </div>
+      <p style="color: rgba(0, 0, 0, 0%);">~{{id_proyectos}}</p>
     </div>
     <p class="mx-3"></p>
     {{/each}}
   </div>
-
-
-
 </div>
 
 <br>
@@ -78,9 +73,67 @@
   <h1 align="center">Ese proyecto no existe o ya se ha cerrado <br><br>
     <a href="/proyectosActivos" style="text-align: center;">Volver a proyectos</a>
   </h1>
-
   <br><br><br><br><br><br><br><br><br><br><br><br>
 </div>
+
+
+<div class="modal" id="proyecto">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" id="modal_pr">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="container proyectos_modal">
+          <!--TITULO-->
+
+          <h5 style="text-align: center;" class="my-2" id="titulo_proy_modal">
+
+          </h5><br>
+        </div>
+        <br>
+
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="container">
+          <div class="container">
+
+          </div>
+          <div class="container justify-content-center">
+            <div class="container">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-11 float-left" id="descrip_proy_modal">
+                    <!--descrip-->
+                  </div>
+                  <div class="col-1">
+                  </div>
+                </div>
+              </div>
+              <hr style="margin-top: 80px; width: 1px">
+              <div class="container">
+                <div class="row">
+                  <div class="col-6"></div>
+                  <div class="col-4"></div>
+                  <div class="col-2">
+                    <form method="POST" id="form_env">
+                      <button id="unirme">
+                        Unirme
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <!--Codigo enlace desde los div-->
 <script>
   $(document).ready(function () {
@@ -88,9 +141,25 @@
     $('#existencia').hide();
 
     $(document).on('click', '.fichas', function () {
-      location.href = '/fichaProyecto';
-    })
+      //location.href = '/fichaProyecto';
+      var todo = $(this).text();
+      var ast = todo.indexOf('*')
+      var pnt = todo.indexOf(':')
+      //console.log(todo.substring(0, ast))
+      var id = todo.indexOf("~");
 
+      $('#titulo_proy_modal').text(todo.substring(0, ast))
+      $('#descrip_proy_modal').text(todo.substring(pnt + 1, todo.indexOf('$')));
+      $('#proyecto').modal('show')
+
+      $('#unirme').click(function () {
+        //alert(todo.substring(id+1));  
+        //location.href = "/unido/" + todo.substring(id+1);
+        $('#form_env').attr('action', '/unido/' + Number(todo.substring(id + 1)))
+
+      });
+
+    })
 
     $('#ordenar').change(function () {
 
@@ -102,7 +171,6 @@
         var enviar = 2
         location.href = '/proyectosActivos/filtro/' + enviar;
       }
-
 
     });
 
@@ -116,13 +184,9 @@
 
         location.href = "/proyectosActivos/nombre/" + parametro_procesado;
       }
-
-
       //console.log(location.href = "/proyectosActivos/nombre/" + parametro_procesado)
 
-
     })
-
 
     var proyectos = $('.proyectos').html();
     //console.log(proyectos.length)

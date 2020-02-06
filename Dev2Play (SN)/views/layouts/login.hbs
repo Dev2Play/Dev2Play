@@ -1,45 +1,39 @@
 <br><br>
 <div class="container">
-    <h1 class="form-heading"></h1>
-    <div class="login-form">
-        <div class="main-div">
-            <div class="panel">
-                <h2>Inicia sesión</h2>
-                <p>Introduce tu nombre y contraseña</p>
-            </div>
-            <form action="/login" method="POST" id="Login">
-
-                <div class="form-group">
-
-
-                    <input type="text" class="form-control" name="nombre" id="inputEmail" placeholder="Nombre" required>
-
+        <h1 class="form-heading"></h1>
+        <div class="login-form">
+            <div class="main-div">
+                <div class="panel">
+                    <h2>Accede</h2>
+                    <p>Introduce tu nombre y contraseña</p>
                 </div>
-
-                <div class="form-group">
-
-                    <input type="password" class="form-control" name="password" id="inputPassword"
-                        placeholder="Contraseña" required>
-
-                </div>
+                <form action="/login" method="POST" id="Login">
+    
+                    <div class="form-group">
+    
+    
+                        <input type="text" class="form-control" name="nombre" id="inputEmail" placeholder="Nombre">
+    
+                    </div>
+    
+                    <div class="form-group">
+    
+                        <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Contraseña">
+    
+                    </div>
                 <div class="row">
-                    <div class="col-6">
-                        <div class="forgot">
-                            <a href="/recuperar">Contraseña olvidada?</a>
-                        </div>
+                    <div class="forgot">
+                        <a href="/recuperar">¿Olvidaste la contraseña?</a>
                     </div>
-                    <div class="col-5" style="margin-left: 35px;">
-
-                        <div class="register">
-                            <a href="/registro">Registrate!</a>
-                        </div>
+                    <div class="register">
+                        <a href="/registro" style="margin-left: 248px;">Registrate</a>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-
-            </form>
+                    <button type="submit" class="btn color_bt">Acceder</button>
+    
+                </form>
+            </div>
         </div>
     </div>
-</div>
-</div>
-<br><br><br><br><br>
+    </div>
+    <br><br><br><br><br><br>

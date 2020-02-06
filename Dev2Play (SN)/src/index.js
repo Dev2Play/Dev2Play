@@ -8,9 +8,11 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session); 
 const passport = require('passport');
 const flash = require('connect-flash');
-
+const fileUpload = require('express-fileupload')
 const app = express();
+var formidable = require('formidable')
 require('../lib/passport'); 
+app.use(fileUpload());
 
 app.set('port', process.env.PORT || 3002)
 
@@ -97,6 +99,8 @@ app.use(function(req, res, next){
     // Texto plano
     res.type('txt').send('Not found');
   });
+
+
 
 /*
     INCILIZAR SERVIDOR

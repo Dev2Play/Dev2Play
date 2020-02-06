@@ -1,4 +1,3 @@
-
 <div class="modal log uk-modal-dialog" id="nuevaPublicacion">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -167,8 +166,11 @@
 <div class="jumbotron banner container-fluid">
     <div class="container">
         <h1 class="display-4">Dev2Play</h1>
-        <p class="lead" style="text-align: left;">En esta web podras conocer gente nueva con la que crear el videojuego de tus sueños.
-        Ahora podras crear tu videojuego sin tener que saber hacer de todo, ya que puedes crear proyectos y decir el tipo de personas que necesitas como pueden ser programadores, ilustradores y mas puestos que acaben en dores.
+        <p class="lead" style="text-align: left;">En esta web podras conocer gente nueva con la que crear el videojuego
+            de tus sueños.
+            Ahora podras crear tu videojuego sin tener que saber hacer de todo, ya que puedes crear proyectos y decir el
+            tipo de personas que necesitas como pueden ser programadores, ilustradores y mas puestos que acaben en
+            dores.
         </p>
     </div>
 </div>
@@ -207,26 +209,29 @@
             <div class="col-5 fichas_home">
                 <div class="row">
                     <div class="col-12">
-                        <h3 style="font-family: fjalla;">{{titulo}}</h3>
+                        <h3 style="font-family: fjalla;">&bull;{{titulo}}</h3>
+                        <p style="color: rgba(0, 0, 0, 0%);">*</p>
                     </div>
                 </div>
-                <hr class="mb-4">
+                   <hr class="mx-5 mb-4">
                 <div class="row">
                     <p id="desc">{{descripcion}}</p>
                 </div>
-                <hr class="my-3">
+                   <hr class="mx-5 my-3">
                 <div class="row">
-                    <div class="col-12">
-                        <h5 class="mb-3">Se busca:</h5>
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <h5 class="mb-3 ml-4" id="se_busca"><u>Se busca:</u></h5>
                     </div>
                 </div>
                 <div class="row mb-1 mr-1">
-                    <p class="roles">{{roles}}</p>
+                    <p class="roles" id="rol_home"><i>{{roles}}</i></p>
+                    <p style="color:  rgba(0, 0, 0, 0%);">$</p>
                 </div>
-                <hr>
-                <div class="participantes mt-4">
+                <div class="participantes mr-2" style="margin-top: -20px">
                     {{'COUNT(equipos.usuario)'}} / Miembros
                 </div>
+                 <p style="color: rgba(0, 0, 0, 0%);">~{{id_proyectos}}</p>
             </div>
         </div>
         {{/each}}
@@ -254,23 +259,104 @@
         </div>
     </div>
 </div>
-    <br><br>
+<br><br>
+
+
+
+
+
+
+<div class="modal" id="proyecto">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="modal_pr">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <div class="container proyectos_modal">
+                    <!--TITULO-->
+
+                    <h5 style="text-align: center;" class="my-2" id="titulo_proy_modal">
+
+                    </h5><br>
+                </div>
+                <br>
+
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="container">
+                    <div class="container">
+
+                    </div>
+                    <div class="container justify-content-center">
+                        <div class="container">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-11 float-left" id="descrip_proy_modal">
+                                        <!--descrip-->
+                                    </div>
+                                    <div class="col-1">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr style="margin-top: 80px; width: 1px">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-6"></div>
+                                    <div class="col-4"></div>
+                                    <div class="col-2">
+                                        <form method="POST" id="form_env">
+                                            <button id="unirme">
+                                                Unirme
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!--Codigo enlace desde los div-->
+
 <script>
     $(document).ready(function () {
 
         //console.log($('.fichas_home').html());
 
-        $(document).on('click', '.fichas_home', function () {
-            location.href = '/fichaProyecto';
-        })
 
         $('.clickeame').click(function () {
             location.href = "/verPublicaciones/filtro/3"
         });
 
+        $(document).on('click', '.fichas_home', function () {
+            //location.href = '/fichaProyecto';
+            var todo = $(this).text();
+            var ast = todo.indexOf('*')
+            var pnt = todo.indexOf(':')
+            //console.log(todo.substring(0, ast))
+            var id = todo.indexOf("~");
 
+            $('#titulo_proy_modal').text(todo.substring(0, ast))
+            $('#descrip_proy_modal').text(todo.substring(pnt + 1, todo.indexOf('$')));
+            $('#proyecto').modal('show')
+
+
+
+
+            $('#unirme').click(function () {
+                //alert(todo.substring(id+1));  
+                //location.href = "/unido/" + todo.substring(id+1);
+                $('#form_env').attr('action', '/unido/' + todo.substring(id + 1))
+
+            });
+
+        });
     });
 </script>

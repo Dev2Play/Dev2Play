@@ -10,16 +10,16 @@ const dbconn = require('../src/db');
 const helpers = require('./helpers'); 
 
 passport.use('local.registro', new LocalStrategy({
-	usernameField: 'nombre', 
+	usernameField: 'correo', 
     passwordField: 'password',
 	passReqToCallback: true  //OJO
-}, async (req, nombre, password, done) => {
+}, async (req, correo, password, done) => {
 
 	
-	const { nick } = req.body;
+	const { nombre } = req.body;
 	let nuevoUsuario = { 
-		nick,
 		nombre,
+		correo,
 		password,
 		
 	};

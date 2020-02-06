@@ -1,0 +1,134 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sign Out</h5>
+      </div>
+      <div class="modal-body text-center">
+        <p>Estás a punto de desconectarte.</p>
+        <b>¿Estas seguro?</b>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Aún No</button>
+        <button type="button" class="btn btn-primary">Salir</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--MENU VERTICAL-->
+<div class="container">
+  <form action="" id="admin" method="POST">
+    <div class="row">
+      <div class="col-4 mb-5">
+        <div class="mt-5 rounded tablamenu">
+          <div class="bg-info text-center pt-3 rounded-top menutitulo">Opciones de Administración</div>
+          <div class="text-center py-3">
+            <a id="revisaproyectos">Revisar Proyectos</a><br>
+            <hr>
+            <a id="revisareportes">Revisar Reportes</a><br>
+            <hr>
+            <a data-toggle="modal" data-target="#modalrol">Añadir Rol</a><br>
+            <hr>
+            <a data-toggle="modal" data-target="#modalcategoria" id="aniadir_categ">Añadir Categoria</a><br>
+            <hr>
+            <a id="revisausuarios">Administrar Usuarios</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-3 mb-5"></div>
+      <div class="col-4 mt-5" style="height: 400px; max-height: 600px; overflow-y: auto; border: 1px solid black">
+        <!--TODO: REPORTES-->
+        {{#each reporte}}
+        <p class="mt-3">
+          <u>ID:</u> {{id_reportes}} <br>
+          <u>ID PUBLICACION REPORTADA:</u> {{publicacion_reportada}} <br>
+          <u>USUARIO REPORTADO:</u> {{reportado}}
+          <img src="{{enlace}}" alt="">
+          <hr>
+        </p>
+        {{/each}}
+
+        <!--TODO: USUARIOS-->
+        {{#each personas}}
+        <p class="mt-3">
+          <u>ID</u> {{id_usuario}} <br>
+          <u>NOMBRE:</u> {{nombre}} <br>
+          <u>PREMIUM:</u> {{premium}}
+          <hr>
+        </p>
+        {{/each}}
+
+        {{#each proyecto}}
+        <p class="mt-3">
+          <u>ID:</u> {{id_proyectos}} <br>
+          <u>TITULO:</u> {{titulo}} <br>
+          <u>DESCRIPCION</u> {{descripcion}}<br>
+          <u>SE BUSCA:</u> {{roles}}
+          <hr>
+        </p>
+        {{/each}}
+      </div>
+    </div>
+      </form>
+    <div id="intro_cat">
+      <form action="" id="form_cat" method="POST">
+        <input type="text" name="cat"
+          style="border-top: 0px; border-left: 0px; border-right: 0px; outline: none; border-bottom: 1px solid blue"
+          placeholder="Añade una categoria">
+        <button type="button" id="guardar_cat">Guardar</button>
+      </form>
+    </div>
+
+
+</div>
+
+
+
+
+<br><br><br>
+<script>
+  $(document).ready(function () {
+
+
+    /*Tabla Proyectos Toggle*/
+    $('#revisaproyectos').on('click', function () {
+      var val = 1;
+      $('#admin').attr('action', '/administracion/' + val);
+      $('#admin').submit()
+
+    });
+
+    $('#revisareportes').on('click', function () {
+      var val = 2
+      $('#admin').attr('action', '/administracion/' + val);
+      $('#admin').submit()
+
+    });
+
+    $('#revisausuarios').on('click', function () {
+      var val = 5
+      $('#admin').attr('action', '/administracion/' + val);
+      $('#admin').submit()
+    });
+
+    $('#intro_cat').hide()
+
+    $('#aniadir_categ').on('click', function () {
+
+      $('#intro_cat').show();
+
+    });
+
+
+    $('#guardar_cat').click(function () {
+
+      $('#form_cat').attr('action', '/nueva_cat');
+      $('#form_cat').submit();
+
+    })
+
+  });
+  //TODO: ADMIN
+</script>
