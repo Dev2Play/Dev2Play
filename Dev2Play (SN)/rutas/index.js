@@ -222,7 +222,7 @@ router.get('/proyectosActivos', async (req, res) => {
 
     if(req.user){
         const foto_perfil = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario)
-        const proyectos = await dbconn.query('SELECT * , COUNT(equipos.usuario) FROM proyectos INNER JOIN equipos ON proyectos.id_proyectos = equipos.proyecto WHERE validacion = 1 ORDER BY fecha_inicio DESC');
+        const proyectos = await dbconn.query('SELECT * FROM proyectos INNER JOIN equipos ON proyectos.id_proyectos = equipos.proyecto WHERE validacion = 1 ORDER BY fecha_inicio DESC');
         //console.log(proyectos)
     
     
@@ -371,12 +371,13 @@ router.get('/editarPerfil', isLoggedIn, async (req, res) => {
     //console.log(req.user.sobremi)
     const editdescrip = await dbconn.query('UPDATE usuario SET sobremi = ? WHERE id_usuario = ?', [req.user.sobremi, req.user.id_usuario]);
     //console.log(editdescrip)
+    const public = await dbconn.query('SELECT * FROM publicacion WHERE usuario_id = ? ORDER BY fecha_publicacion DESC', [req.user.id_usuario]);
     const editfoto = await dbconn.query('UPDATE usuario SET foto = ? WHERE id_usuario = ?', [req.user.foto, req.user.id_usuario]);
     const desc = await dbconn.query('SELECT sobremi FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
     const foto = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
 
 
-    res.render('../views/partials/perfil/editarPerfil', { usuario: req.user, descrip: desc[0].sobremi, photo: foto[0].foto });
+    res.render('../views/partials/perfil/editarPerfil', { usuario: req.user, descrip: desc[0].sobremi, photo: foto[0].foto, archivo: public });
     console.log(foto)
 
 });
@@ -581,9 +582,9 @@ router.post('/uploadJuego', isLoggedIn, (req, res) => {
 router.post('/perfil', isLoggedIn, async (req, res) => {
 
     let file = req.files.file;
+        //console.log(file);
     const { desc } = req.body;
     //console.log(desc)
-    //console.log(file);
 
     file.mv(`src/public/publicaciones/${file.name}`, async err => {
         if (err) return res.status(500).send({ message: err })
@@ -631,6 +632,7 @@ router.post('/foto', isLoggedIn, async (req, res) => {
     //console.log(file)
     file.mv(`src/public/imagenes_perfil/${file.name}`, async err => {
         if (err) return res.status(500).send({ message: err })
+        
         const nombre_pub = 'imagenes_perfil/' + file.name
 
         const editfoto = await dbconn.query('UPDATE usuario SET foto = ? WHERE id_usuario = ?', [nombre_pub, req.user.id_usuario]);
@@ -643,6 +645,7 @@ router.post('/foto', isLoggedIn, async (req, res) => {
 });
 
 
+//TODO: TIENDA
 router.post('/tienda', isLoggedIn, async (req, res) => {
 
     let file = req.files.file;
@@ -678,6 +681,32 @@ router.post('/tienda', isLoggedIn, async (req, res) => {
     });
 
 
+
+
+});
+
+//TODO: GESTOR
+router.get('/gestor', isLoggedIn, async (req, res) => {
+
+    const foto_perfil = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
+
+
+
+    res.render('../views/partials/proyectos/gestor', {usuario: req.user, photo: foto_perfil[0].foto})
+});
+
+
+router.post('/gestor', isLoggedIn, async (req, res) => {
+
+    let file = req.files.file
+   
+    file.mv(`src/public/gestor/${file.name}`, err => {
+        if (err) return res.status(500).send({ message: err });
+
+        return res.status(200).redirect('/gestor')
+    });
+    
+    
 });
 
 module.exports = router;
