@@ -252,12 +252,12 @@ router.get('/perfil', isLoggedIn, async (req, res) => {
 
     const rol = await dbconn.query('SELECT * FROM roles inner join especialidad_usuarios on roles.id_roles = especialidad_usuarios.rol_us inner join usuario on especialidad_usuarios.usuario = usuario.id_usuario WHERE id_usuario = ?' , [req.user.id_usuario]);
     if (rol.length == 0 && equipo.length == 0){
-        res.render('../views/partials/perfil/perfil' , {roles: rol[0].nombre_rol, equipos: equipo[0].titulo})
+        res.render('../views/partials/perfil/perfil' , {roles: rol, equipos: equipo[0].titulo})
     }
     const equipo = await dbconn.query('SELECT * FROM proyectos inner join equipos on proyectos.id_proyectos = equipos.proyecto INNER JOIN usuario ON equipos.usuario = usuario.id_usuario WHERE id_usuario = ?',[req.user.id_usuario] );
     console.log((rol))
 
-    res.render('../views/partials/perfil/perfil', {usuario: req.user, photo: foto[0].foto});
+    res.render('../views/partials/perfil/perfil', {usuario: req.user, photo: foto[0].foto, roles: rol, equipos: equipo[0].titulo });
     
 });
 
@@ -271,9 +271,9 @@ router.get('/editarPerfil', isLoggedIn, async(req, res) => {
     const editfoto = await dbconn.query('UPDATE usuario SET foto = ? WHERE id_usuario = ?',[req.user.foto ,req.user.id_usuario]);
     const desc = await dbconn.query('SELECT sobremi FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
     const foto = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
+    const equipo = await dbconn.query('SELECT * FROM proyectos inner join equipos on proyectos.id_proyectos = equipos.proyecto INNER JOIN usuario ON equipos.usuario = usuario.id_usuario WHERE id_usuario = ?',[req.user.id_usuario] );
     
-    
-    res.render('../views/partials/perfil/editarPerfil', {usuario: req.user , descrip: desc[0].sobremi , photo: foto[0].foto });
+    res.render('../views/partials/perfil/editarPerfil', {usuario: req.user , descrip: desc[0].sobremi , photo: foto[0].foto, equipos: equipo[0].titulo });
     console.log(foto)
    
 });
@@ -384,10 +384,17 @@ router.post('/foto', async (req, res) => {
 
     });
 
+    
+
 
 });
 
 
-
+router.post('/roles_update' , async (req,res) => {
+    console.log('roles', req.body)
+    if(typeof(req.body.sonido) == 'string') await dbconn.query("INSERT INTO especialidad_usuarios (usuario,rol_us) values (?, '3')", [  req.user.id_usuario] );
+    console.log(typeof(req.body.sonido))
+    if(typeof(req.body.animador) == 'string') await dbconn.query("INSERT INTO especialidad_usuarios (usuario,rol_us) values (?, '4')", [  req.user.id_usuario] );
+});
 
 module.exports = router;
