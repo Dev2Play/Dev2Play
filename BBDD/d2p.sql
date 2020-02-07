@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
--- Host: localhost    Database: d2p
+-- Host: localhost    Database: mydb
 -- ------------------------------------------------------
 -- Server version	8.0.18
 
@@ -150,11 +150,11 @@ CREATE TABLE `equipos` (
   PRIMARY KEY (`id_equipos`),
   KEY `fk_usuario_idx` (`usuario`),
   KEY `fk_proyecto` (`proyecto`),
-  KEY `fk_rol_eq_idx` (`rol_eq`),
+  KEY `fk_roleq_idx` (`rol_eq`),
   CONSTRAINT `fk_proyecto` FOREIGN KEY (`proyecto`) REFERENCES `proyectos` (`id_proyectos`),
-  CONSTRAINT `fk_rol_eq` FOREIGN KEY (`rol_eq`) REFERENCES `roles` (`id_roles`),
+  CONSTRAINT `fk_roleq` FOREIGN KEY (`rol_eq`) REFERENCES `roles` (`id_roles`),
   CONSTRAINT `fk_usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,8 +163,35 @@ CREATE TABLE `equipos` (
 
 LOCK TABLES `equipos` WRITE;
 /*!40000 ALTER TABLE `equipos` DISABLE KEYS */;
-INSERT INTO `equipos` VALUES (1,1,2,10,8),(2,1,3,10,5);
+INSERT INTO `equipos` VALUES (1,1,2,10,2),(2,1,3,10,5),(3,1,13,10,2),(4,1,13,NULL,NULL),(5,1,13,NULL,NULL),(6,1,13,NULL,NULL),(7,1,13,NULL,NULL),(8,4,13,NULL,NULL),(9,4,13,NULL,NULL),(10,1,13,NULL,NULL),(11,4,13,NULL,NULL),(12,4,13,NULL,NULL),(13,4,13,NULL,NULL),(18,1,13,NULL,NULL),(19,1,13,NULL,NULL),(20,1,13,NULL,NULL),(21,1,13,NULL,NULL);
 /*!40000 ALTER TABLE `equipos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `especialidad`
+--
+
+DROP TABLE IF EXISTS `especialidad`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `especialidad` (
+  `id_especialidad` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(60) NOT NULL,
+  `roles` int(11) NOT NULL,
+  PRIMARY KEY (`id_especialidad`),
+  KEY `fk_roles_idx` (`roles`),
+  CONSTRAINT `fk_roles` FOREIGN KEY (`roles`) REFERENCES `roles` (`id_roles`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `especialidad`
+--
+
+LOCK TABLES `especialidad` WRITE;
+/*!40000 ALTER TABLE `especialidad` DISABLE KEYS */;
+INSERT INTO `especialidad` VALUES (1,'Programador',3),(2,'Dibujante',4),(3,'Multitarea',1),(4,'guionista',2);
+/*!40000 ALTER TABLE `especialidad` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -180,10 +207,10 @@ CREATE TABLE `especialidad_usuarios` (
   `rol_us` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_rol_usuarios`),
   KEY `fk_usuario_idx` (`usuario`),
-  KEY `fk_rol_us_idx` (`rol_us`),
-  CONSTRAINT `fk_rol_us` FOREIGN KEY (`rol_us`) REFERENCES `roles` (`id_roles`),
+  KEY `fk_rolesp_idx` (`rol_us`),
+  CONSTRAINT `fk_rolesp` FOREIGN KEY (`rol_us`) REFERENCES `roles` (`id_roles`),
   CONSTRAINT `fk_usuar_id` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,7 +219,7 @@ CREATE TABLE `especialidad_usuarios` (
 
 LOCK TABLES `especialidad_usuarios` WRITE;
 /*!40000 ALTER TABLE `especialidad_usuarios` DISABLE KEYS */;
-INSERT INTO `especialidad_usuarios` VALUES (1,2,4),(2,4,6),(3,3,5),(4,5,7),(5,8,1),(6,7,9),(7,9,2),(8,1,3),(9,6,8);
+INSERT INTO `especialidad_usuarios` VALUES (1,2,4),(2,4,6),(3,3,5),(4,5,6),(5,8,1),(6,7,6),(7,9,2),(8,1,3),(9,6,6),(10,12,4),(11,13,2),(12,13,4),(13,12,2),(14,12,6),(15,13,1),(21,55,3),(22,13,5),(23,12,3),(24,12,4),(25,12,5),(26,12,6),(27,12,2),(28,12,1);
 /*!40000 ALTER TABLE `especialidad_usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,6 +250,68 @@ LOCK TABLES `genero` WRITE;
 /*!40000 ALTER TABLE `genero` DISABLE KEYS */;
 INSERT INTO `genero` VALUES (1,1,0,0,0,0,0),(2,0,1,0,0,0,0);
 /*!40000 ALTER TABLE `genero` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `gestor`
+--
+
+DROP TABLE IF EXISTS `gestor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `gestor` (
+  `id_gestor` int(11) NOT NULL AUTO_INCREMENT,
+  `equipo_pr` int(11) NOT NULL,
+  `archivos` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_gestor`,`equipo_pr`),
+  KEY `equip_gest_idx` (`equipo_pr`),
+  CONSTRAINT `equip_gest` FOREIGN KEY (`equipo_pr`) REFERENCES `equipos` (`id_equipos`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gestor`
+--
+
+LOCK TABLES `gestor` WRITE;
+/*!40000 ALTER TABLE `gestor` DISABLE KEYS */;
+/*!40000 ALTER TABLE `gestor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `juegos`
+--
+
+DROP TABLE IF EXISTS `juegos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `juegos` (
+  `id_juegos` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(150) DEFAULT NULL,
+  `descripcion` mediumtext,
+  `genero` int(11) DEFAULT NULL,
+  `precio` decimal(6,2) DEFAULT NULL,
+  `imagen` varchar(255) DEFAULT NULL,
+  `sistema_operativo` varchar(150) DEFAULT NULL,
+  `memoria` varchar(45) DEFAULT NULL,
+  `graficos` varchar(45) DEFAULT NULL,
+  `procesador` varchar(45) DEFAULT NULL,
+  `almacenamiento` varchar(45) DEFAULT NULL,
+  `fecha_subida` date DEFAULT NULL,
+  PRIMARY KEY (`id_juegos`),
+  KEY `fk_genero_jueg_idx` (`genero`),
+  CONSTRAINT `fk_genero_jueg` FOREIGN KEY (`genero`) REFERENCES `genero` (`id_genero`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `juegos`
+--
+
+LOCK TABLES `juegos` WRITE;
+/*!40000 ALTER TABLE `juegos` DISABLE KEYS */;
+INSERT INTO `juegos` VALUES (1,'The Secret Of Monkey Island','Pues un clasicazo que te cagas',2,12.99,'images/portada.jpg','	Windows 10, 64 bits','	8g','	GeForce GTX 750 Ti or Radeon HD 7950','	Intel Core i5-2400 or AMD Phenom II X6 1100T',' 	36 GB de espacio disponible',NULL),(2,'Street Figther ALPHA','haduooken y tal',1,20.99,'images/portada2.jpg','Windows 10, 64 bits','8g','GeForce GTX 750 Ti or Radeon HD 7950','	Intel Core i5-2400 or AMD Phenom II X6 1100T','	36 GB de espacio disponible',NULL),(15,'xcxvbnbvcxvbnbvbcvxbvbcbvbnvcb','bvcbvcbvcbcvbvcbcvb',1,21.00,'juegos/hyper.png','','','','','','2020-02-06'),(16,'adsad','sdsa',1,2.00,'juegos/goku.jpg','','','','','','2020-02-06'),(17,'Dragon ball Kakarot original','version original',1,3.00,'https://as.com/meristation/imagenes/2019/09/12/game_cover/104851791568285651.jpg','','','','','','2020-02-06'),(26,'123','123',NULL,123.00,'juegos/latios.png','','','','','','2020-02-07');
+/*!40000 ALTER TABLE `juegos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -262,7 +351,7 @@ CREATE TABLE `premium` (
   `plata` tinyint(1) DEFAULT NULL,
   `oro` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id_premium`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -271,7 +360,7 @@ CREATE TABLE `premium` (
 
 LOCK TABLES `premium` WRITE;
 /*!40000 ALTER TABLE `premium` DISABLE KEYS */;
-INSERT INTO `premium` VALUES (1,1,NULL),(2,NULL,1),(3,NULL,NULL);
+INSERT INTO `premium` VALUES (1,1,NULL),(2,NULL,1),(3,NULL,1);
 /*!40000 ALTER TABLE `premium` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -288,15 +377,16 @@ CREATE TABLE `proyectos` (
   `descripcion` mediumtext NOT NULL,
   `fecha_inicio` date NOT NULL,
   `fecha_final` date NOT NULL,
-  `validacion` tinyint(1) DEFAULT NULL,
-  `lider` int(11) NOT NULL,
+  `lider` int(11) DEFAULT NULL,
   `genero_id` int(11) DEFAULT NULL,
+  `roles` varchar(200) DEFAULT NULL,
+  `validacion` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id_proyectos`),
   KEY `fk_lider_idx` (`lider`),
   KEY `fk_genero_proy_idx` (`genero_id`),
   CONSTRAINT `fk_genero_proy` FOREIGN KEY (`genero_id`) REFERENCES `genero` (`id_genero`),
   CONSTRAINT `fk_lider` FOREIGN KEY (`lider`) REFERENCES `usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -305,7 +395,7 @@ CREATE TABLE `proyectos` (
 
 LOCK TABLES `proyectos` WRITE;
 /*!40000 ALTER TABLE `proyectos` DISABLE KEYS */;
-INSERT INTO `proyectos` VALUES (1,'d','d','2019-01-01','2019-01-02',1,1,1),(2,'s','d','2019-01-02','2019-01-03',NULL,2,2),(3,'c','d','2019-01-03','2019-01-04',NULL,3,NULL);
+INSERT INTO `proyectos` VALUES (1,'Dev2Play','Aplicacion desarrollada para fomentar la creacion de videojuegos de genero independiente','2019-01-01','2019-01-02',1,1,'Necesitamos programadores y diseñadores para poder crear nuestra aplicacion y tenerla completa al 100% en el menor tiempo posible',1),(2,'s','d','2019-01-02','2019-01-03',2,2,NULL,1),(3,'c','d','2019-01-03','2019-01-04',3,NULL,NULL,1),(4,'1','asdsadas','2020-02-05','2020-04-05',NULL,NULL,'asdsadas',1);
 /*!40000 ALTER TABLE `proyectos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -319,19 +409,19 @@ DROP TABLE IF EXISTS `publicacion`;
 CREATE TABLE `publicacion` (
   `id_publicacion` int(11) NOT NULL AUTO_INCREMENT,
   `usuario_id` int(11) NOT NULL,
-  `titulo` varchar(150) NOT NULL,
+  `titulo` varchar(150) DEFAULT NULL,
   `descripcion` mediumtext,
-  `archivo` varchar(255) NOT NULL,
+  `archivo` varchar(255) DEFAULT NULL,
   `enlace` varchar(255) DEFAULT NULL,
-  `likes` tinyint(20) DEFAULT NULL,
-  `roles_id` int(11) NOT NULL,
+  `likes` tinyint(20) DEFAULT '0',
+  `roles_id` int(11) DEFAULT NULL,
   `fecha_publicacion` date NOT NULL,
   PRIMARY KEY (`id_publicacion`),
   KEY `fk_usuario_id_idx` (`usuario_id`),
-  KEY `fk_rol_id_idx` (`roles_id`),
-  CONSTRAINT `fk_rol_id` FOREIGN KEY (`roles_id`) REFERENCES `roles` (`id_roles`),
+  KEY `fk_rolpub_idx` (`roles_id`),
+  CONSTRAINT `fk_rolpub` FOREIGN KEY (`roles_id`) REFERENCES `roles` (`id_roles`),
   CONSTRAINT `fk_usuario_id` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -340,7 +430,7 @@ CREATE TABLE `publicacion` (
 
 LOCK TABLES `publicacion` WRITE;
 /*!40000 ALTER TABLE `publicacion` DISABLE KEYS */;
-INSERT INTO `publicacion` VALUES (1,5,'guitarra','gggggg','ggggg','eeee',2,6,'2017-01-05'),(2,7,'humo','hhhhhh','hhhh',NULL,6,4,'2014-01-05'),(3,4,'iluminacion','iiiiiii','i',NULL,8,3,'2017-06-05'),(4,1,'jarra','jjjjjj','j',NULL,99,7,'2017-01-15'),(5,2,'kiwi','kkkkkk','k',NULL,7,9,'2016-09-05'),(6,9,'liberar','lllllllll','l',NULL,5,2,'2017-01-08'),(7,3,'minimo','mmmm','m',NULL,7,5,'2018-11-05'),(8,6,'noche','n','nnn',NULL,NULL,8,'2019-01-05'),(9,8,'tabique','tttttt','t',NULL,NULL,1,'2020-01-05');
+INSERT INTO `publicacion` VALUES (1,5,'guitarra','gggggg','ggggg','https://as.com/meristation/imagenes/2019/01/31/noticias/1548966634_757466_1548966672_noticia_normal.jpg',2,6,'2017-01-05'),(2,7,'humo','hhhhhh','hhhh','https://capitalgaming.mx/wp-content/uploads/2019/03/jojosss-2100x1200.jpeg',6,4,'2014-01-05'),(3,4,'iluminacion','iiiiiii','i','https://ramenparados.com/wp-content/uploads/2017/03/5925381-1000x600.jpg',8,3,'2017-06-05'),(4,1,'jarra','jjjjjj','j','https://www.lavanguardia.com/r/GODO/LV/p7/WebSite/2020/01/27/Recortada/img_mbrugat_20191004-142541_imagenes_lv_terceros_1569563295_099038_1569563353_noticia_normal_4_7_797996992-kf9E-U473165516582fPF-992x558@LaVanguardia-Web.jpg',100,6,'2017-01-15'),(5,2,'kiwi','kkkkkk','k','https://media.metrolatam.com/2019/10/03/mariokarttour800-e1d9469db342332768b0ad8a59ff4869-600x400.jpg',7,6,'2016-09-05'),(6,9,'liberar','lllllllll','l','https://cdn.atomix.vg/wp-content/uploads/2015/11/Pok%C3%A9mon-fan-art1.jpg',5,2,'2017-01-08'),(7,3,'minimo','mmmm','m','https://as01.epimg.net/meristation/imagenes/2019/05/28/header_image/648264261559028567.jpg',7,5,'2018-11-05'),(8,6,'noche','n','nnn','https://ksr-ugc.imgix.net/assets/021/312/307/82c0da3412697ca98116991c13cc1256_original.gif?w=680&fit=max&v=1526971998&auto=format&gif-q=50&q=92&s=50c23f07028b05b7aafa6e2ee66d6af1',2,6,'2019-01-05'),(9,8,'tabique','tttttt','t','https://media.gtanet.com/gallery/gta-5-screenshots/fullsize/808-1280.jpg',1,1,'2020-01-05'),(10,13,'JEJE','Tralari','images/gif.gif','https://i.pinimg.com/originals/ae/2b/d5/ae2bd59c88e75d2663db6ab96f9bb501.jpg',6,6,'2020-01-05'),(11,12,'vfdf','sdfdsfdsf','sdfdsf','images/gif.gif',4,3,'2020-01-05'),(18,13,NULL,'primera subida busadsad sa dsad asd asd asd asd asd sad as das dasd asd sd sdsad asd sad asd asd asd ena',NULL,'publicaciones/both.png',1,NULL,'2020-02-05'),(19,13,NULL,'goku',NULL,'publicaciones/goku2.jpg',0,NULL,'2020-02-05'),(20,13,NULL,'asdsad',NULL,'publicaciones/nypia.jpg',0,NULL,'2020-02-05'),(21,13,NULL,'asdsad',NULL,'publicaciones/huerto.png',0,NULL,'2020-02-05'),(22,13,NULL,'hola mundo',NULL,'publicaciones/invader.jpg',0,NULL,'2020-02-06'),(23,12,NULL,'dsad',NULL,'publicaciones/goku.jpg',0,NULL,'2020-02-06'),(24,12,NULL,'sdfdsfdsf',NULL,'publicaciones/chiinf.jpg',0,NULL,'2020-02-06'),(25,13,NULL,'sda',NULL,'publicaciones/bolas.jpg',0,NULL,'2020-02-06'),(27,13,NULL,'sdf',NULL,'publicaciones/homer.jpg',0,NULL,'2020-02-07'),(28,13,NULL,'f',NULL,'publicaciones/homer.jpg',1,NULL,'2020-02-07'),(29,13,NULL,'foto del pokimon',NULL,'publicaciones/giratina.jpg',0,NULL,'2020-02-07'),(30,13,NULL,'asdas',NULL,'publicaciones/hyper.png',0,NULL,'2020-02-07'),(31,55,NULL,'asdsad',NULL,'publicaciones/hyper.png',0,NULL,'2020-02-07'),(32,55,NULL,'asdad',NULL,'publicaciones/huerto.png',0,NULL,'2020-02-07'),(33,12,NULL,'fg',NULL,'publicaciones/ok.jpg',0,NULL,'2020-02-07');
 /*!40000 ALTER TABLE `publicacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -359,8 +449,9 @@ CREATE TABLE `reportes` (
   `not_safe_words` varchar(45) DEFAULT NULL,
   `plagio` varchar(45) DEFAULT NULL,
   `ofensivo` varchar(45) DEFAULT NULL,
-  `comentario` mediumtext NOT NULL,
+  `comentario` mediumtext,
   `validacion` varchar(45) DEFAULT NULL,
+  `reportado` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id_reportes`),
   KEY `fk_usuario_reporta_idx` (`usuario_que_reporta`),
   KEY `fk_usuario_reportado_idx` (`usuario_reportado`),
@@ -368,7 +459,7 @@ CREATE TABLE `reportes` (
   CONSTRAINT `fk_publicacion_reportada` FOREIGN KEY (`publicacion_reportada`) REFERENCES `publicacion` (`id_publicacion`),
   CONSTRAINT `fk_usuario_reporta` FOREIGN KEY (`usuario_que_reporta`) REFERENCES `usuario` (`id_usuario`),
   CONSTRAINT `fk_usuario_reportado` FOREIGN KEY (`usuario_reportado`) REFERENCES `usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -377,7 +468,7 @@ CREATE TABLE `reportes` (
 
 LOCK TABLES `reportes` WRITE;
 /*!40000 ALTER TABLE `reportes` DISABLE KEYS */;
-INSERT INTO `reportes` VALUES (1,NULL,NULL,1,NULL,NULL,NULL,'sdjsadkjsadh',NULL);
+INSERT INTO `reportes` VALUES (1,NULL,NULL,1,NULL,NULL,NULL,'sdjsadkjsadh',NULL,NULL),(2,NULL,NULL,9,NULL,NULL,NULL,NULL,NULL,'Paco'),(3,NULL,NULL,8,NULL,NULL,NULL,NULL,NULL,'Keannu'),(4,NULL,NULL,11,NULL,NULL,NULL,NULL,NULL,'8'),(5,NULL,NULL,8,NULL,NULL,NULL,NULL,NULL,'Keannu'),(6,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,'Unai'),(7,NULL,NULL,20,NULL,NULL,NULL,NULL,NULL,'hola'),(8,NULL,NULL,20,NULL,NULL,NULL,NULL,NULL,'hola'),(9,NULL,NULL,20,NULL,NULL,NULL,NULL,NULL,'hola'),(10,NULL,NULL,20,NULL,NULL,NULL,NULL,NULL,'hola'),(11,NULL,NULL,20,NULL,NULL,NULL,NULL,NULL,'hola'),(12,NULL,NULL,20,NULL,NULL,NULL,NULL,NULL,'hola'),(13,NULL,NULL,20,NULL,NULL,NULL,NULL,NULL,'hola'),(14,NULL,NULL,20,NULL,NULL,NULL,NULL,NULL,'hola'),(15,NULL,NULL,20,NULL,NULL,NULL,NULL,NULL,'hola'),(16,NULL,NULL,23,NULL,NULL,NULL,NULL,NULL,'8'),(17,NULL,NULL,22,NULL,NULL,NULL,NULL,NULL,'hola'),(18,NULL,NULL,23,NULL,NULL,NULL,NULL,NULL,'8'),(19,NULL,NULL,23,NULL,NULL,NULL,NULL,NULL,'8'),(20,NULL,NULL,18,NULL,NULL,NULL,NULL,NULL,'hola'),(21,NULL,NULL,23,NULL,NULL,NULL,NULL,NULL,'8'),(22,NULL,NULL,22,NULL,NULL,NULL,NULL,NULL,'hola'),(23,NULL,NULL,22,NULL,NULL,NULL,NULL,NULL,'hola'),(24,NULL,NULL,24,NULL,NULL,NULL,NULL,NULL,'8'),(25,NULL,NULL,24,NULL,NULL,NULL,NULL,NULL,'8'),(26,NULL,NULL,24,NULL,NULL,NULL,NULL,NULL,'8'),(27,NULL,NULL,24,NULL,NULL,NULL,NULL,NULL,'8'),(28,NULL,NULL,22,NULL,NULL,NULL,NULL,NULL,'hola'),(29,NULL,NULL,4,NULL,NULL,NULL,NULL,NULL,'Omar'),(30,NULL,NULL,4,NULL,NULL,NULL,NULL,NULL,'Omar'),(31,NULL,NULL,24,NULL,NULL,NULL,NULL,NULL,'8'),(32,NULL,NULL,27,NULL,NULL,NULL,NULL,NULL,'hola'),(33,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,'Unai'),(34,NULL,NULL,22,NULL,NULL,NULL,NULL,NULL,'hola');
 /*!40000 ALTER TABLE `reportes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -390,11 +481,7 @@ DROP TABLE IF EXISTS `roles`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roles` (
   `id_roles` int(11) NOT NULL,
-  `sonido` tinyint(1) DEFAULT '0',
-  `arte` tinyint(1) DEFAULT '0',
-  `programacion` tinyint(1) DEFAULT '0',
-  `guionista` tinyint(1) DEFAULT '0',
-  `otros` varchar(80) DEFAULT NULL,
+  `nombre_rol` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_roles`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -405,7 +492,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,0,1,1,0,NULL),(2,1,0,1,1,NULL),(3,1,0,1,1,NULL),(4,0,0,1,1,NULL),(5,0,0,1,0,NULL),(6,0,1,0,1,NULL),(7,1,0,0,0,NULL),(8,1,0,0,1,NULL),(9,1,1,1,0,NULL);
+INSERT INTO `roles` VALUES (1,'Programador'),(2,'Ilustrador'),(3,'Sonido'),(4,'Animador'),(5,'Guion'),(6,'Modelador'),(7,'Tester'),(8,'Nada');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -465,6 +552,31 @@ LOCK TABLES `seguimiento_usuarios` WRITE;
 /*!40000 ALTER TABLE `seguimiento_usuarios` DISABLE KEYS */;
 INSERT INTO `seguimiento_usuarios` VALUES (1,2,3),(2,3,4),(3,3,5),(4,3,6);
 /*!40000 ALTER TABLE `seguimiento_usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sessions`
+--
+
+DROP TABLE IF EXISTS `sessions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sessions` (
+  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `expires` int(11) unsigned NOT NULL,
+  `data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sessions`
+--
+
+LOCK TABLES `sessions` WRITE;
+/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
+INSERT INTO `sessions` VALUES ('p6Tj7xHcXBV97DIRKiCRY_FQV6Mu6ARN',1581177169,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{\"exito\":[\"Buenas hola .\",\"Buenas 8 .\",\"Buenas hola .\",\"Buenas hola .\",\"Buenas hola .\",\"Buenas hola .\",\"Buenas hola .\",\"Buenas 8 .\",\"Buenas hola .\",\"Buenas 8 .\",\"Buenas hola .\",\"Buenas 8 .\",\"Buenas hola .\",\"Buenas 8 .\",\"Buenas hola .\",\"Buenas 8 .\",\"Buenas 1 .\",\"Buenas hola .\",\"Buenas hola .\",\"Buenas 8 .\",\"Buenas hola .\",\"Buenas hola .\",\"Buenas hola .\",\"Buenas hola .\",\"Buenas hola .\",\"Buenas hola .\",\"Buenas hola .\",\"Buenas hola .\",\"Buenas hola .\",\"Buenas 8 .\",\"Buenas hola .\",\"Buenas hola .\",\"Buenas hola .\",\"Buenas hola .\",\"Buenas hola .\",\"Buenas hola .\",\"Buenas hola .\",\"Buenas 8 .\",\"Buenas hola .\",\"Buenas hola .\"],\"message\":[\"El Usuario no existe\",\"El Usuario no existe\",\"El Usuario no existe\",\"El Usuario no existe\"]},\"passport\":{}}');
+/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -549,21 +661,21 @@ DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(60) NOT NULL,
-  `nick` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `nick` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `password` varchar(60) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `correo` varchar(60) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `correo` varchar(60) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `pais` varchar(30) DEFAULT NULL,
   `cuidad` varchar(30) DEFAULT NULL,
-  `fecha_de_alta` date NOT NULL,
+  `fecha_de_alta` date DEFAULT NULL,
   `foto` varchar(255) DEFAULT NULL,
   `nivel` int(11) DEFAULT NULL,
-  `premium` int(11) DEFAULT NULL,
+  `premium` int(11) DEFAULT '0',
+  `sobremi` varchar(222) DEFAULT NULL,
   PRIMARY KEY (`id_usuario`),
   KEY `fk_nivel_idx` (`nivel`),
   KEY `fk_premium_idx` (`premium`),
-  CONSTRAINT `fk_nivel` FOREIGN KEY (`nivel`) REFERENCES `niveles` (`idniveles`),
-  CONSTRAINT `fk_premium` FOREIGN KEY (`premium`) REFERENCES `premium` (`id_premium`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_nivel` FOREIGN KEY (`nivel`) REFERENCES `niveles` (`idniveles`)
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -572,7 +684,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Omar','Wall','12','omar@gmail.com','España','Palencia','2019-01-01',NULL,NULL,2),(2,'Hector','Dic','21','hec@gmail.com','España','León','2019-02-02',NULL,NULL,1),(3,'Sergio','Verde','23','verde@gmail.com','España','León','2019-01-02',NULL,NULL,3),(4,'Jesus','yisus','33','crist@gmail.com','Francia','Paris','2018-02-28',NULL,NULL,NULL),(5,'Unai','Escandaleras','09','unai@gmail.com','España','Bilbao','2018-09-03',NULL,NULL,NULL),(6,'Keannu','Boss','98','keannu@gmail.com','Canada','Canada','2016-07-17',NULL,NULL,NULL),(7,'Kevin','Durant','88','nba@gmail.com','EEUU','Chicago','2017-04-17',NULL,NULL,NULL),(8,'Paco','Copa ','ere','paco12@gmail.com','Alemania','Berlin','2019-05-19',NULL,NULL,NULL),(9,'John','Boom','nb','johny@gmail.com','EEUU','Nueva York','2017-09-30',NULL,NULL,NULL),(10,'Astrid','defcn2','0909','astrid@gmail.com','Japon','Tokio','2016-01-30',NULL,NULL,NULL),(11,'Alejandro','Magno','888','alex@gmail.com','China','Hong Kong','2017-08-28',NULL,NULL,NULL);
+INSERT INTO `usuario` VALUES (1,'Omar','Wall','12','omar@gmail.com','España','Palencia','2019-01-01',NULL,NULL,2,NULL),(2,'Hector','Dic','21','hec@gmail.com','España','León','2019-02-02',NULL,NULL,1,NULL),(3,'Sergio','Verde','23','verde@gmail.com','España','León','2019-01-02',NULL,NULL,3,NULL),(4,'Jesus','yisus','33','crist@gmail.com','Francia','Paris','2018-02-28',NULL,NULL,NULL,NULL),(5,'Unai','Escandaleras','09','unai@gmail.com','España','Bilbao','2018-09-03',NULL,NULL,NULL,NULL),(6,'Keannu','Boss','98','keannu@gmail.com','Canada','Canada','2016-07-17',NULL,NULL,NULL,NULL),(7,'Kevin','Durant','88','nba@gmail.com','EEUU','Chicago','2017-04-17',NULL,NULL,NULL,NULL),(8,'Paco','Copa ','ere','paco12@gmail.com','Alemania','Berlin','2019-05-19',NULL,NULL,NULL,NULL),(9,'John','Boom','nb','johny@gmail.com','EEUU','Nueva York','2017-09-30',NULL,NULL,NULL,NULL),(10,'Astrid','defcn2','0909','astrid@gmail.com','Japon','Tokio','2016-01-30',NULL,NULL,NULL,NULL),(11,'Alejandro','Magno','888','alex@gmail.com','China','Hong Kong','2017-08-28',NULL,NULL,NULL,NULL),(12,'8','8','$2a$10$xDs8NdDpKdouRC6FqE6zgejE7UxG8pPHMbxKOCGFm5BUZQ5r4YPU2',NULL,NULL,NULL,NULL,'imagenes_perfil/hyper.png',NULL,NULL,' buenas tardesdfdsf'),(13,'hola','adios','$2a$10$A2d2VD.TRGO7woR0bjFPTuXTbCCsWRuf7YAW2MVkQqX36Is.CA1pu',NULL,NULL,NULL,NULL,'imagenes_perfil/homer.jpg',NULL,NULL,'Hola soy alber y white negros'),(14,'1',NULL,'$2a$10$RmlaeQP4lezazh.zkfQdvOnmqTDcxzA/6lRC1dycHTvXaybwofMcC','1',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(55,'asdasd',NULL,'$2a$10$Ju2D8UeslIGS0p5twEpuzOUWdWMNvCXjIDUY2MN2qNczJOb2FMQry','holaasdasd',NULL,NULL,NULL,'imagenes_perfil/both.png',NULL,0,' Hola');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -585,4 +697,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-23 21:50:39
+-- Dump completed on 2020-02-07 17:08:50
