@@ -1,3 +1,5 @@
+//TODO: codigo no usable
+/*
 exports.upload = function(req, res){
     res.render('/tienda',{ title: 'ejemplo de subida de imagen por HispaBigData' });
   };
@@ -25,3 +27,4 @@ exports.Uploads = function(req, res) {
          });
      }
 };
+*/

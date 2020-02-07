@@ -21,7 +21,7 @@ passport.use('local.registro', new LocalStrategy({
 		nombre,
 		correo,
 		password,
-		
+		premium: "0"
 	};
 
 

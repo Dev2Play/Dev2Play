@@ -222,16 +222,16 @@ router.get('/proyectosActivos', async (req, res) => {
 
     if(req.user){
         const foto_perfil = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario)
-        const proyectos = await dbconn.query('SELECT * FROM proyectos INNER JOIN equipos ON proyectos.id_proyectos = equipos.proyecto WHERE validacion = 1 ORDER BY fecha_inicio DESC');
+        const proyectos = await dbconn.query('SELECT * FROM proyectos ORDER BY fecha_inicio DESC');
         //console.log(proyectos)
     
     
         res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos, usuario: req.user, photo: foto_perfil[0].foto });
     } else{
 
-        const proyectos = await dbconn.query('SELECT * , COUNT(equipos.usuario) FROM proyectos INNER JOIN equipos ON proyectos.id_proyectos = equipos.proyecto WHERE validacion = 1 ORDER BY fecha_inicio DESC');
+        const proyectos = await dbconn.query('SELECT * FROM proyectos ORDER BY fecha_inicio DESC');
         //console.log(proyectos)
-    
+
     
         res.render('../views/partials/proyectos/proyectosActivos', { proyecto: proyectos, usuario: req.user});
     }
@@ -367,31 +367,51 @@ router.get('/perfil', isLoggedIn, async (req, res) => {
 
 
 
-router.get('/editarPerfil', isLoggedIn, async (req, res) => {
+router.get('/editarPerfil', isLoggedIn, async(req, res) => {
     //console.log(req.user.sobremi)
-    const editdescrip = await dbconn.query('UPDATE usuario SET sobremi = ? WHERE id_usuario = ?', [req.user.sobremi, req.user.id_usuario]);
+    const editdescrip = await dbconn.query('UPDATE usuario SET sobremi = ? WHERE id_usuario = ?',[req.user.sobremi , req.user.id_usuario]);
     //console.log(editdescrip)
-    const public = await dbconn.query('SELECT * FROM publicacion WHERE usuario_id = ? ORDER BY fecha_publicacion DESC', [req.user.id_usuario]);
-    const editfoto = await dbconn.query('UPDATE usuario SET foto = ? WHERE id_usuario = ?', [req.user.foto, req.user.id_usuario]);
+    const editfoto = await dbconn.query('UPDATE usuario SET foto = ? WHERE id_usuario = ?',[req.user.foto ,req.user.id_usuario]);
     const desc = await dbconn.query('SELECT sobremi FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
     const foto = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
+    const equipo = await dbconn.query('SELECT * FROM proyectos inner join equipos on proyectos.id_proyectos = equipos.proyecto INNER JOIN usuario ON equipos.usuario = usuario.id_usuario WHERE id_usuario = ?',[req.user.id_usuario] );
 
-
-    res.render('../views/partials/perfil/editarPerfil', { usuario: req.user, descrip: desc[0].sobremi, photo: foto[0].foto, archivo: public });
-    console.log(foto)
-
+    if(equipo.length == 0){
+        res.render('../views/partials/perfil/editarPerfil', {usuario: req.user , descrip: desc[0].sobremi , photo: foto[0].foto});
+        console.log(foto)
+    } else{
+        res.render('../views/partials/perfil/editarPerfil', {usuario: req.user , descrip: desc[0].sobremi , photo: foto[0].foto, equipos: equipo[0].titulo });
+        console.log(foto)
+    }
+   
 });
+
+
+//TODO: AÑADIR CATEGORIA
+router.post('/roles_update' , async (req,res) => {
+    console.log('roles', req.body)
+    if(typeof(req.body.sonido) == 'string') await dbconn.query("INSERT INTO especialidad_usuarios (usuario,rol_us) values (?, '3')", [  req.user.id_usuario] );
+    //console.log(typeof(req.body.sonido))
+    if(typeof(req.body.animador) == 'string') await dbconn.query("INSERT INTO especialidad_usuarios (usuario,rol_us) values (?, '4')", [  req.user.id_usuario] );
+    if(typeof(req.body.guion) == 'string') await dbconn.query("INSERT INTO especialidad_usuarios (usuario,rol_us) values (?, '5')", [  req.user.id_usuario] );
+    if(typeof(req.body.modelador) == 'string') await dbconn.query("INSERT INTO especialidad_usuarios (usuario,rol_us) values (?, '6')", [  req.user.id_usuario] );
+    if(typeof(req.body.ilustrador) == 'string') await dbconn.query("INSERT INTO especialidad_usuarios (usuario,rol_us) values (?, '2')", [  req.user.id_usuario] );
+    if(typeof(req.body.programador) == 'string') await dbconn.query("INSERT INTO especialidad_usuarios (usuario,rol_us) values (?, '1')", [  req.user.id_usuario] );
+    
+    res.redirect('/perfil')
+});
+
 
 router.get('/tienda', async (req, res) => {
 
-    if(req.use){
+    if(req.user){
         const foto_perfil = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario)
-        const juegos_tienda = await dbconn.query('SELECT * FROM juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE id_genero < 10 ORDER BY fecha_subida DESC;');
+        const juegos_tienda = await dbconn.query('SELECT * FROM juegos ORDER BY fecha_subida DESC;');
     
         res.render('../views/partials/tienda/tienda', { juegos: juegos_tienda, usuario: req.user, photo: foto_perfil[0].foto });
     } else{
 
-        const juegos_tienda = await dbconn.query('SELECT * FROM juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE id_genero < 10 ORDER BY fecha_subida DESC;');
+        const juegos_tienda = await dbconn.query('SELECT * FROM juegos ORDER BY fecha_subida DESC;');
     
         res.render('../views/partials/tienda/tienda', { juegos: juegos_tienda, usuario: req.user });
     }
@@ -652,7 +672,7 @@ router.post('/tienda', isLoggedIn, async (req, res) => {
     file.mv(`src/public/juegos/${file.name}`, async err => {
         if (err) return res.status(500).send({ message: err })
 
-        const { titulo, descripcion, genero, precio, sistema_operativo, memoria, graficos, procesador, almacenamiento } = req.body;
+        const { titulo, descripcion, precio, sistema_operativo, memoria, graficos, procesador, almacenamiento } = req.body;
         const nombre_publ = "juegos/" + file.name;
         var d = new Date();
         var fecha_inicio = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
@@ -660,7 +680,6 @@ router.post('/tienda', isLoggedIn, async (req, res) => {
         const nuevo_juego = {
             titulo,
             descripcion,
-            genero,
             precio,
             imagen: nombre_publ,
             sistema_operativo,
@@ -673,8 +692,6 @@ router.post('/tienda', isLoggedIn, async (req, res) => {
 
 
         const jueg = await dbconn.query('INSERT INTO juegos set ?', [nuevo_juego]); //como hacer que le genero entre
-
-        const juegos_tienda = await dbconn.query('SELECT * FROM juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE id_genero < 10 ORDER BY fecha_subida DESC;');
 
         res.redirect('tienda');
 
