@@ -1,0 +1,27 @@
+como buscar en internet +
+
+Op matematicos + 
+Op logicos +
+TEXTO != numeros +
+tipos de variables +
+bucles y condicionales +
+arrays, listas, diccionarios, strings, tuplas +
+num entero != num float +
+
+funciones +
+parametros +
+importar modulos +
+usos basicos de modulos +
+funciones predefinidas +
+
+objetos +
+que es una clase +
+herencia basica de clases -
+metodo constructor  +
+herencia avanzada de clases -
+
+github
+control de versiones
+git 
+
+Uso del framework ren py

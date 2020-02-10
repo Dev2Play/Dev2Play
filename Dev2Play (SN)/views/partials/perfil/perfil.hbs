@@ -18,8 +18,17 @@
 
 	<hr>
 	<br>
-	<h4 style="text-align: left; margin-left: 100px"><u>Especialidades</u></h4>
-	<br>
+	
+	<div class="row">
+		<div class="col-4">
+			<h4 style="text-align: left; margin-left: 100px;"><u>Especialidades</u></h4>
+		</div>
+		<div class="col-4"></div>
+		<div class="col-4">
+			<h4 style="text-align: center; margin-left: 150px"><u>Proyecto Actual</u></h4>
+		</div>
+	</div>
+	
 	<div class="row">
 		<div class="col-3" style="height: 400px; max-height: 400px; overflow-y: auto">
 			<br>
@@ -35,7 +44,7 @@
 		<div class="col scroll" >
 			<div class="row" >
 				{{#each archivo}}
-				<div class="col-sm-6 clickeame">
+				<div class="col-sm-6 clickeame" id="fotos_perfil">
 					<div class="card publis_per" >
 						<img class="card-img-top" id="publi_per" src={{enlace}} alt="Card image cap">
 						<p style="display:none;">{{enlace}}º </p>
@@ -51,11 +60,9 @@
 		</div>
 
 		<div class="col-3">
-			<h4 style="text-align: center;"><u>Proyecto Actual</u></h4>
+
 			<br>
 			<h4 style="text-align: center;">{{equipos}}</h4>
-			
-			<br>
 		</div>
 
 	</div>
@@ -65,8 +72,8 @@
 		<div class="col-4"></div>
 
 		<div class="col-1">
-			<button class="mb-2 my-2" type="button" class="btn btn-primary" data-toggle="modal"
-				data-target="#nuevaPublicacion" style="width: 150px;">
+			<button class="mb-2 my-2" type="button" id="boton_publ" class="btn btn-primary" data-toggle="modal"
+				data-target="#nuevaPublicacion" style="width: 150px; outline: none">
 				Publicacion Nueva
 			</button>
 		</div>

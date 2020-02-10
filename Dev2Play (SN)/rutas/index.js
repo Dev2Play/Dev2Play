@@ -198,6 +198,7 @@ router.post('/reporte/:id', isLoggedIn, async (req, res) => {
 //TODO: CREACION DE PROYECTO
 router.post('/publicado/:titulo', isLoggedIn, async (req, res) => {
     const { titulo } = req.params
+    //console.log(titulo)
     const { descripcion, necesita } = req.body;
     //console.log("Necesita: " + necesita)
     //TODO: PROCESAR FECHA
@@ -206,11 +207,13 @@ router.post('/publicado/:titulo', isLoggedIn, async (req, res) => {
     var fecha_final = d.getFullYear() + "-" + (d.getMonth() + 3) + "-" + d.getDate();
     //console.log("FECHA: " + String(fecha_inicio) + "FINAL: " + String(fecha_final));
 
-    const insertar = await dbconn.query('INSERT INTO proyectos (titulo, descripcion, fecha_inicio, fecha_final, roles) VALUES (?, ?, ?, ?, ?)', [titulo, descripcion, fecha_inicio, fecha_final, necesita]);
+    const insertar = await dbconn.query('INSERT INTO proyectos (titulo, descripcion, fecha_inicio, fecha_final, roles, lider) VALUES (?, ?, ?, ?, ?, ?)', [titulo, descripcion, fecha_inicio, fecha_final, necesita, req.user.id_usuario]);
 
-    //const proyectos = await dbconn.query('SELECT  * FROM proyectos');
+    //console.log(insertar.insertId)
 
-    res.redirect('/proyectosActivos');
+  const subida = await dbconn.query('INSERT INTO equipos(usuario,proyecto) SELECT id_usuario, id_proyectos FROM usuario, proyectos where id_usuario=? and id_proyectos=?', [req.user.id_usuario, insertar.insertId]);
+
+    res.redirect('/gestor');
 });
 
 
@@ -375,12 +378,13 @@ router.get('/editarPerfil', isLoggedIn, async(req, res) => {
     const desc = await dbconn.query('SELECT sobremi FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
     const foto = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
     const equipo = await dbconn.query('SELECT * FROM proyectos inner join equipos on proyectos.id_proyectos = equipos.proyecto INNER JOIN usuario ON equipos.usuario = usuario.id_usuario WHERE id_usuario = ?',[req.user.id_usuario] );
+    const public = await dbconn.query('SELECT * FROM publicacion WHERE usuario_id = ? ORDER BY fecha_publicacion DESC', [req.user.id_usuario]);
 
     if(equipo.length == 0){
-        res.render('../views/partials/perfil/editarPerfil', {usuario: req.user , descrip: desc[0].sobremi , photo: foto[0].foto});
+        res.render('../views/partials/perfil/editarPerfil', {usuario: req.user , descrip: desc[0].sobremi , photo: foto[0].foto,  archivo: public});
         console.log(foto)
     } else{
-        res.render('../views/partials/perfil/editarPerfil', {usuario: req.user , descrip: desc[0].sobremi , photo: foto[0].foto, equipos: equipo[0].titulo });
+        res.render('../views/partials/perfil/editarPerfil', {usuario: req.user , descrip: desc[0].sobremi , photo: foto[0].foto, equipos: equipo[0].titulo, archivo: public });
         console.log(foto)
     }
    
@@ -458,7 +462,7 @@ router.get('/fichaJuego/:id', async (req, res) => {
         const foto_perfil = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario)
         const { id } = req.params;
         console.log(id);
-        const ficha = await dbconn.query('SELECT * FROM juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE id_juegos=?', id);//cambio
+        const ficha = await dbconn.query('SELECT * FROM juegos WHERE id_juegos=?', id);//cambio
         //console.log(ficha);
         //console.log(req)
         res.render('../views/partials/juegos/fichaJuego', { usuario: req.user, juegos: ficha, photo: foto_perfil[0].foto });
@@ -466,7 +470,7 @@ router.get('/fichaJuego/:id', async (req, res) => {
 
         const { id } = req.params;
         console.log(id);
-        const ficha = await dbconn.query('SELECT * FROM juegos INNER JOIN genero ON juegos.genero = genero.id_genero WHERE id_juegos=?', id);//cambio
+        const ficha = await dbconn.query('SELECT * FROM juegos WHERE id_juegos=?', id);//cambio
         //console.log(ficha);
         //console.log(req)
         res.render('../views/partials/juegos/fichaJuego', { usuario: req.user, juegos: ficha });
@@ -705,24 +709,46 @@ router.post('/tienda', isLoggedIn, async (req, res) => {
 //TODO: GESTOR
 router.get('/gestor', isLoggedIn, async (req, res) => {
 
-    const foto_perfil = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
+    const equipo = await dbconn.query('SELECT * FROM proyectos inner join equipos on proyectos.id_proyectos = equipos.proyecto INNER JOIN usuario ON equipos.usuario = usuario.id_usuario WHERE id_usuario = ?', [req.user.id_usuario]);
 
+    if(equipo.length > 0){
+        const foto_perfil = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
 
-
-    res.render('../views/partials/proyectos/gestor', {usuario: req.user, photo: foto_perfil[0].foto})
+    
+        //console.log(equipo[0]);
+        //TODO: AÑADIR FECHA DE SUBIDA
+        const sacar = await dbconn.query('SELECT * FROM gestor WHERE proy_gest = ? ORDER BY id_gestor DESC', equipo[0].id_proyectos)
+        //console.log(sacar)
+        if(equipo.length<1){
+            res.redirect("/formularioProyecto")
+        } else{
+            res.render('../views/partials/proyectos/gestor', {usuario: req.user, photo: foto_perfil[0].foto, equipos: equipo[0].titulo, archivos: sacar})
+        }   
+    } else{
+        res.redirect("/formularioProyecto")
+    }
+    
 });
 
-
+//Para subir un archivo
 router.post('/gestor', isLoggedIn, async (req, res) => {
 
-    let file = req.files.file
-   
-    file.mv(`src/public/gestor/${file.name}`, err => {
-        if (err) return res.status(500).send({ message: err });
-
-        return res.status(200).redirect('/gestor')
-    });
+    var file = req.files
+    if(file){
+        let file = req.files.file
+        file.mv(`src/public/gestor/${file.name}`, async err => {
+            if (err) return res.status(500).send({ message: err });
+            const equipo = await dbconn.query('SELECT * FROM proyectos inner join equipos on proyectos.id_proyectos = equipos.proyecto INNER JOIN usuario ON equipos.usuario = usuario.id_usuario WHERE id_usuario = ?', [req.user.id_usuario]);
+            console.log(equipo[0])
+            const nombre_arch = "gestor/" + file.name;
+            //console.log(nombre_arch)
+           const aniadir = await dbconn.query('INSERT INTO gestor (proy_gest, archivos) VALUES (?, ?)', [equipo[0].id_proyectos, nombre_arch])
     
+            return res.status(200).redirect('/gestor')
+        });
+    } else{
+        res.redirect('/gestor')
+    }
     
 });
 

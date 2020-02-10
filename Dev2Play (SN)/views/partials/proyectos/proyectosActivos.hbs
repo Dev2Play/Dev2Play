@@ -2,19 +2,19 @@
 <!--BUSCAR Y FILTRAR-->
 <div class="container-fluid">
   <div class="row">
-    <div class="col-6">
+    <div class="col-6 mr-5">
       <div id="busqueda">
         <form action="" id="formulario" method="POST">
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp🔎
+         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp🔎
           &nbsp
           <input type="text" id="datos" class="inputs_proyectos"> &nbsp <button id="buscar"
             type="submit">Buscar</button>
         </form>
       </div>
     </div>
-    <div class="col-4"></div>
+    <div class="col-3"></div>
     <div class="col-2">
-      <select name="categorias" id="ordenar" class="mt-2">
+      <select name="categorias" id="ordenar" class="filtrados mt-2">
         <!--ver el tpo de categoria seleccionada-->
         <option value="recientes">Ordenar por</option>
         <option value="novedad">Ordenar por novedad</option>
@@ -35,7 +35,7 @@
 
   <div class="row">
     {{#each proyecto}}
-    <div class="col-5 fichas">
+    <div class="col-5 ml-5 fichas">
       <div class="row">
         <div class="col-12">
           <h3 style="font-family: fjalla;">&bull;{{titulo}}</h3>
