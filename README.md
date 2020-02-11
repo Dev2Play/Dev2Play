@@ -1,2 +1,3 @@
-# Dev2Play
-Repositorio de la red social Dev2Play
+# Plataforma Videojuegos
+
+Plataforma para formar equipos de desarrollo de videojuegos

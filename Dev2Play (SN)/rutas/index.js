@@ -515,9 +515,12 @@ router.get('/404', async (req, res) => {
 //TODO: ADMINISTRACION
 router.get('/administracion', isLoggedIn, async (req, res) => {
 
-    const foto_perfil = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario)
-
-    res.render('../views/partials/Administracion/administracion', { usuario: req.user, photo: foto_perfil[0].foto })
+    if(req.user.id_usuario == 13){
+        const foto_perfil = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario)
+        res.render('../views/partials/Administracion/administracion', { usuario: req.user, photo: foto_perfil[0].foto})
+    } else{
+        res.redirect('/404')
+    }
 });
 
 
@@ -533,8 +536,10 @@ router.post('/administracion/:val', isLoggedIn, async (req, res) => {
 
     if (val == 2) { //TODO: REPORTES
         const reportes = await dbconn.query('SELECT * FROM reportes');
-        const foto_perfil = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario)
-        res.render('../views/partials/Administracion/administracion', { reporte: reportes, usuario: req.user, photo: foto_perfil[0].foto })
+        const foto_perfil = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
+        const foto = await dbconn.query('SELECT enlace FROM publicacion')
+        //console.log(foto);
+        res.render('../views/partials/Administracion/administracion', { reporte: reportes, usuario: req.user, photo: foto_perfil[0].foto, enlace: foto })
     }
     if (val == 5) { //TODO: USUARIOS
         const foto_perfil = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario)
@@ -750,6 +755,34 @@ router.post('/gestor', isLoggedIn, async (req, res) => {
         res.redirect('/gestor')
     }
     
+});
+
+router.get('/borrar/:id', isLoggedIn, async (req, res) => {
+    const { id } = req.params
+    //res.send("llega " + id)
+    await dbconn.query('DELETE FROM usuario WHERE id_usuario = ?', id);
+    //req.flash('success', 'Enlace borrado de la BD.');
+    res.redirect('/administracion');
+    
+});
+
+//TODO: REPORTES
+router.get('/borrar_pu/:id', isLoggedIn, async (req, res) => {
+    const { id } = req.params;
+    //res.send("llega " + id);
+    const elim_rep = await dbconn.query('DELETE FROM reportes WHERE publicacion_reportada = ?', id);
+    const elim_publ = await dbconn.query('DELETE FROM publicacion WHERE id_publicacion = ?', id);
+    //req.flash('success', 'Enlace borrado de la BD.');
+    res.redirect('/administracion');
+    
+});
+
+router.get('/verPubRep/:id', isLoggedIn, async (req, res) => {
+    const { id } = req.params
+    const publicaciones = await dbconn.query('SELECT * FROM publicacion WHERE id_publicacion = ?', id);
+    const foto_perfil = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario)
+    res.render('../views/partials/Administracion/administracion', {usuario: req.user, publicacion: publicaciones, photo: foto_perfil[0].foto})
+
 });
 
 module.exports = router;

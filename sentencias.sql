@@ -60,9 +60,12 @@
 
   -- filtro rol // aqui lo que hacemos es selecionar los campos que vamos a mostrar (con el valor tabla.campo) from la tabla y la unimos a la de roles con la que tienen igual y luego podemos usar los datos de la tabla de roles
      SELECT publicacion.titulo, publicacion.descripcion, publicacion.archivo, publicacion.fecha_publicacion FROM publicacion inner join roles on publicacion.roles_id = roles.id_roles where roles.sonido=1; 
+
      SELECT publicacion.titulo, publicacion.descripcion, publicacion.archivo, publicacion.fecha_publicacion FROM publicacion inner join roles on publicacion.roles_id = roles.id_roles where roles.arte=1; 
+
      SELECT publicacion.titulo, publicacion.descripcion, publicacion.archivo, publicacion.fecha_publicacion FROM publicacion inner join roles on publicacion.roles_id = roles.id_roles where roles.programacion=1; 
-     SELECT publicacion.titulo, publicacion.descripcion, publicacion.archivo, publicacion.fecha_publicacion FROM publicacion inner join roles on publicacion.roles_id = roles.id_roles where roles.guoinista=1; 
+
+     SELECT publicacion.titulo, publicacion.descripcion, publicacion.archivo, publicacion.fecha_publicacion FROM publicacion inner join roles on publicacion.roles_id = roles.id_roles where roles.guionista=1; 
   
   -- filtro recientes
      SELECT titulo, descripcion, fecha_publicacion FROM publicacion ORDER BY fecha_publicacion DESC;
@@ -99,7 +102,8 @@
    
    -- general
       SELECT * FROM proyectos WHERE validacion=1 ORDER BY fecha_inicio DESC;
-   
+
+      SELECT  *, COUNT(equipos.usuario) FROM proyectos INNER JOIN equipos ON proyectos.id_proyectos = equipos.proyecto WHERE validacion = 1;
    
    
    -- ordenar 

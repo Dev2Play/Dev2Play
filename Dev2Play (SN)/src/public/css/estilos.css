@@ -1076,3 +1076,14 @@ p {
         color: rgb(65, 128, 238);
         
     }
+
+
+    #subir_archivos{
+        border-radius: 20px; 
+        background-color:rgb(255, 255, 255);
+        color: rgb(3, 3, 3);
+    }
+
+    #subir_archivos:hover{
+        box-shadow: 1px 1px 1px 1px black;
+    }

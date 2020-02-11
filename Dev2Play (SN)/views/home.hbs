@@ -162,18 +162,11 @@
 
 
 
-<!--Banner Jumbotron-->
-<div class="jumbotron banner container-fluid">
-    <div class="container">
-        <h1 class="display-4">Dev2Play</h1>
-        <p class="lead" style="text-align: left;">En esta web podras conocer gente nueva con la que crear el videojuego
-            de tus sueños.
-            Ahora podras crear tu videojuego sin tener que saber hacer de todo, ya que puedes crear proyectos y decir el
-            tipo de personas que necesitas como pueden ser programadores, ilustradores y mas puestos que acaben en
-            dores.
-        </p>
+
+   <div class="container-fluid mb-5">
+       <img src="/images/banner1.png" alt="Banner_registro" style="margin-left: -15px;"  width="1520px" id="go_regis"> 
     </div>
-</div>
+
 
 
 
@@ -355,6 +348,10 @@
 
             });
 
+        });
+
+         $('#go_regis').click(function() {
+            location.href = '/registro'
         });
     });
 </script>

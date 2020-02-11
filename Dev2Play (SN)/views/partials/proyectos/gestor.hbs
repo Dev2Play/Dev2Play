@@ -10,9 +10,10 @@
 
         <p id="cont_gest">
             {{#each archivos}}
+                          
             <div class="col-2 ml-5">
                 <p class="imagenes mt-3 mx-3" title="{{archivos}}">
-                    <a href="{{archivos}}" id="enlace_desc" download="">📝{{archivos}}</a>
+                    <a href="{{archivos}}" id="enlace_desc" download="">📄{{archivos}}</a>
                 </p>
             </div>
             {{/each}}
@@ -26,7 +27,7 @@
 <div class="container mt-3">
     <form action="/gestor" method="POST" enctype="multipart/form-data" style="text-align: right;">
         <input type="file" name="file">
-        <button type="submit">Subir archivo</button>
+        <button type="submit" id="subir_archivos">Subir archivo</button>
     </form>
 </div>
 

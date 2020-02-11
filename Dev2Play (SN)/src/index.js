@@ -13,6 +13,7 @@ const app = express();
 var formidable = require('formidable')
 require('../lib/passport'); 
 app.use(fileUpload());
+const favicon = require('serve-favicon');
 
 app.set('port', process.env.PORT || 3002)
 
@@ -55,6 +56,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(morgan('dev'));
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
+
 
 /*
         VARIABLES GLOBALES
