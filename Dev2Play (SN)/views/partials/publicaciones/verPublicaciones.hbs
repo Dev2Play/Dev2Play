@@ -1,0 +1,211 @@
+<div class="album py-5 bg-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-11"></div>
+      <div class="col-1" style="margin-left: -60px;">
+        <form action="" >
+          <select name="categorias" id="filtros_public" class="mt-2 filtrados">
+            <!--filtos de busqueda-->
+            <option value="recientes">Ordenar por</option>
+            <option value="recientes" id="recientes">Recientes</option>
+            <option value="mas valorados" id="valorados">Más Valorados</option>
+            <option value="destacados" id="destacados">Destacados</option>
+          </select>
+          <br><br>
+        </form>
+
+      </div>
+    </div>
+    <hr class="mb-5">
+
+
+    <div class="row" id="todas_las_publ">
+      <span id="sacar_publ">{{#each publicacion}}</span>
+
+
+      <div class="col-md-4 clickeame">
+        <!-- TODO: id="sacar_modal_publ" TODO: clickeame es para el modal-->
+        <div class="card mb-4 box-shadow tarjeta_publicacion">
+          <!--img class="fotos" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="images/gif.gif" data-holder-rendered="true"-->
+
+          <h5 style="text-align: center;" class="mt-1" id="nombre_publ">
+            {{nombre}} <p id="asterisco">*</p><br>
+          </h5>
+
+
+          <!--TODO: data-holder-rendered="true"
+            data-toggle="modal" data-target="#publicacion" data-dismiss="modal" -->
+          <a class="mr-5 mb-5 " style="margin-top: 52px;margin-left: 320px; position: absolute; opacity: 90%; background-color: rgba(140, 119, 119, 0.557)"
+            href="/reporte/{{id_publicacion}}" id="rep">🚩</a>
+          <img src="{{enlace}}" class="fotos">
+          <p style="display:none;">º {{enlace}}</p>
+
+
+
+
+
+          <div class="card-body descripcion_publicaciones my-2" id="descripcion_foto">
+            <span style="color: rgba(0, 0, 0, 0%);">~</span> {{descripcion}}<span
+              style="color: rgba(0, 0, 0, 0%);">$</span>
+          </div>
+          <hr>
+          <div>
+
+            <!--form action="/verPublicaciones" method="POST"-->
+            <div class="form-group my-3" id="quitar_modal">
+              <button type="submit" class="like mb-2" name="like" value={{likes}}>{{likes}}❤️</button>
+              <p id="id_publ" style="color: rgba(0, 0, 0, 0%);">{{id_publicacion}}</p>
+            </div>
+            <!--/form-->
+
+          </div>
+
+        </div>
+      </div>
+      {{/each}}
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- TODO: MODAL REPORTE-->
+
+</div>
+
+
+<!--MODAL PUBLICACION-->
+
+
+<div class="modal" id="publicacion">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="container publicaciones_modal">
+          <!--TITULO-->
+
+          <h5 style="text-align: center;" class="my-2" id="titulo_publ_modal">
+
+          </h5><br>
+          <div class="container-fluid foto_modal" id="foto_publ"></div>
+        </div>
+        <br>
+
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="container">
+          <div class="container">
+
+          </div>
+          <div class="container justify-content-center">
+            <div class="container">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-11 float-left" id="descrip_publ_modal">
+                    <!--descrip-->
+                  </div>
+                  <div class="col-1">
+
+                    <button id="like_boton">
+                      <p id="like">
+                        ❤
+                      </p>
+                    </button>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+{{#each publicacion}}
+<script>
+
+  $(document).ready(function () {
+
+    $('#filtros_public').change(function () {
+      
+      if ($(this).val() == "recientes") {
+        var enviar = 1
+        location.href = '/verPublicaciones/filtro/' + enviar;
+      }
+      if ($(this).val() == "mas valorados") {
+        var enviar = 2
+        location.href = '/verPublicaciones/filtro/' + enviar;
+      }
+      if ($(this).val() == "destacados") {
+        var enviar = 3
+        location.href = '/verPublicaciones/filtro/' + enviar;
+      }
+
+    });
+
+    const descripciones = JSON.stringify("{{descripcion}}");
+    //console.log(descripciones)
+
+
+
+
+    $('.clickeame').click(function () {
+      $("#publicacion").modal("show");
+      //console.log(publicacion);
+      var nueva_desc = String($(this).text());
+
+      var breakpointR = nueva_desc.indexOf("❤");
+      var id = nueva_desc.substring(breakpointR + 2);
+      //console.log(id)
+
+      var breakNombre = nueva_desc.indexOf("*");
+      var breakDesc1 = nueva_desc.indexOf("~");
+      var breakDesc2 = nueva_desc.indexOf("$");
+      var breakImg = nueva_desc.indexOf("º");
+
+      var descripcion = nueva_desc.substring(breakDesc1 + 1, breakDesc2);
+
+      var nombre = nueva_desc.substring(0, breakNombre);
+
+      var imagen = nueva_desc.substring(breakImg + 1, breakDesc1);
+      var img = new Image();
+      img.src = imagen;
+      var imagen_final = img.src;
+      //console.log(imagen_final)
+      //console.log(imagen);
+
+      $('#titulo_publ_modal').text(nombre)
+      $('#descrip_publ_modal').text(descripcion);
+      //$('#foto_publ').html(img)
+      $('#foto_publ').css('background-image', 'url(' + imagen_final + ')');
+      $('#foto_publ').css("background-repeat", 'no-repeat');
+      $('#foto_publ').css("background-repeat", 'no-repeat');
+      $('#foto_publ').css("background-size", "100% 100%");
+
+
+      //TODO: BUG CON LIKES INFINITOS AL RECARGAR LA PAGINA
+      $('#like').click(function () {
+        location.href = "/verPublicaciones/" + Number(id);
+
+      });
+    });
+
+  });
+
+</script>
+{{/each}}

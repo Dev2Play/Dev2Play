@@ -1,0 +1,84 @@
+<!--NAVEGACION-->
+<nav id="nav" class="navbar navbar-expand-lg  navbar-expand-sm navbar-white  static-top">
+    <div class="container-fluid">
+
+        <img src="images/logo.png" alt="Dev2Play" class="mx-3 logo">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto mx-2 my-2">
+                <li class="nav-item active">
+                    <!--a class="nav-link" href="#">Home
+                            <span class="sr-only">(current)</span>
+                        </a-->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link enlaces_nav" href="/tienda">Tienda</a>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link" href="#" style="color: rgba(184, 173, 173, 0.32); font-weight: 800; margin-top: 4px;">|
+                    </p>
+                </li>
+                <li class="text-muted">
+                    <a class="nav-link enlaces_nav" href="/verPublicaciones">Publicaciones</a>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link" href="#" style=" color: rgba(184, 173, 173, 0.32);font-weight: 800; margin-top: 4px;">|
+                    </p>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link enlaces_nav" href="/proyectosActivos">Proyectos</a>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link" href="#" style="color: rgba(184, 173, 173, 0.32); font-weight: 800; margin-top: 4px;">|
+                    </p>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link enlaces_nav" href="/gestor">Mis proyectos</a>
+                </li>
+                <li class="nav-item avatar dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        {{#if usuario}} <img src="{{photo}}"
+                            class="rounded-circle z-depth-0" width="40px" height="40px">{{else}} <img src=""
+                            class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|} glyphicon glyphicon-user mt-1"
+                            alt="">{{/if}}
+                    </a>
+
+
+                    <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+                        aria-labelledby="navbarDropdownMenuLink-55">
+                        {{#if usuario}}
+                        <a class="dropdown-item" id="drop" href="/perfil">Ver mi perfil</a>
+                        <a class="dropdown-item" id="drop" href="/editarPerfil">Editar mi perfil</a>
+                        <a class="dropdown-item" id="drop" href="/formularioProyecto">Crear Proyecto</a>
+                        <a class="dropdown-item" id="drop" href="/formularioJuego">Subir Juego</a>
+                        <a class="dropdown-item" id="drop" href="/salir">Cerrar sesión</a>
+                        {{else}}
+                        <a class="dropdown-item" id="drop" href="/login">Iniciar sesion</a>
+                        <a class="dropdown-item" id="drop" href="/registro">Registrarse</a>
+                        {{/if}}
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+</nav>
+<br><br><br><br>
+
+<script>
+    $(document).ready(function () {
+
+        $(".logo").click(function () {
+            location.href = "/"
+        })
+
+    });
+</script>

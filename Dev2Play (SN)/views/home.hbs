@@ -1,0 +1,357 @@
+<div class="modal log uk-modal-dialog" id="nuevaPublicacion">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="container modal_login">
+                    <h1 class="form-heading"></h1>
+                    <div class="login-form">
+                        <div class="main-div">
+                            <div class="panel">
+                                <h2>Sign In</h2>
+                                <p>Please enter your email and password</p>
+                            </div>
+                            <form id="Login">
+
+                                <div class="form-group">
+
+
+                                    <input type="email" class="form-control" id="inputEmail"
+                                        placeholder="Email Address">
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <input type="password" class="form-control" id="inputPassword"
+                                        placeholder="Password">
+
+                                </div>
+                                <div class="row mx-2">
+                                    <div class="forgot">
+                                        <a href="reset.html" data-toggle="modal" data-target="#reset"
+                                            data-dismiss="modal">Contraseña olvidada?</a>
+                                    </div>
+                                    <div class="register">
+                                        <a href="register.html" data-toggle="modal" data-target="#registro"
+                                            data-dismiss="modal">Registrarse!</a>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Login</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--MODAL RECUPERAR CONTRASEÑA-->
+<div class="modal " id="reset">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="container">
+                    <h1 class="form-heading"></h1>
+                    <div class="login-form">
+                        <div class="main-div">
+                            <div class="panel">
+                                <h2>Reset Password</h2>
+                                <p>Please enter your email</p>
+                            </div>
+                            <form id="Login">
+
+                                <div class="form-group">
+
+
+                                    <input type="email" class="form-control" id="inputEmail"
+                                        placeholder="Email Address">
+
+                                </div>
+                                <button type="submit" class="btn btn-primary">Send Reset Email</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--MODAL REGISTRO-->
+<div class="modal " id="registro">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="container">
+                    <div class="container justify-content-center">
+                        <div class="form register justify-content-center py-3"></div>
+                        <form>
+                            <div class="form-group  justify-content-center">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" placeholder="Enter email">
+                                <small id="emailHelp" class="form-text text-muted">We'll send you an email with the
+                                    new Pasword</small>
+                            </div>
+                            <div class="form-group  justify-content-center">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1"
+                                    placeholder="Password">
+                            </div>
+                            <div class="form-group  justify-content-center">
+                                <label for="exampleInputPassword1">Confirm Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1"
+                                    placeholder="Confirm Password">
+                            </div>
+                            <div>
+                                <label for="exampleInputPassword1">Countrie</label>
+                                <select class="form-control form-control">
+                                    <option>Small select</option>
+                                    <option>Small select</option>
+                                    <option>Small select</option>
+                                    <option>Small select</option>
+                                    <option>Small select</option>
+                                    <option>Small select</option>
+                                    <option>Small select</option>
+                                    <option>Small select</option>
+                                    <option>Small select</option>
+                                    <option>Small select</option>
+                                    <option>Small select</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">I've read the <a href="#">terms
+                                        and conditions</a></label>
+                            </div>
+                            <button type="submit" class="btn btn-primary mb-3">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+   <div class="container-fluid mb-5">
+       <img src="/images/banner1.png" alt="Banner_registro" style="margin-left: -15px;"  width="1520px" id="go_regis"> 
+    </div>
+
+
+
+
+<!--Imagenes y proyectos visibles-->
+<div class="container-fluid">
+    <div class="row mx-auto">
+        <div class="col-5 imagenes">
+
+            <h3 class="float-left ml-4"><u>Publicaciones Destacadas</u></h3>
+
+            <div style="overflow-y: auto; overflow-x: hidden; width: 800px; max-height: 520px; min-height: 520px;">
+                <div class="row ml-2 mt-4">
+                    <!--CARD-->
+                    {{#each publicacion}}
+
+                    <div class="col-4 clickeame" id="fotos_home">
+                        <img src="{{enlace}}" class="publicaciones_home">
+                        <p>&nbsp;</p>
+                    </div>
+                    <div class="col-2"></div>
+                    {{/each}}
+                </div>
+            </div>
+
+        </div>
+        <div class="col-2">
+        </div>
+        <div class="container-fluid"></div>
+
+        {{#each proyecto}}
+        <!--Proyectos-->
+        <div class="container">
+            <div class="col-5 fichas_home">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 style="font-family: fjalla;">&bull;{{titulo}}</h3>
+                        <p style="color: rgba(0, 0, 0, 0%);">*</p>
+                    </div>
+                </div>
+                   <hr class="mx-5 mb-4">
+                <div class="row">
+                    <p id="desc">{{descripcion}}</p>
+                </div>
+                   <hr class="mx-5 my-3">
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <h5 class="mb-3 ml-4" id="se_busca"><u>Se busca:</u></h5>
+                    </div>
+                </div>
+                <div class="row mb-1 mr-1">
+                    <p class="roles" id="rol_home"><i>{{roles}}</i></p>
+                    <p style="color:  rgba(0, 0, 0, 0%);">$</p>
+                </div>
+
+                 <p style="color: rgba(0, 0, 0, 0%);">~{{id_proyectos}}</p>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+</div>
+
+<!--TEXTO OPCIONES PREMIUM-->
+<div class="container-fluid">
+    <h3 class="prem">OPCIONES PREMIUM</h3>
+</div>
+
+<!--TARJETAS PREMIUM-->
+<div class="container">
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-5">
+                <img src="images/5euros.png" class="dinero5" width="700px">
+            </div>
+            <div class="col-1"></div>
+            <div class="col-5">
+                <img src="images/10euros.png" class="dinero10" width="620px">
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+
+
+
+
+
+
+<div class="modal" id="proyecto">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="modal_pr">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <div class="container proyectos_modal">
+                    <!--TITULO-->
+
+                    <h5 style="text-align: center;" class="my-2" id="titulo_proy_modal">
+
+                    </h5><br>
+                </div>
+                <br>
+
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="container">
+                    <div class="container">
+
+                    </div>
+                    <div class="container justify-content-center">
+                        <div class="container">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-11 float-left" id="descrip_proy_modal">
+                                        <!--descrip-->
+                                    </div>
+                                    <div class="col-1">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr style="margin-top: 80px; width: 1px">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-6"></div>
+                                    <div class="col-4"></div>
+                                    <div class="col-2">
+                                        <form method="POST" id="form_env">
+                                            <button id="unirme">
+                                                Unirme
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Codigo enlace desde los div-->
+
+<script>
+    $(document).ready(function () {
+
+        //console.log($('.fichas_home').html());
+
+
+        $('.clickeame').click(function () {
+            location.href = "/verPublicaciones/filtro/3"
+        });
+
+        $(document).on('click', '.fichas_home', function () {
+            //location.href = '/fichaProyecto';
+            var todo = $(this).text();
+            var ast = todo.indexOf('*')
+            var pnt = todo.indexOf(':')
+            //console.log(todo.substring(0, ast))
+            var id = todo.indexOf("~");
+
+            $('#titulo_proy_modal').text(todo.substring(0, ast))
+            $('#descrip_proy_modal').text(todo.substring(pnt + 1, todo.indexOf('$')));
+            $('#proyecto').modal('show')
+
+
+
+
+            $('#unirme').click(function () {
+                //alert(todo.substring(id+1));  
+                //location.href = "/unido/" + todo.substring(id+1);
+                $('#form_env').attr('action', '/unido/' + todo.substring(id + 1))
+
+            });
+
+        });
+
+         $('#go_regis').click(function() {
+            location.href = '/registro'
+        });
+    });
+</script>

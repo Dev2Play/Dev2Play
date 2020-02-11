@@ -1,8 +1,0 @@
-CREACION:
-    1-Inizializamos con node.init
-    2-Importamos los modulos
-    3-Creamos las carpetas src, views, rutas, lib y database
-    4-Dentro de src creamos => public-css-images y index.js
-    5-Dentro de views creamos layouts, partials, links y un archivo index.hbs
-    6-Ponemos la estructura básica
-    7-Hacemos la relacion con los estilos y fijamos los archivos para ver imagenes.

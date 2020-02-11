@@ -1,0 +1,101 @@
+<!--BANNER-->
+
+<!--FILTROS-->
+<div class="album py-5 bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-10">
+                <!--TODO: TIPO -->
+
+            </div>
+            <div class="col-1 mb-3">
+                <form action="" class="mx-2">
+                    <select name="categorias" id="ordenar" class="mt-2 filtrados">
+                        <!--filtos de busqueda-->
+                        <option value="3">Ordenar por</option>
+                        <option value="1">Precio más alto</option>
+                        <option value="2">Precio más bajo</option>
+
+                    </select>
+                    <br><br>
+                </form>
+
+            </div>
+
+        </div>
+        <hr class="mb-5">
+
+        <!--TARJETAS-->
+        <div class="row">
+            <span id="sacar_jueg"> {{#each juegos}}</span>
+
+            <div class="col-md-3">
+                <div class="card mb-3 box-shadow tarjeta">
+                    <span style=" display: none; color: rgba(0, 0, 0, 0%);">~{{id_juegos}}</span><span
+                        style=" display: none; color:  rgba(0, 0, 0, 0%);">$</span>
+                    <img src="{{imagen}}" class="tar_tien">
+                    <div class="card-body">
+                        <p class="card-text" style="margin-top: -10px; font-size: 15px;"><b>{{titulo}}</b></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+
+                                <div class="row">
+                                    <div class="col-9"></div>
+                                    <div class="col-2">
+                                        <button type="button" style="width: 75px" class="btn btn-sm btn-outline-secondary">Comprar |
+                                            {{precio}}€</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {{/each}}
+        </div>
+    </div>
+</div>
+</div>
+
+<br>
+
+
+<script>
+    $(document).ready(function () {
+        /* $(document).on('click', '.tarjeta', function () {
+           location.href = '/fichaJuego';
+         })*/
+        $('.tarjeta').click(function () {
+            var esta = String($(this).text());
+
+            var id_inic = esta.indexOf("~");
+            var id_fin = esta.indexOf('$');
+
+            //console.log(id_inic)
+
+            var redireccion = esta.substring(id_inic + 1, id_fin);
+
+            console.log(redireccion);
+            location.href = "/fichaJuego/" + Number(redireccion);
+        });
+
+        $('#ordenar').change(function () {
+
+            if ($(this).val() == "1") {
+                var enviar = 1
+                location.href = '/tienda/' + enviar;
+            }
+            if ($(this).val() == "2") {
+                var enviar = 2
+                location.href = '/tienda/' + enviar;
+            }
+
+        });
+
+
+
+    });
+</script>

@@ -1,0 +1,108 @@
+<!--DATOS DEL JUEGO-->
+    <div class="container-fluid">
+        <span id="ver_jueg"> {{#each juegos}}</span>
+
+        <br>
+        <h3 class="ml-5 mb-5"><u>{{titulo}}</u></h3>
+        <div class="row my-5">
+            
+            <!--FOTO Y TITULO--> 
+            <div class="col-6">
+                <div class="row">
+                  
+                </div>
+                <div class="row">
+                    <div class="col-12 mx-2">
+                        <img src="{{imagen}}" class="img_form_juego ml-5">
+                    </div>
+                </div>
+            </div> 
+            <!--REQUISITOS Y DESCRIPCION--> 
+            <div class="col-6">
+                <div class="row mx-5 my-2" align = "left">
+                    <u><strong>Descripcion:</strong></u> &nbsp {{descripcion}}
+                </div>
+                <hr class="my-5">
+                <div class="row mx-5 my-2">
+                    <h4 class="mb-5"><u>Requisitos</u></h4>
+                </div>
+                <div class="row">
+                    <div class="ml-5"></div>
+                    <div class="col-9">
+                        <table>
+                            <tr>
+                                <th>Sistema Operativo:</th>
+                                <td>&nbsp</td>
+                                <td>{{sistema_operativo}}</td> 
+                            </tr>
+                            <tr><td>&nbsp</td></tr>
+                            <tr>
+                                <th>Memoria:</th>
+                                <td>&nbsp</td>
+                                <td>{{memoria}}</td>
+                            </tr>
+                            <tr><td>&nbsp</td></tr>
+                            <tr>
+                                <th>Graficos:</th>
+                                <td>&nbsp</td>
+                                <td>{{graficos}}</td>
+                            </tr>
+                            <tr><td>&nbsp</td></tr>
+                            <tr>
+                                <th>Procesador:</th>
+                                <td>&nbsp</td>
+                                <td>{{procesador}}</td>
+                            </tr>
+                            <tr><td>&nbsp</td></tr>
+                            <tr>
+                                <th>Almacenamiento:</th>
+                                <td>&nbsp</td>
+                                <td>{{almacenamiento}}</td>
+                            </tr>
+                            <tr><td>&nbsp</td></tr>
+                            
+                        </table>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+
+    
+
+    <div class="container-fluid">
+        <div class="row">
+            
+            <div class="col-9"></div>
+            <div class="col-3">
+                <hr>
+                <div class="row">
+                    <div class="col-6">
+                        <h3>Comprar</h3>
+                    </div>
+                    <div class="col-6">
+                        <button type="" id="comprar" style="width: 80px; height: 50px">{{precio}}€</button>
+                    </div>
+  
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <br><br>
+    {{/each}}
+
+
+<script>
+
+    $(document).ready(function(){
+        $('#comprar').click(function(){
+            alert("Proximamente")
+        });
+
+    });
+
+</script>

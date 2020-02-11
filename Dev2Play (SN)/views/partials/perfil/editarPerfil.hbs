@@ -1,0 +1,241 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-4"></div>
+		<div class="col-4">
+			<div id="preview" class="thumbnail py-4">
+				<img src="{{photo}}" class="rounded-circle z-depth-0 mx-auto  perf" alt="avatar image" width="200px"
+					height="200px" style="border: solid 4px">
+			</div>
+			<!--Edicion de la foto-->
+			<div class="container-fluid">
+				<div class="row" style="width: 600px">
+					<form action="" method="POST" id="form_foto_perfil" enctype="multipart/form-data">
+						<input type="file" name="file" id="imagen_perfil" class="my-2 mt-4" style="margin-left: -32px;">
+						<button class="my-4" id="nueva_foto" type="submit" style="margin-left: 22px;">Guardar</button>
+
+
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="col-4"></div>
+	</div>
+
+
+</div>
+<br>
+
+<br>
+<div class="row mb-2">
+	<div class="mx-auto text-center">
+		<br>
+		<form action="" method="POST" id="envi_form">
+			<div class="container-fluid">
+				<div class="row">
+
+					<div class="col-4"><textarea rows="6" id="descdat" cols="150"> {{descrip}}</textarea></div>
+					<div class="col-8"> <input type="button" class="my-5 float-right" name="guardar" value="Guardar"
+							id="sobre"></div>
+				</div>
+			</div>
+		</form>
+		<!-- quepasa-->
+
+	</div>
+</div>
+<div class="row">
+	<div class="col mx-auto text-center mb-1">
+		<!--boton para editar nombre y texto-->
+		<form method="" action="">
+		</form>
+	</div>
+</div>
+<br>
+
+
+
+
+
+<div class="row">
+	<div class="col-3 fijar scroll">
+		<br>
+		<h4 style="text-align: left;" class="mb-3 ml-5"><u>Especialidades</u></h4>
+		<div class="salida_roles px-1 mb-5">
+			<div>
+				<p id="p_programador"> </p>
+				<p id="p_ilustrador"> </p>
+				<p id="p_sonido"> </p>
+				<p id="p_animador"> </p>
+				<p id="p_guion"> </p>
+				<p id="p_modelador"> </p>
+			</div>
+			<form class="ml-5" method="post" action="/roles_update" id="envi_rol">
+				<input type="checkbox" value="1" id="programador" name="programador"> Programador <br>
+				<input type="checkbox" value="2" id="ilustrador" name="ilustrador"> Ilustrador <br>
+				<input type="checkbox" value="3" id="sonido" name="sonido"> Sonido <br>
+				<input type="checkbox" value="4" id="animador" name="animador"> Animador <br>
+				<input type="checkbox" value="5" id="guion" name="guion"> Guión <br>
+				<input type="checkbox" value="6" id="modelador" name="modelador"> Modelador <br>
+				<div class="col-8">
+					<input type="submit" class="my-3 mr-5" style="text-align: center;" name="guardar" value="Guardar" id="save_rol">
+				</div>
+			</form>
+		</div>
+
+	</div>
+
+	<div class="col scroll">
+		<div class="col scroll">
+			<div class="row">
+				{{#each archivo}}
+				<div class="col-sm-6 clickeame">
+					<div class="card publis_per">
+						<img class="card-img-top" id="publi_per" src={{enlace}} alt="Card image cap">
+						<p style="display:none;">{{enlace}}º </p>
+						<div class="card-body">
+							<p class="card-text" id="descri_per_pub">{{descripcion}}</p>
+						</div>
+
+					</div>
+					<br>
+				</div>
+				{{/each}}
+			</div>
+		</div>
+
+	</div>
+	<!--Para que quede el hueco de la derecha-->
+	<div class="col-3" style="text-align: center;">
+		<br>
+	</div>
+</div>
+
+</div>
+<!-- /.container -->
+<br>
+
+
+<script>
+	$(document).ready(function () {
+		function filePreview(input) {
+			//Miramos si hay archivos seleccionados
+			if (input.files && input.files[0]) {
+				var reader = new FileReader(); //Esto nos permite leer archivos
+				reader.onload = function (e) { //el parametro nos permite acceder a la ruta de la imagen
+					$('#preview').html("<img src = '" + e.target.result + "'  class='rounded-circle z-depth-0 mx-auto  perf' alt='avatar image'  '/>"); //Ponemos la imagen dentro del div
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		$('#imagen_perfil').change(function () {
+			filePreview(this);
+		});
+		$('#sobre').click(function () {
+			var de = $('#descdat').val();
+			//location.href = "sobremi/" + de
+			$('#envi_form').attr('action', '/sobremi/' + de);
+			$('#envi_form').submit()
+		});
+		$('#nueva_foto').click(function () {
+			$('#form_foto_perfil').attr('action', '/foto')
+		});
+		//Rol Programador
+		$('#programador').on('change', function () {
+			console.log($('#programador').prop('checked'));
+			if ($('#programador').prop('checked')) {
+
+				$('#p_programador').html('Programador');
+
+
+			} else {
+				$('#p_programador').html('')
+			}
+
+
+
+
+		});
+		$('#save_rol').click(function () {
+
+			$('#envi_rol').submit();
+		});
+
+		/*console.log("rds")
+		var programador = 1;
+		//$('#p_programador').html('Programador');
+		
+	}else{
+		var programador = 0;
+	};*/
+		//Rol Ilustrador
+		$('#ilustrador').on('change', function () {
+			console.log($('#ilustrador').prop('checked'));
+			if ($('#ilustrador').prop('checked')) {
+
+				$('#p_ilustrador').html('Ilustrador');
+			} else {
+				$('#p_ilustrador').html('')
+			}
+
+
+
+
+		});
+		//Rol Sonido
+		$('#sonido').on('change', function () {
+			console.log($('#sonido').prop('checked'));
+			if ($('#sonido').prop('checked')) {
+
+				$('#p_sonido').html('Sonido');
+			} else {
+				$('#p_sonido').html('')
+			}
+
+
+
+
+		});
+		// Rol Animador
+		$('#animador').on('change', function () {
+			console.log($('#animador').prop('checked'));
+			if ($('#animador').prop('checked')) {
+
+				$('#p_animador').html('Animador');
+			} else {
+				$('#p_animador').html('')
+			}
+
+
+
+
+		});
+		//Rol Guión
+		$('#guion').on('change', function () {
+			console.log($('#guion').prop('checked'));
+			if ($('#guion').prop('checked')) {
+
+				$('#p_guion').html('Guión');
+			} else {
+				$('#p_guion').html('')
+			}
+
+
+
+
+		});
+		//Rol Modelador
+		$('#modelador').on('change', function () {
+			console.log($('#modelador').prop('checked'));
+			if ($('#modelador').prop('checked')) {
+
+				$('#p_modelador').html('Modelador');
+			} else {
+				$('#p_modelador').html('')
+			}
+
+
+
+
+		});
+	});
+</script>

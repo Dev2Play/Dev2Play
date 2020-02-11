@@ -1,0 +1,41 @@
+1-En la consola de comandos:
+    npm init
+    npm install express --save
+    npm install -g nodemon
+    npm install express-handlebars --save
+    npm install mysql
+    npm install morgan => Este da las respuestas del servidor como los errores etc (GET 404)
+
+2-Creacion de carpetas y archivos:
+    1-index.js en la carpeta src:
+        -Primera configuracion (src/index.js)
+    2-db.js en la carpeta src para enlazar con la base de datos:
+        -Primera configuracion (db.js)
+    3-keys.js en la carpeta src para que funcione la base de datos:
+        -Configuracion (keys.js)
+    4-Creamos la carpeta database en la root principal y dentro ceramos db.sql:
+        -Primera configuracion (db.sql)
+    5-Creamos la carpeta rutas y el archivo index.js:
+        -Primera configuracion (rutas/index.js)
+    
+    6-Creamos la carpeta views con las subcarpetas layouts y partials y una home.hbs al primer nivel, y para conectarlo lo conectamos en index.js de SRC
+        -Segunda configuracion (src/index.js)
+
+    7-En la carpeta layouts ponemos el main.hbs que definiamos como default en el index.js de src y creamos la carpeta lib con el archivo handlebars.js para que funcione lo demas:
+        -Primera configuracion (lib/handlebars.js)
+    
+    8-Creamos el archivo main.hbs en layouts:
+        -Primera configuracion (views/layouts/main.hbs) => Esto seria la nav o lo que sea, la cual llamamos a parte
+
+    9-Creamos la carpeta public dentro de src y ahi de momento metemos solo la carpeta css y la de images
+
+    10-Llamamos a estas carpetas desde el inex.js de src:
+        -Tercera configuracion (src/index.js)
+
+    11-Creamos todas las ventanas en partials
+
+    12-Conectamos la base de datos finalizada
+
+    13-Hacemos pruebas en la ventana publicaciones
+    
+

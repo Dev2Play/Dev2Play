@@ -1,0 +1,85 @@
+<!--Titular-->
+<div class="container">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4 my-5">
+            <h2>Crea tu proyecto</h2>
+        </div>
+    </div>
+</div>
+
+<form action="" id="envia_datos" method="POST">
+    <!--Datos-->
+    <div class="container">
+        <!--Nombre-->
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-5 my-5 mx-3">
+                <input type="text" name="nombre" placeholder=" Nombre del Proyecto" required id="nombre_proyecto"
+                    class="inputs_formulario_ficha_proyecto">
+            </div>
+        </div>
+
+        <hr>
+        <!--Programador, diseñador...-->
+
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-5">
+                <!-- TODO: TABLA -->
+
+                <textarea name="necesita" id="necesita" class="mt-5 ml-3" cols="90" rows="7" required placeholder="Que necesitas? (programador, diseñador...)"></textarea>
+
+
+            </div>
+        </div>
+
+        <!--Descripcion-->
+        <div class="container">
+            <hr class="my-5">
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-5">
+                    <textarea name="descripcion" id="descripcion_proy" required cols="90" rows="7"
+                        placeholder=" Descripcion..."></textarea>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--Enviar-->
+        <div class="form-group">
+            <div class="col-md-12 text-center">
+                <button type="submit" id="publicar_proy" class="btn btn-primary btn-lg mb-2 mt-3">Publicar</button>
+            </div>
+        </div>
+
+
+    </div>
+</form>
+
+
+<script>
+    $(document).ready(function () {
+        $('#otro_txt').toggle();
+        $('#otro_numero').toggle();
+
+        $('#otro').click(function () {
+            $('#otro_txt').toggle();
+            $('#otro_numero').toggle();
+        });
+
+
+        $('#publicar_proy').click(function () {
+
+            console.log(String($('#nombre_proyecto').val()));
+            console.log(String($('#descripcion_proy').val()));
+
+            $('#envia_datos').attr('action', '/publicado/' + String($('#nombre_proyecto').val()));
+
+        });
+
+
+    });
+</script>

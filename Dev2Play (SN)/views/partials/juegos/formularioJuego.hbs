@@ -1,0 +1,128 @@
+<!--FORMULARIO-->
+<br><br>
+<div class="container-fluid">
+ <form action="/tienda" enctype="multipart/form-data" method="POST">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-5 mx-5">
+          <h3 class="h3" style="text-align: left;">Nombre</h3>
+          <input class="input_juego" name="titulo" type="text" required>
+          <br>
+          <br>
+          <h3 class="h3" style="text-align: left;">Descripcion</h3>
+          <textarea id="juegoDesc" name="descripcion" cols="70" rows="5" required></textarea>
+
+        </div>
+        <!--//TODO: SUBIR LA IMAGEN-->
+        <div id="posicion_imagen_juego" class="foto_juego container-fluid mb-1" width="220px">
+          <input type="file" name="file" id="imagen_juego_archivo" class="my-2 mt-4" required>
+        </div>
+      </div>
+    </div>
+    <br><br><br>  
+
+    <!--GENEROS Y VENTA-->
+    <div class="container-fluid">
+      <div class="row" align="left">
+        <div class="col-3 mx-5 my-5" align="left">
+          Precio de venta <br><br>
+          <input class="input_juego" name="precio" type="text" placeholder="Precio minimo de 1€" required>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr style="width: 1200px;">
+
+    <!--REQUISITOS-->
+    <div class="container-flui">
+
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-4">
+          <h3 class="h3">Requisitos</h3><br>
+        </div>
+        <div class="col-4"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-4"> </div>
+        <div class="col-2">&bull; Sistema Operativo</div>
+        <div class="col-1"><input class="input_juego" type="text" name="sistema_operativo"></div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-4"> </div>
+        <div class="col-2">&bull; Memoria</div>
+        <div class="col-1"><input class="input_juego" type="text" name="memoria"></div>
+      </div>
+
+      <br>
+      <div class="row">
+        <div class="col-4"> </div>
+        <div class="col-2">&bull; Graficos</div>
+        <div class="col-1"><input class="input_juego" type="text" name="graficos"></div>
+      </div>
+
+      <br>
+      <div class="row">
+        <div class="col-4"> </div>
+        <div class="col-2">&bull; Procesador</div>
+        <div class="col-1"><input class="input_juego" type="text" name="procesador"></div>
+      </div>
+
+      <br>
+      <div class="row">
+        <div class="col-4"> </div>
+        <div class="col-2">&bull; Almacenamiento</div>
+        <div class="col-1"><input class="input_juego" type="text" name="almacenamiento"></div>
+      </div>
+
+    </div>
+
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-10"></div>
+        <div class="col-2 mt-5">
+
+          <button type="submit" id="publicar_juego" class="btn btn-primary">Publicar</button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+<br>
+</div>
+  <script>
+
+    $(document).ready(function () {
+
+      function filePreview(input) {
+        //Miramos si hay archivos seleccionados
+        if (input.files && input.files[0]) {
+          var reader = new FileReader(); //Esto nos permite leer archivos
+
+          reader.onload = function (e) { //el parametro nos permite acceder a la ruta de la imagen
+            // $('#posicion_imagen_juego').html("<img src = '" + e.target.result + "' style = 'width: 100%' '/>"); //Ponemos la imagen dentro del div, añadiendola
+
+            $('#posicion_imagen_juego').css("background-image", "url(" + e.target.result + ")");
+            $('#posicion_imagen_juego').css("background-repeat", 'no-repeat');
+            $('#posicion_imagen_juego').css("background-repeat", 'no-repeat');
+            $('#posicion_imagen_juego').css("background-size", "100% 100%");
+            $('#posicion_imagen_juego').css("border", "0px solid red");
+
+          }
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+
+
+      $('#imagen_juego_archivo').change(function () {
+        filePreview(this);
+
+      });
+
+    });
+
+  </script>
