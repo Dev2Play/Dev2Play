@@ -90,8 +90,8 @@
         <div class="container publicaciones_modal">
           <!--TITULO-->
 
-          <h5 style="text-align: center;" class="my-2" id="titulo_publ_modal">
-
+          <h5 style="text-align: center;" class="my-2" >
+            <a  id="titulo_publ_modal" name = "nombre" style="color: black;"></a>
           </h5><br>
           <div class="container-fluid foto_modal" id="foto_publ"></div>
         </div>
@@ -189,7 +189,11 @@
       //console.log(imagen_final)
       //console.log(imagen);
 
-      $('#titulo_publ_modal').text(nombre)
+
+      $('#titulo_publ_modal').text(nombre);
+      $('#titulo_publ_modal').attr("href", "/otro_perfil/" + nueva_desc.substring("*", breakNombre).trim());
+
+
       $('#descrip_publ_modal').text(descripcion);
       //$('#foto_publ').html(img)
       $('#foto_publ').css('background-image', 'url(' + imagen_final + ')');

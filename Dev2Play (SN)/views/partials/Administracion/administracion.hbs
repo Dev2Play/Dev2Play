@@ -28,8 +28,6 @@
             <hr>
             <a id="revisareportes">Revisar Reportes</a><br>
             <hr>
-            <a data-toggle="modal" data-target="#modalrol">Añadir Rol</a><br>
-            <hr>
             <a data-toggle="modal" data-target="#modalcategoria" id="aniadir_categ">Añadir Categoria</a><br>
             <hr>
             <a id="revisausuarios">Administrar Usuarios</a>
@@ -56,7 +54,7 @@
 
         <p class="mt-3">
           <u>ID</u> <u id="id_us">{{id_usuario}}</u> <br>
-          <u>NOMBRE:</u> {{nombre}} <br>
+          <u>NOMBRE:</u> <a href="/otro_perfil/{{nombre}}">{{nombre}}</a> <br>
           <u>PREMIUM:</u> {{premium}} <br>
           <hr>
         </p>

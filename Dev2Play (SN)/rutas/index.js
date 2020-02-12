@@ -15,9 +15,9 @@ router.get('/', async (req, res) => {
 
 
         if (proyecto_destacado.length > 1) {
-            var id_random = Math.round(Math.random() * (proyecto_destacado.length - 1) + 1);
             //console.log(id_random)
-            var proyecto_destacado = await dbconn.query('SELECT *, COUNT(equipos.usuario) FROM proyectos INNER JOIN equipos ON proyectos.id_proyectos = equipos.proyecto WHERE id_proyectos = ? and validacion = 1', 1);
+            var proyecto_destacado = await dbconn.query('SELECT *, COUNT(equipos.usuario) FROM proyectos INNER JOIN equipos ON proyectos.id_proyectos = equipos.proyecto WHERE validacion = 1');
+           // console.log(proyecto_destacado[]);
 
             const publicaciones_destacadas = await dbconn.query('SELECT * FROM publicacion inner join usuario on publicacion.usuario_id = usuario.id_usuario inner join premium on usuario.premium = premium.id_premium WHERE oro > 0 or plata > 0  order by likes DESC LIMIT 8');
 
@@ -370,8 +370,6 @@ router.get('/perfil', isLoggedIn, async (req, res) => {
 });
 
 
-
-
 router.get('/editarPerfil', isLoggedIn, async (req, res) => {
     //console.log(req.user.sobremi)
     const editdescrip = await dbconn.query('UPDATE usuario SET sobremi = ? WHERE id_usuario = ?', [req.user.sobremi, req.user.id_usuario]);
@@ -382,12 +380,13 @@ router.get('/editarPerfil', isLoggedIn, async (req, res) => {
     const foto_perfil_personas = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario)
     const equipo = await dbconn.query('SELECT * FROM proyectos inner join equipos on proyectos.id_proyectos = equipos.proyecto INNER JOIN usuario ON equipos.usuario = usuario.id_usuario WHERE id_usuario = ?', [req.user.id_usuario]);
     const public = await dbconn.query('SELECT * FROM publicacion WHERE usuario_id = ? ORDER BY fecha_publicacion DESC', [req.user.id_usuario]);
-
+    const roles = await dbconn.query('SELECT * FROM roles');
+    //console.log(roles)
     if (equipo.length == 0) {
-        res.render('../views/partials/perfil/editarPerfil', { usuario: req.user, descrip: desc[0].sobremi, photo: foto[0].foto, archivo: public , photo_us: foto_perfil_personas[0].foto });
+        res.render('../views/partials/perfil/editarPerfil', { usuario: req.user, descrip: desc[0].sobremi, photo: foto[0].foto, archivo: public , photo_us: foto_perfil_personas[0].foto, rol: roles });
         console.log(foto)
     } else {
-        res.render('../views/partials/perfil/editarPerfil', { usuario: req.user, descrip: desc[0].sobremi, photo: foto[0].foto, equipos: equipo[0].titulo, archivo: public , photo_us: foto_perfil_personas[0].foto });
+        res.render('../views/partials/perfil/editarPerfil', { usuario: req.user, descrip: desc[0].sobremi, photo: foto[0].foto, equipos: equipo[0].titulo, archivo: public , photo_us: foto_perfil_personas[0].foto, rol: roles });
         console.log(foto)
     }
 
@@ -571,7 +570,7 @@ router.post('/unido/:id', isLoggedIn, async (req, res) => {
     var ll = id.indexOf("}")
 
     var proyecto = Number(id.substring(dpnt + 2, ll - 1));
-    console.log(proyecto);
+    //console.log(proyecto);
     const subida = await dbconn.query('INSERT INTO equipos(usuario,proyecto) SELECT id_usuario, id_proyectos FROM usuario, proyectos where id_usuario=? and id_proyectos=?', [req.user.id_usuario, proyecto]);
 
     //const subida = await dbconn.query('UPDATE COUNT(equipos.usuario) SET equipos.usuario = equipos.usuario + 1')
@@ -698,16 +697,9 @@ router.post('/tienda', isLoggedIn, async (req, res) => {
             almacenamiento,
             fecha_subida: fecha_inicio
         };
-
-
-
         const jueg = await dbconn.query('INSERT INTO juegos set ?', [nuevo_juego]); //como hacer que le genero entre
-
         res.redirect('tienda');
-
     });
-
-
 });
 
 //TODO: GESTOR
@@ -716,9 +708,12 @@ router.get('/gestor', isLoggedIn, async (req, res) => {
     const equipo = await dbconn.query('SELECT * FROM proyectos inner join equipos on proyectos.id_proyectos = equipos.proyecto INNER JOIN usuario ON equipos.usuario = usuario.id_usuario WHERE id_usuario = ?', [req.user.id_usuario]);
     //console.log(equipo[0].tareas);
 
+
     if (equipo.length > 0) {
         const foto_perfil = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
-
+        
+        const mensajes = await dbconn.query('SELECT * FROM chat_equipo WHERE proyecto = ?', equipo[0].id_proyectos );
+        //console.log(mensajes);
 
         //console.log(equipo[0]);
         //TODO: AÑADIR FECHA DE SUBIDA
@@ -735,10 +730,10 @@ router.get('/gestor', isLoggedIn, async (req, res) => {
             res.redirect("/formularioProyecto")
         } else {
 
-            if (lider[0].id_usuario == req.user.id_usuario) {
-                res.render('../views/partials/proyectos/gestor', { usuario: req.user, photo: foto_perfil[0].foto, equipos: equipo[0].titulo, archivos: sacar, vista_de_lider: miembros, tareas: equipo[0].tareas, adios: equipo[0].proyecto });
+            if (lider[0] == req.user.id_usuario) {
+                res.render('../views/partials/proyectos/gestor', { usuario: req.user, photo: foto_perfil[0].foto, equipos: equipo[0].titulo, archivos: sacar, vista_de_lider: miembros, tareas: equipo[0].tareas, adios: equipo[0].proyecto, mensaje: mensajes });
             } else {
-                res.render('../views/partials/proyectos/gestor', { usuario: req.user, photo: foto_perfil[0].foto, equipos: equipo[0].titulo, archivos: sacar, miembros: miembros, tareas: equipo[0].tareas});
+                res.render('../views/partials/proyectos/gestor', { usuario: req.user, photo: foto_perfil[0].foto, equipos: equipo[0].titulo, archivos: sacar, miembros: miembros, tareas: equipo[0].tareas, mensaje: mensajes, adios: equipo[0].proyecto});
             }
         }
     } else {
@@ -807,14 +802,16 @@ router.get('/expulsar/:nombre', isLoggedIn, async (req, res) => {
 
 
 
-router.get('/otro_perfil/:nombre', async (req, res) => {
+router.get('/otro_perfil/:nombre',isLoggedIn, async (req, res) => {
     const foto_perfil = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', req.user.id_usuario);
     const { nombre } = req.params;
-    const sacar_id = await dbconn.query('SELECT * FROM usuario WHERE nombre = ?', nombre); //TODO: USUARIO
-    //console.log(sacar_id)
+    //console.log(nombre)
+    const sacar_id = await dbconn.query('SELECT * FROM usuario WHERE nombre = ?', nombre); //TODO: sacar_id => USUARIO
+    //console.log(sacar_id[0].id_usuario)
 
     //TODO: DATOS DEL PERFIL
-    const foto_perfil_personas = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', sacar_id[0].id_usuario)
+    const foto_perfil_personas = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ?', sacar_id[0].id_usuario);
+
     const nombre_perfil = await dbconn.query('SELECT * FROM usuario WHERE id_usuario = ?', sacar_id[0].id_usuario)
     //console.log(nombre_perfil)
     const roles = await dbconn.query('SELECT * FROM especialidad_usuarios inner join roles on especialidad_usuarios.rol_us = roles.id_roles inner join usuario on especialidad_usuarios.usuario = usuario.id_usuario WHERE id_roles = ?', sacar_id[0].id_usuario);
@@ -823,10 +820,14 @@ router.get('/otro_perfil/:nombre', async (req, res) => {
     //console.log(public)
     const rol = await dbconn.query('SELECT nombre_rol FROM roles inner join especialidad_usuarios on roles.id_roles = especialidad_usuarios.rol_us inner join usuario on especialidad_usuarios.usuario = usuario.id_usuario WHERE id_usuario = ?', [sacar_id[0].id_usuario]);
     //console.log(rol)
-    const equipo = await dbconn.query('SELECT * FROM proyectos inner join equipos on proyectos.id_proyectos = equipos.proyecto INNER JOIN usuario ON equipos.usuario = usuario.id_usuario WHERE id_usuario = ?', [sacar_id[0].id_usuario]);
+    const equipo = await dbconn.query('SELECT * FROM proyectos inner join equipos on proyectos.id_proyectos = equipos.proyecto INNER JOIN usuario ON equipos.usuario = usuario.id_usuario WHERE id_usuario = ?', sacar_id[0].id_usuario);
     //console.log(equipo);
 
-    res.render('../views/partials/perfil/perfil', {usuario: sacar_id[0], roles: rol, equipos: equipo[0].titulo, archivo: public, photo: foto_perfil[0].foto, photo_us: foto_perfil_personas[0].foto})
+    if(equipo.length < 1){
+        res.render('../views/partials/perfil/perfil', {usuario: sacar_id[0], roles: rol, archivo: public, photo: foto_perfil[0].foto, photo_us: foto_perfil_personas[0].foto})
+    } else{
+        res.render('../views/partials/perfil/perfil', {usuario: sacar_id[0], roles: rol, equipos: equipo[0].titulo, archivo: public, photo: foto_perfil[0].foto, photo_us: foto_perfil_personas[0].foto})
+    }
 });
 
 router.get('/nueva_tarea/:tarea', isLoggedIn, async (req, res) => {
@@ -846,6 +847,30 @@ router.get('/adios_proyecto/:id', isLoggedIn, async(req, res) => {
     const adios_gestor = await dbconn.query('DELETE FROM gestor WHERE proy_gest = ?', id)
     const adios_proyecto = await dbconn.query('DELETE FROM proyectos WHERE id_proyectos = ?', id)
     res.redirect('/')
+});
+
+router.get('/chat/:texto', isLoggedIn, async (req, res) => {
+    const { texto } = req.params;
+    //console.log(texto);
+
+    const usuario = req.user.id_usuario;
+    const proyecto = await dbconn.query('SELECT * FROM equipos WHERE usuario = ?', usuario);
+    //console.log(proyecto[0].proyecto);
+    //console.log(usuario);
+
+    const nombre = await dbconn.query('SELECT * FROM usuario WHERE id_usuario = ?', usuario);
+    //console.log(nombre[0].nombre);
+
+    const mensaje = await dbconn.query('INSERT INTO chat_equipo (proyecto, usuarios, mensaje) VALUES (?, ?, ?)', [proyecto[0].proyecto, nombre[0].nombre, texto]);
+
+    res.redirect('/gestor')
+});
+
+router.get('/abandonar_proyecto', isLoggedIn, async (req, res) => {
+    const fuera = await dbconn.query('DELETE FROM equipos WHERE usuario = ?', req.user.id_usuario);
+
+    res.redirect('/perfil')
+    
 });
 
 module.exports = router;

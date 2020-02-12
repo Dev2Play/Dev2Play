@@ -1,6 +1,7 @@
-<br><br><br>
+<br>
 
 <div class="container">
+    <span></span>
     <h3 style="text-align: center;" class="mb-4" id="nombre"><u>{{equipos}}</u></h3>
     <p class="text-muted" style="text-align: center;">Para descargar un archivo, haz click sobre dicho archivo :)</p>
 </div>
@@ -53,7 +54,12 @@
             {{/each}}
             <br><br>
             {{#if vista_de_lider}}
-            <p><a id="cancelar_proyecto" class="btn-danger" style="font-weight: 500;color: white">Cancelar Proyecto</a></p>
+            <p><a id="cancelar_proyecto" class="btn-danger" style="font-weight: 500;color: white">Cancelar Proyecto</a>
+            </p>
+            {{else}}
+            <p><a id="abandonar_proyecto" class="btn-danger" style="font-weight: 500;color: white">Abandonar
+                    Proyecto</a>
+            </p>
             {{/if}}
         </div>
 
@@ -72,11 +78,37 @@
         </div>
     </div>
 </div>
+<hr class="my-5">
+<!--TODO: CHAT-->
+<div class="container-fluid mt-5">
+    <h5 style="text-align: center;" class="mb-5">Chat</h5>
+    <div class="row">
+
+        <div class="col-2"></div>
+        <div class="col-8" id="chat">
+            {{#each mensaje}}
+            <p style="text-align: left" class="my-3"> <a href="/otro_perfil/{{usuarios}}">{{usuarios}}</a> ➤ {{mensaje}}
+            </p>
+            <hr style="width: 150px;" align="left">
+            {{/each}}
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <input type="text" class="mt-3" id="mensaje" placeholder="Manda tu mensaje">
+            <button id="mandar_mensaje">Mandar</button>
+        </div>
+    </div>
+</div>
 
 <span id="id" style="color: rgba(0, 0, 0, 0%);">{{adios}}</span>
 
 
-<br><br><br><br>
+
+<br><br>
 
 
 <script>
@@ -100,7 +132,26 @@
             var id = $('#id').text();
             location.href = "/adios_proyecto/" + id;
 
-        })
+        });
+
+        $('#abandonar_proyecto').click(function () {
+            location.href = "/abandonar_proyecto"
+
+        });
+
+
+        $('#mandar_mensaje').click(function () {
+
+            var texto = $('#mensaje').val();
+            //console.log(texto)
+            if (texto == "") {
+                return false
+            } else {
+                location.href = "/chat/" + texto.trim();
+            }
+
+
+        });
 
     });
 </script>

@@ -916,6 +916,7 @@ p {
  .img_form_juego{
      width: 448px;
      height: 548px;
+     border: 5px solid black;
  }
 
  /*Administracion*/
@@ -938,7 +939,8 @@ p {
 
 #descrip_proy_modal{
 
-    min-height: 200px;
+    height: 200px;
+    max-height: 200px;
     overflow-y: auto;
 }
 
@@ -1106,4 +1108,32 @@ p {
         font-family: fjalla;
         color: black;
         font-size: 18px;
+    }
+
+    #chat{
+        border: 1px solid black;
+        height: 300px;
+        max-height: 300px;
+        overflow-y: auto;
+        
+    }
+
+    #mensaje{
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+        outline: none;
+        border-bottom: 2px solid black;
+        width: 750px;
+    }
+
+    #mandar_mensaje{
+        border-radius: 20px; 
+        background-color:rgb(255, 255, 255);
+        color: rgb(3, 3, 3);
+        outline: none;
+    }
+
+    #mandar_mensaje:hover{
+        box-shadow: 1px 1px 1px 1px black;
     }

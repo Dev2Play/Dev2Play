@@ -5,7 +5,7 @@
     <div class="col-6 mr-5">
       <div id="busqueda">
         <form action="" id="formulario" method="POST">
-         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp🔎
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp🔎
           &nbsp
           <input type="text" id="datos" class="inputs_proyectos"> &nbsp <button id="buscar"
             type="submit">Buscar</button>
@@ -50,6 +50,7 @@
       <div class="row">
         <div class="col-12">
           <h5 class="mb-3" id="se_busca"><u>Se busca:</u></h5>
+          <p style="color: rgba(0, 0, 0, 0%);" id="fecha">{{fecha_final}}</p>
         </div>
       </div>
       <div class="row mb-1 mr-1">
@@ -59,6 +60,7 @@
       <p style="color: rgba(0, 0, 0, 0%);">~{{id_proyectos}}</p>
     </div>
     <p class="mx-3"></p>
+
     {{/each}}
   </div>
 </div>
@@ -107,6 +109,7 @@
                   </div>
                 </div>
               </div>
+              <h6 id="salida_fecha">Finaliza el: </h6> 
               <hr style="margin-top: 80px; width: 1px">
               <div class="container">
                 <div class="row">
@@ -140,12 +143,13 @@
       //location.href = '/fichaProyecto';
       var todo = $(this).text();
       var ast = todo.indexOf('*')
-      var pnt = todo.indexOf(':')
+      var pnt = todo.indexOf(')') //) por la hora que sale
       //console.log(todo.substring(0, ast))
       var id = todo.indexOf("~");
 
-      $('#titulo_proy_modal').text(todo.substring(0, ast))
+      $('#titulo_proy_modal').text(todo.substring(0, ast));
       $('#descrip_proy_modal').text(todo.substring(pnt + 1, todo.indexOf('$')));
+      $('#salida_fecha').text("Finaliza el: " + todo.substring(todo.indexOf(":")+1, todo.indexOf('00:')))
       $('#proyecto').modal('show')
 
       $('#unirme').click(function () {
@@ -190,6 +194,12 @@
       $('#existencia').show();
     }
 
-
   });
+
+  /*
+   var fecha = $('#fecha').text();
+    var breakF = fecha.indexOf(":")
+    $('#fecha_procesada').text(fecha.substring(0, breakF-3))
+  */
+
 </script>
