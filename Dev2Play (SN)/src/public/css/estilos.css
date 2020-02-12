@@ -127,8 +127,8 @@ nav {
 
 footer {
 
-    bottom: 1px;
-    /*Lo ponemos abajo*/
+    bottom: 0px;
+    position: relative;
     width: 100%;
 
     background-image: linear-gradient(to top, rgb(172, 172, 178), white);
@@ -1136,4 +1136,11 @@ p {
 
     #mandar_mensaje:hover{
         box-shadow: 1px 1px 1px 1px black;
+    }
+
+    #sobre_mi_gente{
+
+        height: 90px;
+        max-height: 90px;
+        overflow-y: auto;
     }

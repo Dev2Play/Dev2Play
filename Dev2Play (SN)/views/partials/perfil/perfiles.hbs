@@ -1,0 +1,21 @@
+<div class="row my-5 mx-5">
+    {{#each perfiles}}
+    <div class="col-md-4 my-3">
+        <div class="card mb-3 box-shadow tarjeta">
+            <img src="{{foto}}" class="rounded-circle mb-5 z-depth-0 mx-auto  perf">
+            <div class="card-body">
+                <p class="card-text" style="margin-top: -10px; font-size: 15px;"><b>{{nombre}}</b></p>
+                <hr>
+                <div class="container">
+                    <p id="sobre_mi_gente">{{sobremi}}</p>
+                </div>
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-4"></div>
+                    <div class="col-4"><a href="/otro_perfil/{{nombre}}">Ver perfil</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
