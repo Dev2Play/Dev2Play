@@ -9,16 +9,27 @@
 		<div class="mx-auto text-center">
 			<br>
 			<h3> {{usuario.nombre}} <br></h3>
+
 			<div class="container">
 				<p class="text-muted">{{usuario.sobremi}}</p>
 			</div>
 
 		</div>
 	</div>
-
+	<!--TODO: EXPORTA ALGO QUE FUNCIONE SI ENTRAS DESDE OTRO Y PONES EL IF PARA VALDIARLO Y SACAS ESTO O NO (V2.0)-->
+	<!--
+	<div class="row">
+		<div class="col-4"></div>
+		<div class="col-5"></div>
+		<div class="col-2">
+			<a href="/chat_gen/{{usuario.id_usuario}}"><button class="btn-primary btn mb-1">Mandar mensaje</button></a>
+				
+		</div>		
+	</div>
+-->
 	<hr>
 	<br>
-	
+
 	<div class="row">
 		<div class="col-4">
 			<h4 style="text-align: left; margin-left: 100px;"><u>Especialidades</u></h4>
@@ -28,7 +39,7 @@
 			<h4 style="text-align: center; margin-left: 150px"><u>Proyecto Actual</u></h4>
 		</div>
 	</div>
-	
+
 	<div class="row">
 		<div class="col-3" style="height: 400px; max-height: 400px; overflow-y: auto">
 			<br>
@@ -37,15 +48,15 @@
 				<h5 style="text-align: center;">{{nombre_rol}}</h5>
 				<br>
 			</div>
-		{{/each}}
+			{{/each}}
 		</div>
 
 		<!--PUBLICACIONES-->
-		<div class="col scroll" >
-			<div class="row" >
+		<div class="col scroll">
+			<div class="row">
 				{{#each archivo}}
 				<div class="col-sm-6 clickeame" id="fotos_perfil">
-					<div class="card publis_per" >
+					<div class="card publis_per">
 						<img class="card-img-top" id="publi_per" src={{enlace}} alt="Card image cap">
 						<p style="display:none;">{{enlace}}º </p>
 						<div class="card-body">
@@ -67,7 +78,7 @@
 
 	</div>
 	<br>
-			{{#if usuario_propio}}
+	{{#if usuario_propio}}
 	<div class="row">
 		<div class="col-4"></div>
 		<div class="col-4"></div>
@@ -80,7 +91,7 @@
 		</div>
 
 	</div>
-			{{/if}}
+	{{/if}}
 </div>
 
 
@@ -91,7 +102,7 @@
 		<div class="modal-content">
 
 			<!-- Modal Header -->
-			<div class="modal-header" >
+			<div class="modal-header">
 				<div class="container publicaciones_modal mt-2">
 					<!--FOTO-->
 					<div class="container-fluid foto_modal" id="foto_publ"></div>
@@ -191,7 +202,7 @@
 			var bre1 = nueva_desc.indexOf('º');
 
 			var enlace = nueva_desc.substring(0, bre1);
-			var des = nueva_desc.substring(bre1+1);
+			var des = nueva_desc.substring(bre1 + 1);
 
 			$('#descrip_publ_modal').text(des);
 

@@ -25,17 +25,30 @@
         <div class="col-6">
             <div class="container" id="gestor">
                 <div class="row">
+                    {{#if vista_de_lider}}
+                     <p id="cont_gest">
+                        {{#each archivos}}
 
+                        <div class="col-2 ml-5">
+                            <p class="imagenes mt-3 mx-3" title="{{archivos}}">
+                                <a href="{{archivos}}" id="enlace_desc" download="">📄{{archivos}}</a> 
+                                <a href="/fuera/{{id_gestor}}" style="background-color: red;">🗑️</a>
+                            </p>
+                        </div>
+                        {{/each}}
+                    </p>
+                    {{else}}
                     <p id="cont_gest">
                         {{#each archivos}}
 
                         <div class="col-2 ml-5">
                             <p class="imagenes mt-3 mx-3" title="{{archivos}}">
-                                <a href="{{archivos}}" id="enlace_desc" download="">📄{{archivos}}</a>
+                                <a href="{{archivos}}" id="enlace_desc" download="">📄{{archivos}}</a> 
                             </p>
                         </div>
                         {{/each}}
                     </p>
+                    {{/if}}
 
                 </div>
             </div>

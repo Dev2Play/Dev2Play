@@ -1,0 +1,40 @@
+<!--
+<h3>Estas manteniendo una conversacion con: <u>{{us2}}</u></h3>
+<div class="container my-2" id="chat_gen">
+</div>
+
+<div class="container mt-3">
+    <div class="row">
+      <form action="" method="POST">
+        <input type="text" name="mensaje" class="mb-5" placeholder=" Manda un mensaje..." id="mensaje_gen">
+        <button id="mandar_mensaje" class="mx-5 mb-2">Mandar</button>
+      </form>
+
+
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+
+
+
+        $('#mandar_mensaje').click(function () {
+
+            var texto = $('#mensaje_gen').val();
+            //console.log(texto)
+            if (texto == "") {
+                
+                return false
+            } else {
+                location.href = "/nuevo_mensaje/" + texto.trim();
+                
+            }
+
+
+        });
+
+    });
+</script>
+-->

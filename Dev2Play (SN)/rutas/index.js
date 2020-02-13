@@ -957,6 +957,7 @@ router.get('/adios_proyecto/:id', isLoggedIn, async (req, res) => {
     res.redirect('/')
 });
 
+
 router.get('/chat/:texto', isLoggedIn, async (req, res) => {
     const { texto } = req.params;
     //console.log(texto);
@@ -973,6 +974,7 @@ router.get('/chat/:texto', isLoggedIn, async (req, res) => {
 
     res.redirect('/gestor')
 });
+
 
 router.get('/abandonar_proyecto', isLoggedIn, async (req, res) => {
     const fuera = await dbconn.query('DELETE FROM equipos WHERE usuario = ?', req.user.id_usuario);
@@ -1024,7 +1026,7 @@ router.get('/rechazar/:nombre', isLoggedIn, async (req, res) => {
 
     const { nombre } = req.params;
     //console.log(nombre);
-    const id_usuario = await dbconn.query('SELECT * FROM usuario WHERE nombre = ?', nombre); 
+    const id_usuario = await dbconn.query('SELECT * FROM usuario WHERE nombre = ?', nombre);
     //console.log("id usuario: " + JSON.stringify(id_usuario[0].id_usuario));
     const delete_de_rookie = await dbconn.query('DELETE FROM rookies WHERE us_rookie = ?', [id_usuario[0].id_usuario]);
 
@@ -1033,6 +1035,61 @@ router.get('/rechazar/:nombre', isLoggedIn, async (req, res) => {
     res.redirect('/gestor')
 
 });
+
+
+router.get('/fuera/:archivos', isLoggedIn, async (req, res) => {
+
+    const { archivos } = req.params;
+
+    const eliminar = await dbconn.query('DELETE FROM gestor WHERE id_gestor = ?', archivos);
+    res.redirect('/gestor')
+
+});
+
+
+router.get('/desestimar/:id_publicacion', isLoggedIn, async (req, res) => {
+
+    const { id_publicacion } = req.params;
+
+    const elim_rep = await dbconn.query('DELETE FROM reportes WHERE publicacion_reportada = ?', id_publicacion);
+
+    res.redirect('/administracion');
+
+
+});
+
+
+
+router.get('/perfiles/nombre/:parametro_procesado', async (req, res) => {
+
+    if (req.user) {
+        const { parametro_procesado } = req.params;
+        
+
+        const foto_perfil = await dbconn.query('SELECT foto FROM usuario WHERE id_usuario = ? ', req.user.id_usuario)
+        const nombre = await dbconn.query('SELECT * FROM usuario WHERE nombre = (?)', parametro_procesado);
+  
+            const gente = await dbconn.query('SELECT * FROM usuario WHERE nombre = (?)', parametro_procesado); 
+
+            res.render('../views/partials/perfil/perfiles', { usuario: req.user, perfiles: gente, photo: foto_perfil[0].foto });
+
+
+    } else {
+        const { parametro_procesado } = req.params;
+        //console.log("buscar: " + parametro_procesado);
+
+
+
+        const gente = await dbconn.query('SELECT * FROM usuario WHERE nombre = (?)', parametro_procesado);
+
+        res.render('../views/partials/perfil/perfiles', { usuario: req.user, perfiles: gente });
+    }
+
+
+});
+
+//TODO: CHATS CON PERSONAS (v2.0)
+
 
 module.exports = router;
 

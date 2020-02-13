@@ -73,7 +73,14 @@
 
         {{#each publicacion}}
         <img src="{{enlace}}" alt="" class="my-5" style="width: 100%;">
-        <a class="btn-danger" href="/borrar_pu/{{id_publicacion}}">ELIMINAR PUBLICACION</a>
+        <div class="row">
+          <div class="col-8">
+            <a class="btn-danger" href="/borrar_pu/{{id_publicacion}}">ELIMINAR PUBLICACION</a>
+          </div>
+          <div class="col-4">
+            <a href="/desestimar/{{id_publicacion}}" class="btn-success">Rechazar</a>
+          </div>
+        </div>
         {{/each}}
 
       </div>

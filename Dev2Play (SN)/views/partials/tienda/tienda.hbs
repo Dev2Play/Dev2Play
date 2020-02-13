@@ -30,7 +30,7 @@
             <span id="sacar_jueg"> {{#each juegos}}</span>
 
             <div class="col-md-3">
-                <div class="card mb-3 box-shadow tarjeta">
+                <div class="card mb-3 box-shadow tarjeta_j">
                     <span style=" display: none; color: rgba(0, 0, 0, 0%);">~{{id_juegos}}</span><span
                         style=" display: none; color:  rgba(0, 0, 0, 0%);">$</span>
                     <img src="{{imagen}}" class="tar_tien">
@@ -68,7 +68,7 @@
         /* $(document).on('click', '.tarjeta', function () {
            location.href = '/fichaJuego';
          })*/
-        $('.tarjeta').click(function () {
+        $('.tarjeta_j').click(function () {
             var esta = String($(this).text());
 
             var id_inic = esta.indexOf("~");

@@ -1,21 +1,87 @@
-<div class="row my-5 mx-5">
-    {{#each perfiles}}
-    <div class="col-md-4 my-3">
-        <div class="card mb-3 box-shadow tarjeta">
-            <img src="{{foto}}" class="rounded-circle mb-5 z-depth-0 mx-auto  perf">
-            <div class="card-body">
-                <p class="card-text" style="margin-top: -10px; font-size: 15px;"><b>{{nombre}}</b></p>
-                <hr>
-                <div class="container">
-                    <p id="sobre_mi_gente">{{sobremi}}</p>
-                </div>
-                <div class="row">
-                    <div class="col-4"></div>
-                    <div class="col-4"></div>
-                    <div class="col-4"><a href="/otro_perfil/{{nombre}}">Ver perfil</a></div>
-                </div>
+<br><br><br>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 mr-5">
+            <div id="busqueda">
+
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp🔎
+                &nbsp
+                <input type="text" id="datos" class="inputs_proyectos"> &nbsp <button id="buscar">Buscar</button>
+
             </div>
         </div>
-    </div>
-    {{/each}}
-</div>
+        <div class="container-fluid nosiste">
+            <div id="existencia">
+                <br><br>
+                <div class="row">
+
+                    <h1 class="mx-auto">Ese usuario no existe :(<br><br>
+                        <a href="/perfiles" style="text-align: center;">Volver a perfiles</a>
+                    </h1>
+                </div>
+            </div>
+            <br><br><br>
+        </div>
+
+        <div class="row mb-5 mx-5" id="analizar">
+            {{#each perfiles}}
+            <div class="col-md-4 my-3">
+                <div class="card mb-3 box-shadow tarjeta">
+                    <img src="{{foto}}" class="rounded-circle mb-5 z-depth-0 mx-auto  perf">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-4 ml-4">
+                                <p class="card-text" id="nombre_otro" style="margin-top: -10px; font-size: 15px;">
+                                    <b>{{nombre}}</b></p>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                        <hr>
+                        <span style="color: rgba(0, 0, 0, 0%);">%</span>
+                        <div class="container">
+                            <p id="sobre_mi_gente">{{sobremi}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+
+        <script>
+
+
+            $('#existencia').hide();
+            $('#buscar').click(function () {
+                var parametro = $('.inputs_proyectos').val();
+                var parametro_procesado = String(parametro);
+                // console.log(parametro_procesado)
+
+                if (parametro_procesado.length > 0) {
+                    location.href = "/perfiles/nombre/" + parametro_procesado;
+                    console.log(parametro_procesado)
+                } else {
+                    return false;
+                }
+                //console.log(location.href = "/perfiles/nombre/" + parametro_procesado)
+
+            });
+
+            var perfiles = $('#analizar').html();
+
+            if (perfiles.length < 100) {
+                $('#existencia').show();
+            }
+
+            $('.tarjeta').click(function () {
+                const nombre = String($(this).text());
+                //console.log(nombre)
+                var break_N = nombre.indexOf("%");
+                const nombre_procesado = nombre.substring(0, break_N)
+                location.href = "/otro_perfil/" + nombre_procesado.trim()
+            });
+
+
+        </script>
